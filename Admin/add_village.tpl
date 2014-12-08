@@ -12,18 +12,18 @@
 <style>
 .del {width:12px; height:12px; background-image: url(img/admin/icon/del.gif);} 
 </style>  
-<form method="post" action="admin.php">
+<form method="post" action="index.php">
 <input name="action" type="hidden" value="addVillage">
 <input name="uid" type="hidden" value="<?php echo $user['id'];?>">
 <table id="member" style="width: 225px;" align="center"> 
   <thead>
     <tr>
-        <th colspan="2">Add Village</th>
+        <th colspan="2">新增村莊</th>
     </tr>
   </thead>   
   
 	<tr>
-        <td colspan="2"><center>Coordinates (<b>X</b>|<b>Y</b>)</center></td>
+        <td colspan="2"><center>座標 (<b>X</b>|<b>Y</b>)</center></td>
     </tr>  
     
 	<tr>
@@ -37,7 +37,7 @@
     </tr>
 	
     <tr>
-        <td colspan="2"><center><input value="Add Village" type="submit" <?php if($_SESSION['access'] == ADMIN){ echo ''; } else if($_SESSION['access'] == MULTIHUNTER){ echo 'disabled="disabled"'; } ?>></center></td>
+        <td colspan="2"><center><input value="新增" type="submit" <?php if($_SESSION['access'] == ADMIN){ echo ''; } else if($_SESSION['access'] == MULTIHUNTER){ echo 'disabled="disabled"'; } ?>></center></td>
     </tr> 
 	
 </table>

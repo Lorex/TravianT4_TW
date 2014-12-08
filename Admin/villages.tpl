@@ -15,16 +15,16 @@
 <table id="member">
   <thead>
     <tr>
-        <th>Villages</th>
+        <th>村莊</th>
     </tr>
   </thead> 
 
 </table>
 <table id="profile">    
     <tr>
-        <td>Name</td>
-        <td>Population</td>
-        <td>Coordinates</td>
+        <td>名稱</td>
+        <td>人口數</td>
+        <td>座標</td>
 		<td></td>
     </tr>
 <?php         
@@ -45,7 +45,7 @@ $delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return
 echo '
     <tr>
         <td><a href="?p=village&did='.$varray[$i]['wref'].'">'.$varray[$i]['name'].'</a> '.$capital.'</td>
-        <td>'.$varray[$i]['pop'].' <a href="?action=recountPop&did='.$varray[$i]['wref'].'">Recount<a/></td>
+        <td>'.$varray[$i]['pop'].'<!--a href="?action=recountPop&did='.$varray[$i]['wref'].'">Recount<a/--></td>
         <td>('.$coorproc['x'].'|'.$coorproc['y'].')</td>
 		<td>'.$delLink.' </td>
     </tr>  

@@ -170,7 +170,7 @@ if($deletion){
 		此玩家沒有金幣！ (<img src='../img/admin/gold_g.gif' class='gold' alt='Gold' title='這個玩家擁有: <?php echo $user['gold']; ?> 金'/> <?php echo $user['gold']; ?>) <?php if($_SESSION['access'] == ADMIN){ ?><a href='index.php?p=player&uid=<?php echo $id; ?>&g'>派金 <?php } ?></a>
 		<?php }
 		else if($user['gold'] > 0){ ?>
-		<img src='../img/admin/gold.gif' class='gold' alt='Gold' title='這個玩家擁有: <?php echo $user['gold']; ?> 金'/> <?php echo $user['gold']; ?>  <?php if($_SESSION['access'] == ADMIN){ ?><a href='admin.php?p=player&uid=<?php echo $id; ?>&g'><img src='../img/admin/edit.gif' title='派金'><?php } ?></a></td>
+		<img src='../img/admin/gold.gif' class='gold' alt='Gold' title='這個玩家擁有: <?php echo $user['gold']; ?> 金'/> <?php echo $user['gold']; ?>  <?php if($_SESSION['access'] == ADMIN){ ?><a href='index.php?p=player&uid=<?php echo $id; ?>&g'><img src='../img/admin/edit.gif' title='派金'><?php } ?></a></td>
 		<?php }
 		?>
     </tr>

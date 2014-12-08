@@ -21,7 +21,7 @@ $active = $admin->getUserActive();
 
 </style>  
 
-<form method="post" action="admin.php">
+<form method="post" action="index.php">
 
 <input name="action" type="hidden" value="punish">
 
@@ -35,7 +35,7 @@ $active = $admin->getUserActive();
 
     <tr>
 
-        <th colspan="2">Punish Player</th>
+        <th colspan="2">懲罰玩家</th>
 
     </tr>
 
