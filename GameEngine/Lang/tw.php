@@ -299,7 +299,7 @@ define("U60","Monster 開拓者");
 
 //INDEX.php
 define("LOGIN","登入");
-define("PLAYERS","玩家數量");
+define("PLAYERS","");
 define("ONLINE","在線");
 define("TUTORIAL","新手教學");
 define("PLAYER_STATISTICS","玩家狀態");
@@ -502,9 +502,9 @@ define("MASS_SENT","廣播訊息已寄出");
 
 // Player statics
 
-	define("TOTAL_PLAYERS","註冊玩家：");
-	define("PLAYERS_ACTIVE","活躍玩家：");
-	define("PLAYERS_ONLINE","在線玩家：");
+	define("TOTAL_PLAYERS","註冊玩家");
+	define("PLAYERS_ACTIVE","活躍玩家");
+	define("PLAYERS_ONLINE","在線玩家");
 	define("PLAYERS","註冊玩家");
 	define("ACTIVE","活躍玩家");
 	define("ONLINE","在線玩家");
