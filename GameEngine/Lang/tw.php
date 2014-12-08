@@ -8,8 +8,8 @@
 //                                 DO NOT REMOVE COPYRIGHT NOTICE!                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
                                     //                         //
-									//         ENGLISH         //
-			                        //      Author: Dzoki      //
+									//         CHINESE         //
+			                        //      Author: Lorex      //
 									/////////////////////////////
 
 //MAIN MENU
@@ -181,9 +181,9 @@ define("Q1","任務 1: 伐木場");
 define("Q1_DESC","在您的村莊附近有４個森林。在其中一個森林裡興建伐木場。對於我們的新聚落來說，木材是一個非常重要的資源。");
 define("Q1_ORDER","任務目標:<\/p>興建伐木場。");
 define("Q1_RESP","非常好，這樣您的人民就有木材可以使用了。我會協助您立即完成你的建築進度。");
-//define("Q1_DESC","There are four green forests around your village. Construct a woodcutter on one of them. Lumber is an important resource for our new settlement.");
-//define("Q1_ORDER","任務目標:<\/p>Construct a woodcutter.");
-//define("Q1_RESP","Yes, that way you gain more lumber.I helped a bit and completed the order instantly.");
+define("Q1_DESC","在您的村莊附近有４個森林。在其中一個森林裡興建伐木場。對於我們的新聚落來說，木材是一個非常重要的資源。");
+define("Q1_ORDER","任務目標:<\/p>興建伐木場。");
+define("Q1_RESP","非常好，這樣您的人民就有木材可以使用了。我會協助您立即完成你的建築進度。");
 
 define("Q1_REWARD","伐木場 立刻完成。");
 
