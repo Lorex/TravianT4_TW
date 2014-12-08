@@ -48,8 +48,8 @@ define("HEADER_DAY","白天");
 define("HEADER_NOTICES_NEW","新報告");
 
 
-define("SIDEINFO_ADVENTURES","拍賣");
-define("SIDEINFO_AUCTIONS","冒險");
+define("SIDEINFO_ADVENTURES","冒險");
+define("SIDEINFO_AUCTIONS","拍賣");
 define("SIDEINFO_PROFILE","個人資料");
 define("SIDEINFO_ALLIANCE","聯盟");
 define("SIDEINFO_ALLY_FORUM","聯盟討論區");
