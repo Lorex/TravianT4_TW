@@ -18,16 +18,16 @@
 #################################################################################
 ?>
 <div align="center"><img src="../img/admin/admin.gif" width="468" height="60" border="0"></div>
-<p>Login to Admin Control Panel:</p>
+<p>登入管理介面:</p>
 <form method="post" action="admin.php">
 	<input type="hidden" name="action" value="login">
 		<table cellspacing="0">
 			<tr>
-            	<td>Username:&nbsp;<input class="fm fm110" type="text" name="name" value="<?php echo $_SESSION['username']?>" maxlength="15"> <span class="e f7"></span>
+            	<td>帳號:&nbsp;<input class="fm fm110" type="text" name="name" value="<?php echo $_SESSION['username']?>" maxlength="15"> <span class="e f7"></span>
 				</td>
             </tr>
 			<tr>
-            	<td>Password:&nbsp;<input class="fm fm110" type="password" name="pw" value="" maxlength="20"> <span class="e f7"></span>
+            	<td>密碼:&nbsp;<input class="fm fm110" type="password" name="pw" value="" maxlength="20"> <span class="e f7"></span>
 				</td>
             </tr>
 		</table>
