@@ -13,36 +13,36 @@
 <table id="profile">
   <thead>
     <tr>
-        <th colspan="3" class="left">Information</th>
+        <th colspan="3" class="left">玩家資訊</th>
     </tr>
   </thead> 
 </table> 
       <center><div id="s_nav2">
         <span class="f8">
-          <span class="b"><br />Player</span>: <a href="?p=player&uid=<?php echo $user['id'];?>"><?php echo $user['username'];?></a> (uid: <?php echo $user['id'];?>)
+          <span class="b"><br />玩家</span>: <a href="?p=player&uid=<?php echo $user['id'];?>"><?php echo $user['username'];?></a> (uid: <?php echo $user['id'];?>)
         </span>
         <br>
         <span class="f8">
-          <span class="b">Tribe</span>: <?php                        
+          <span class="b">種族</span>: <?php                        
                 if($user['tribe'] == 1) {
-                echo "Roman";
+                echo "羅馬人";
                 }
                 else if($user['tribe'] == 2) {
-                echo "Teutons";
+                echo "條頓人";
                 }
                 else if($user['tribe'] == 3) {
-                echo "Gauls";
-                } ?> | <span class="b">Villages</span>: <?php echo count($varray);?><br /><br />
+                echo "高盧人";
+                } ?> | <span class="b">村莊數量</span>: <?php echo count($varray);?><br /><br />
         </span>
       </div>
       <?php if($_GET['did']){  ?> 
       <div id="s_nav4">
         <span class="f10">
-          <span class="b">Village</span>: <a href="?p=village&did=<?php echo $village['wref'];?>"><?php echo $village['name'];?></a> (did: <?php echo $village['wref'];?>)
+          <span class="b">村莊</span>: <a href="?p=village&did=<?php echo $village['wref'];?>"><?php echo $village['name'];?></a> (did: <?php echo $village['wref'];?>)
         </span>
         <br>
         <span class="f8">
-          <span class="b">Coordinates</span>: (<?php echo $coor['x'];?>|<?php echo $coor['y'];?>) | <span class="b">Inhabitants</span>: <?php echo $village['pop'];?>
+          <span class="b">座標</span>: (<?php echo $coor['x'];?>|<?php echo $coor['y'];?>) | <span class="b">人口數</span>: <?php echo $village['pop'];?>
         </span
       </div>
       <?php }?>
