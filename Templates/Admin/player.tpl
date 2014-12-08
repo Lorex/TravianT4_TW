@@ -1,104 +1,259 @@
-<?php
+<?php 
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
 ##  Filename       player.tpl                                                  ##
 ##  Developed by:  Dzoki                                                       ##
-##  Reworked:      aggenkeech                                                  ##
 ##  License:       TravianX Project                                            ##
-##  Copyright:     TravianX (c) 2010-2012. All rights reserved.                ##
+##  Copyright:     TravianX (c) 2010-2011. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
+?>
+
+<?php
 $id = $_GET['uid'];
 if(isset($id))
 {
-    include_once("../GameEngine/Ranking.php");
-    $varmedal = $database->getProfileMedal($id);
-    $displayarray = $database->getUserArray($id,1);
-    $user=$displayarray;
-    $profiel="".$user['desc1']."".md5('skJkev3')."".$user['desc2']."";
-    $separator="../";
-    require("../Templates/Profile/medal.php");
-    $profiel=explode("".md5('skJkev3')."", $profiel);
+    include_once("../GameEngine/Ranking.php");        
+    $user = $database->getUserArray($id,1);    
     $varray = $database->getProfileVillages($id);
-    $refreshicon  = "<img src=\"data:image/png;base64,
-    iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAIAAADpZ+PpAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
-    jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEQSURBVChTY/gPBkevHfRrtjMsU9bJ05+5eylE
-    kAGI117fKFsqYzhTNeSQY8xhP8vJJmVrK3eeP8Bw58kt03rTkHnRxdvrnKd4m83SCTtsaLZI1K7H
-    mGH2xpnHLh+GGPL7/7/S1dVKU2Usd6roTZBh+Pj3M0QCCL78+Fw6v1ooR1myWU2zzpjBb2Ko8xwf
-    91l+gRNDLzw6f+nepcsPrl14cPXW8wcMWqVaEYdtPdZYubUHww0AMs5cusygU68UtVUr87CPWbdd
-    9Ly83TcO7Lq2I7ozoXfZTAalCjWZemnlaYo2u0wVFkoJdwoyZDOZNDi//vqRwbkjac+dC827p2h3
-    Gyh3S6m0a0Qszrnz6RnQWAAxV5tT/VAiNQAAAABJRU5ErkJggg==\">";
+
     if($user)
     {
         $totalpop = 0;
         foreach($varray as $vil)
         {
-            $totalpop += $vil['pop'];
+        	$totalpop += $vil['pop'];
         }
         include('search2.tpl');
-        echo "<br />";
-        $deletion = false;
-        if($deletion)
-        {
-            include("playerdeletion.tpl");
-        }
-
-        include("playerinfo.tpl");
-        include("playerheroinfo.tpl");
-        include("playeradditionalinfo.tpl");
-        echo "<br />";
-        include("playermedals.tpl");
-        include ("villages.tpl"); ?>
-
-        <div style="float: left;">
-            <?php
-                include ('punish.tpl');
-            ?>
-        </div>
-        <div style="float: right;">
-            <?php
-                include ('add_village.tpl');
-            ?>
-        </div>
-
-        <?php
-            $sql = "SELECT * FROM ".TB_PREFIX."banlist WHERE uid = ".$id."";
-            $numbans = mysql_num_rows(mysql_query($sql));
-        ?>
-        <table id="member" cellpadding="1" cellspacing="1">
-            <thead>
-                <tr>
-                    <th colspan="6">Ban History (<?php echo $numbans; ?>)</th>
-                </tr>
-                <tr>
-                    <td class="hab"><b>Start</b></td>
-                    <td class="hab"><b>End</b></td>
-                    <td class="hab"><b>Duration</b></td>
-                    <td class="on"><b>Reason</b></td>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    $result = mysql_query($sql);
-                    while($row = mysql_fetch_assoc($result))
-                    {
-                        echo '
-                            <tr>
-                                <td class="hab">'.date('d:m:Y H:i', $row['time']).'</td>
-                                <td class="hab">'.date('d:m:Y H:i', $row['end']).'</td>
-                                <td class="hab">'.round((($row['end'] - $row['time']) / 3600), 2).' minutes</td>
-                                <td class="on">'.$row['reason'].'</td>
-                            </tr>';
-                    }
-                ?>
-            </tbody>
-        </table>
-        <?php
+        
+    <?php
+    $deletion = false;
+    if($deletion){
+    ?>  
+    <table id="member" cellpadding="1" cellspacing="1">
+      <tr>
+        <td>這隻帳號將會於 <span class="c2">79:56:11</span> 以內刪除
+          <a href="?action=StopDel&uid=<?php echo $user['id'];?>" onClick="return del('stopDel','<?php echo $user['username'];?>');"><img src="../img/x.gif" class="del"></a>
+        </td>
+      </tr>
+    </table>
+    <?php
     }
-    else
-    {
-        include("404.tpl");
+    ?>
+    <br>
+    <table id="profile" cellpadding="1" cellspacing="1" >
+        <thead>
+        <tr>
+            <th colspan="2">玩家 <a href="index.php?p=player&uid=<?php echo $user['id'];?>"><?php echo $user['username'];?></a></th>
+        </tr>                                       
+        <tr>
+            <td>詳細資訊</td>
+            <td>描述</td>
+
+        </tr>
+        </thead><tbody>
+        <tr>
+            <td class="empty"></td><td class="empty"></td>
+        </tr>
+        <tr>
+            <td class="details">
+                <table cellpadding="0" cellspacing="0">
+                <tr>
+
+                    <th>排名</th>
+                    <td><?php echo $ranking->getUserRank($id); ?></td>
+                </tr>
+                <tr>
+                    <th>種族</th>
+                    <td><?php                        
+                    if($user['tribe'] == 1) {
+                    echo "羅馬人";
+                    }
+                    else if($user['tribe'] == 2) {
+                    echo "條頓人";
+                    }
+                    else if($user['tribe'] == 3) {
+                    echo "高盧人";
+                    }
+                    else if($user['tribe'] == 4) {
+                    echo "自然界";
+                    }
+    				else if($user['tribe'] == 5) {
+                    echo "賴達族";
+                    } ?></td>
+                </tr>
+
+                <tr>
+                    <th>聯盟</th>
+                    <td>
+                    <?php if($user['alliance'] == 0) {
+                      echo "-";
+                    }
+                    else {
+                      echo "<a href=\"?p=alliance&aid=".$user['alliance']."\">".$database->getAllianceName($user['alliance'])."</a>";
+                    } ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>村莊數量</th>
+                    <td><?php echo count($varray);?></td>
+
+                </tr>
+                <tr>
+                    <th>總人口數</th>
+                    <td><?php echo $totalpop;?> <a href="?action=recountPopUsr&uid=<?php echo $user['id'];?>">重新計算</a></td>
+                </tr>
+                <?php 
+                if(isset($user['birthday']) && $user['birthday'] != 0) {
+                $age = date("Y")-substr($user['birthday'],0,4);
+                echo "<tr><th>Age</th><td>$age</td></tr>";
+                }
+                if(isset($user['gender']) && $user['gender'] != 0) {
+                $gender = ($user['gender']== 1)? "Male" : "Female";
+                echo "<tr><th>Gender</th><td>".$gender."</td></tr>";
+                }
+                            
+                echo "<tr><th>Location</th><td><input disabled class=\"fm\" name=\"location\" value=\"".$user['location']."\"></td></tr>";
+                echo "<tr><th><b><font color='#71D000'>P</font><font color='#FF6F0F'>l</font><font color='#71D000'>u</font><font color='#FF6F0F'>s</font></b></th><td>";
+    			if(date('d.m.Y H:i',$user['plus']) == '01.01.1970 00:00') {
+    			echo "Not enabled!</tr></th>";
+    			} else { echo "".date('d.m.Y H:i',$user['plus']+3600*2)."</tr></th>"; }
+                echo "<tr><th>Email</th><td><input disabled class=\"fm\" name=\"email\" value=\"".$user['email']."\"></td></tr>";
+                echo '<tr><td colspan="2" class="empty"></td></tr>';
+    		
+    			if($_SESSION['access'] == ADMIN){
+                echo '<tr><td colspan="2"><a href="?p=editUser&uid='.$user['id'].'">&raquo; Change profile</a></td></tr>';
+    			} else if($_SESSION['access'] == MULTIHUNTER){
+    			echo '';
+    			}
+                echo '<tr><td colspan="2"> <a href="nachrichten.php?t=1&id='.$user['id'].'">&raquo; Write message</a></td></tr>';
+
+    			 if($_SESSION['access'] == ADMIN){
+                echo '<tr><td colspan="2"> <a class="rn3" href="?p=deletion&uid='.$user['id'].'">&raquo; Delete player</a></td></tr>';
+    			 } else if($_SESSION['access'] == MULTIHUNTER){
+    			echo '';
+    			}
+    		
+                echo '<tr><td colspan="2"> <a href="?p=ban&uid='.$user['id'].'">&raquo; Ban</a></td></tr>';
+                echo '<tr><td colspan="2" class="desc2"><div class="desc2div"><center>'.nl2br($user['desc1']).'</center></div></td></tr>';
+                ?>      
+                </table>
+            </td>
+            <td class="desc1">
+    <center><?php echo nl2br($user['desc2']); ?></center>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- ADDITIONAL USER INFORMATION -->
+    <table id="member"> 
+      <thead>
+        <tr>
+            <th colspan="2">Additional Information</th>
+        </tr>
+      </thead>    
+        <tr>
+            <td>Access</td>
+            <td><?php 
+    		if($user['access'] == 0){
+    		echo "Banned";
+    		}
+    		else if($user['access'] == 2){
+    		echo "Normal user";
+    		}
+    		else if($user['access'] == 8){
+    		echo "<b><font color=\"Blue\">Multihunter</font></b>";
+    		}
+    		else if($user['access'] == 9){
+    		echo "<b><font color=\"Red\">Administrator</font></b>";
+    		}?></td>
+        </tr>
+        <tr>
+            <td>Remaining gold</td>
+            <td><?php
+    		if($user['gold'] == 0){ ?>
+    		This user has no gold! (<img src='img/admin/gold_g.gif' class='gold' alt='Gold' title='This user has: <?php echo $user['gold']; ?> gold'/> <?php echo $user['gold']; ?>) <?php if($_SESSION['access'] == ADMIN){ ?><a href='admin.php?p=player&uid=<?php echo $id; ?>&g'>Give gold <?php } ?></a>
+    		<?php }
+    		else if($user['gold'] > 0){ ?>
+    		<img src='img/admin/gold.gif' class='gold' alt='Gold' title='This user has: <?php echo $user['gold']; ?> gold'/> <?php echo $user['gold']; ?>  <?php if($_SESSION['access'] == ADMIN){ ?><a href='admin.php?p=player&uid=<?php echo $id; ?>&g'><img src='img/admin/edit.gif' title='Give Gold'><?php } ?></a></td>
+    		<?php }
+    		?>
+        </tr>
+    	<?php 	
+    	if($_SESSION['access'] == ADMIN){
+    	if($_GET['g'] == 'ok'){
+    		echo '';
+    	} else {
+    		if(isset($_GET['g'])){ ?>
+    		<form action="GameEngine/Admin/Mods/gold_1.php" method="POST">
+    		<input type="hidden" name="id" value="<?php echo $id; ?>">
+    		<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
+    		<tr>
+    		<td>Insert number and press 'enter'</td>
+    		<td><input class="give_gold" name="gold" value="0"> <a href="admin.php?p=player&uid=<?php echo $id; ?>"><img src="img/admin/del.gif" title="Cancel"></a></td>
+    		</tr></form>
+    		<?php } } }?>
+    	<tr><td></td><td></td></tr>
+    	  <tr>
+            <td>Sitter 1</td>
+            <td><?php
+    		if($user['sit1'] >= 1){
+    		echo '<a href="admin.php?p=player&uid='.$user['sit1'].'">'.$database->getUserField($user['sit1'],"username",0).'</a>';
+    		} 
+    		else if($user['sit1'] == 0){
+    		echo 'No sitter';
+    		}
+    		?>
+    </tr>
+      <tr>
+            <td>Sitter 2</td>
+            <td><?php
+    		if($user['sit2'] >= 1){
+    		echo '<a href="admin.php?p=player&uid='.$user['sit2'].'">'.$database->getUserField($user['sit2'],"username",0).'</a>';
+    		} 
+    		else if($user['sit2'] == 0){
+    		echo 'No sitter';
+    		}
+    		?>
+    </tr>
+    <tr><td></td><td></td></tr>
+      <tr>
+            <td>Beginners Protection</td>
+            <td><?php 
+    		echo ''.date('d.m.Y H:i',$user['protect']+3600*2).'';
+    		?>
+    </tr>
+      <tr>
+            <td>Cultural Points</td>
+            <td><?php echo $user['cp'];?> <?php if($_SESSION['access'] == ADMIN){ ?><a href='admin.php?p=player&uid=<?php echo $id; ?>&cp'><img src='img/admin/edit.gif' title='Give Gold'><?php } ?>
+    </tr>
+    <?php if($_SESSION['access'] == ADMIN){
+    	if($_GET['cp'] == 'ok'){
+    	echo '';
+    	} else {
+    		if(isset($_GET['cp'])){ ?>
+    		<form action="GameEngine/Admin/Mods/cp.php" method="POST">
+    		<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
+    		<input type="hidden" name="id" value="<?php echo $id; ?>">
+    		<tr>
+    		<td>Insert number and press 'enter'</td>
+    		<td><input class="give_gold" name="cp" value="0"> <a href="admin.php?p=player&uid=<?php echo $id; ?>"><img src="img/admin/del.gif" title="Cancel"></a></td>
+    		</tr></form>
+    		<?php } } }?>
+      <tr>
+            <td>Last activity</td>
+            <td><?php 
+    		echo ''.date('d.m.Y H:i',$user['timestamp']+3600*2).'';
+    		?>
+    </tr>
+    </table>
+    <center><?php include ('punish.tpl'); ?></center>
+    <?php
+    include ('villages.tpl');
+    include ('add_village.tpl');
+    }else{
+      echo "Not found...<a href=\"javascript: history.go(-1)\">Back</a>";
     }
 }
 ?>
