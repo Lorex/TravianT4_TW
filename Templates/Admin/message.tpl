@@ -30,8 +30,8 @@
 <?php
 error_reporting(0);
 if($_GET['nid'] and ereg('^[0-9]', $_GET['nid'])){
-  include('msg.tpl');
+  include('../Templates/Admin/msg.tpl');
 }elseif($_GET['bid'] and ereg('^[0-9]', $_GET['bid'])){
-  include('report.tpl');
+  include('../Templates/Admin/report.tpl');
 }
 ?>
