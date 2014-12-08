@@ -15,17 +15,17 @@ $result = $admin->search_player($_POST['s']);
 <table id="member">
   <thead>
     <tr>
-        <th class="dtbl"><a href="">1 «</a></th><th>Found player (<?php echo count($result);?>)</th><th class="dtbl"><a href="">» 100</a></th>
+        <th class="dtbl"><a href="">1 «</a></th><th>找到玩家 (<?php echo count($result);?>)</th><th class="dtbl"><a href="">» 100</a></th>
     </tr>
   </thead> 
 
 </table>
 <table id="profile">    
     <tr>
-        <td class="b">UID</td>
-        <td class="b">Player</td>
-        <td class="b">Villages</td>
-        <td class="b">Pop</td>
+        <td class="b">玩家 ID</td>
+        <td class="b">玩家</td>
+        <td class="b">村莊數</td>
+        <td class="b">人口</td>
     </tr>
 <?php      
 if($result){  
@@ -47,7 +47,7 @@ echo '
 else{  
 echo '
     <tr>
-        <td colspan="4">No results</td>  
+        <td colspan="4">查無資料</td>  
     </tr>  
 ';
 }

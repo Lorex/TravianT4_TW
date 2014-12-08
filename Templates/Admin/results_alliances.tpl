@@ -15,17 +15,17 @@ $result = $admin->search_alliance($_POST['s']);
 <table id="member">
   <thead>
     <tr>
-        <th class="dtbl"><a href="">1 «</a></th><th>Found alliances (<?php echo count($result);?>)</th><th class="dtbl"><a href="">» 100</a></th>
+        <th class="dtbl"><a href="">1 «</a></th><th>找到聯盟 (<?php echo count($result);?>)</th><th class="dtbl"><a href="">» 100</a></th>
     </tr>
   </thead> 
 
 </table>
 <table id="profile">    
     <tr>
-        <td class="b">AID</td>
-        <td class="b">Name</td>
-        <td class="b">Tag</td>
-        <td class="b">Founder</td>          
+        <td class="b">聯盟 ID</td>
+        <td class="b">名稱</td>
+        <td class="b">標籤</td>
+        <td class="b">盟主</td>          
     </tr>
 <?php      
 if($result){  
@@ -42,7 +42,7 @@ echo '
 else{  
 echo '
     <tr>
-        <td colspan="4">No results</td>  
+        <td colspan="4">查無資料</td>  
     </tr>  
 ';
 }

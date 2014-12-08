@@ -19,8 +19,8 @@
 ?>
 <div style="margin-top: 50px;">
   <center>
-    <h1>404 - File not found</h1>
-    This admin system is not finished yet or page doesn't exist.<br>
+    <h1>404 - 找不到資料</h1>
+    找不到所要求的頁面<br>
    <br>
   </center>
 </div>

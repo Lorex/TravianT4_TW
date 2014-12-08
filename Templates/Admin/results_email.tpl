@@ -15,16 +15,16 @@ $result = $admin->search_email($_POST['s']);
 <table id="member">
   <thead>
     <tr>
-        <th class="dtbl"><a href="">1 «</a></th><th>Found emails (<?php echo count($result);?>)</th><th class="dtbl"><a href="">» 100</a></th>
+        <th class="dtbl"><a href="">1 «</a></th><th>找到電子郵箱 (<?php echo count($result);?>)</th><th class="dtbl"><a href="">» 100</a></th>
     </tr>
   </thead> 
 
 </table>
 <table id="profile">    
     <tr>
-        <td class="b">UID</td>
-        <td class="b">Name</td>
-        <td class="b">Email</td>         
+        <td class="b">玩家 ID</td>
+        <td class="b">名稱</td>
+        <td class="b">電子郵箱</td>         
     </tr>
 <?php      
 if($result){  
@@ -40,7 +40,7 @@ echo '
 else{  
 echo '
     <tr>
-        <td colspan="4">No results</td>  
+        <td colspan="4">查無資料</td>  
     </tr>  
 ';
 }

@@ -21,19 +21,18 @@
 <font size="3">
     <b>
         <center>
-            WELCOME TO <?php if($_SESSION['access'] == MULTIHUNTER) { echo 'MULTIHUNTER';	} else if($_SESSION['access'] == ADMIN){ echo 'ADMINISTRATOR'; } ?> CONTROL PANEL
+            歡迎來到 <?php if($_SESSION['access'] == MULTIHUNTER) { echo 'MULTIHUNTER';	} else if($_SESSION['access'] == ADMIN){ echo '管理員'; } ?> 後台
         </center>
     </b>
 </font>
-<br />
-<br />
-<br />
-<br />
-Hello <b><?php echo $_SESSION['username']; ?></b>:
+
+<br /><br /><br /><br />
+
+您好， <b><?php echo $_SESSION['username']; ?></b>:
 <br />
 <br />
 <center>
-    You are logged in as <b><?php if($_SESSION['access'] == MULTIHUNTER) { echo '<font color="Blue">Multihunter</font>'; } else if($_SESSION['access'] == ADMIN){ echo '<font color="Red">Administrator</font>'; } ?></b>
+    您現在正以 <b><?php if($_SESSION['access'] == MULTIHUNTER) { echo '<font color="Blue">Multihunter</font>'; } else if($_SESSION['access'] == ADMIN){ echo '<font color="Red">管理員</font>'; } ?></b>權限登入
 </center>
 <br />
 <br />
@@ -52,9 +51,5 @@ Hello <b><?php echo $_SESSION['username']; ?></b>:
 <br />
 <br />
 <font color="#c5c5c5" size="1">
-	Credits: Akakori, Elmar, Dzoki & ZZJHONS
-    <br />
-	Fixed, remade and new features added by <b>Dzoki</b>
-    <br />
-    Reworked by <b>ZZJHONS</b>
+	Translation and Rebuild by <b>Lorex</b>.
 </font>

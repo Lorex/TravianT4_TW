@@ -27,12 +27,12 @@
   <tr class="slr3">
     <td> 
       <select name="p" size="1" class="slr3">
-        <option value="player" <?php if($_POST['p']=='player'){echo "selected";}?>>Search player</option>
-        <option value="alliances" <?php if($_POST['p']=='alliances'){echo "selected";}?>>Search alliances</option>
-        <option value="villages" <?php if($_POST['p']=='villages'){echo "selected";}?>>Search villages</option>
-        <option value="email" <?php if($_POST['p']=='email'){echo "selected";}?>>Search E-mail</option>
-        <option value="ip" <?php if($_POST['p']=='ip'){echo "selected";}?>>Search IPs</option>
-        <option value="deleted_players" <?php if($_POST['p']=='deleted_players'){echo "selected";}?>>Search deleted players</option>
+        <option value="player" <?php if($_POST['p']=='player'){echo "selected";}?>>搜尋玩家</option>
+        <option value="alliances" <?php if($_POST['p']=='alliances'){echo "selected";}?>>搜尋聯盟</option>
+        <option value="villages" <?php if($_POST['p']=='villages'){echo "selected";}?>>搜尋村莊</option>
+        <option value="email" <?php if($_POST['p']=='email'){echo "selected";}?>>搜尋電子郵箱</option>
+        <option value="ip" <?php if($_POST['p']=='ip'){echo "selected";}?>>搜尋IP位址</option>
+        <option value="deleted_players" <?php if($_POST['p']=='deleted_players'){echo "selected";}?>>搜尋已刪帳玩家</option>
       </select>
     </td>
     <td>
@@ -48,7 +48,7 @@
 	if($_GET['msg']){
 		echo '<div style="margin-top: 50px;" class="b"><center>';
 	if($_GET['msg'] == 'ursdel'){
-            echo "User was deleted.";
+            echo "玩家已刪除";
         }
         echo '</center></div>';
 	}

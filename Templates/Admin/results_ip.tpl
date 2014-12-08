@@ -28,7 +28,7 @@ for ($i = 0; $i <= count($arr)-1; $i++) {
 <table id="member">
   <thead>
     <tr>
-        <th class="dtbl"><a href="">1 «</a></th><th>Found IPs (<?php echo count($newArray);?>)</th><th class="dtbl"><a href="">» 100</a></th>
+        <th class="dtbl"><a href="">1 «</a></th><th>找到 IP位址 (<?php echo count($newArray);?>)</th><th class="dtbl"><a href="">» 100</a></th>
     </tr>
   </thead> 
 
@@ -36,7 +36,7 @@ for ($i = 0; $i <= count($arr)-1; $i++) {
 <table id="profile">    
     <tr>
         <td class="b">IP</td>
-        <td class="b">Name</td>            
+        <td class="b">名稱</td>            
     </tr>
 <?php      
 if($result){                       
@@ -54,7 +54,7 @@ echo '
 else{  
 echo '
     <tr>
-        <td colspan="4">No results</td>  
+        <td colspan="4">查無資料</td>  
     </tr>  
 ';
 }
