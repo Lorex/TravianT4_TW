@@ -6,6 +6,12 @@ Thumbs.db
 # /install/*
 /GameEngine/Database/connection.php
 /GameEngine/config.php
+GameEngine/Database/connection.php
+GameEngine/config.php
+/install/include/connection.php
+/install/include/constant.php
+install/include/connection.php
+install/include/constant.php
 
 # Folder config file
 Desktop.ini
