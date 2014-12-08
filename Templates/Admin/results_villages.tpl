@@ -34,7 +34,7 @@ for ($i = 0; $i <= count($result)-1; $i++) {
 	if($_SESSION['access'] == ADMIN){
 	$delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return del(\'did\','.$varray[$i]['wref'].');"><img src="img/admin/del.gif" class="del"></a>';
   }else if($_SESSION['access'] == MULTIHUNTER){
-	$delLink = '<a href="#"><img src="img/admin/x.gif" class="del"></a>';
+	$delLink = '<a href="#"><img src="../img/admin/x.gif" class="del"></a>';
 	}
 echo '
     <tr>
