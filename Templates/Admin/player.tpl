@@ -11,7 +11,6 @@
 ?>
 <?php
 $id = $_GET['uid'];
-require_once("../GameEngine/Ranking");
 if(isset($id)){        
 $user = $database->getUserArray($id,1);    
 $varray = $database->getProfileVillages($id);
