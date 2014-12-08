@@ -64,39 +64,51 @@ include("../GameEngine/Admin/database.php");
                   <!-- 管理員 -->
 
                 	<?php if($_SESSION['access'] == ADMIN){ ?>
+                    <a href="#"><b>主要連結</b></a>
                 	  <a href="index.php">管理後台</a> 
                 	  <a href="<?php echo HOMEPAGE; ?>">首頁</a>
-                	  <a href="#"></a><a href="#"></a>
-
-                	  <a href="?p=server_info">伺服器訊息</a>
-                    <a href="?p=online">在線玩家</a>     
-                    <a href="?p=search">搜尋</a>
-                    <a href="?p=message">訊息 / 報告</a>
-                    <a href="?p=ban">封禁</a>
-                	  <a href="?p=give">給予金子／銀子</a>
-                	  <a href="?p=admin_log"><font color="Red"><b>管理紀錄</font></b></a>
-                    <a href="?p=config">設定</a>
-                	  
-                	  <a href="#"></a><a href="#"></a><a href="#"></a>
                     <a href="?action=logout">登出</a>
-                	  
+                	  <br />
+
+                    <a href="#"><b>伺服器管理</b></a>
+                	  <a href="?p=server_info">伺服器資訊</a>
+                    <a href="?p=online">在線玩家</a>
+                    <a href="?p=config">伺服器設定</a>
+                    <br />
+
+                    <a href="#"><b>遊戲管理</b></a>
+                    <a href="?p=ban">封禁</a>
+                	  <a href="?p=give">給予金子 / 銀子</a>
+                    <br />
+
+                    <a href="#"><b>查詢</b></a>
+                    <a href="?p=search">搜尋遊戲</a>
+                    <a href="?p=message">搜尋訊息 / 報告</a>
+                	  <a href="?p=admin_log"><font color="Red"><b>管理紀錄</font></b></a>
+
                   <!-- MH 管理員 -->
 
                 	<?php } else if($_SESSION['access'] == MULTIHUNTER){ ?>
+                    <a href="#"><b>主要連結</b></a>
                     <a href="index.php">管理後台</a> 
                     <a href="<?php echo HOMEPAGE; ?>">首頁</a>
-                    <a href="#"></a><a href="#"></a>
-
-                    <a href="?p=server_info">伺服器訊息</a>
-                    <a href="?p=online">在線玩家</a>     
-                    <a href="?p=search">搜尋</a>
-                    <a href="?p=message">訊息 / 報告</a>
-                    <a href="?p=ban">封禁</a>=
-                    <a href="?p=admin_log"><font color="Red"><b>管理紀錄</font></b></a>
-                    <a href="?p=config">設定</a>
-                    
-                    <a href="#"></a><a href="#"></a><a href="#"></a>
                     <a href="?action=logout">登出</a>
+                    <br />
+
+                    <a href="#"><b>伺服器管理</b></a>
+                    <a href="?p=server_info">伺服器資訊</a>
+                    <a href="?p=online">在線玩家</a>
+                    <a href="?p=config">伺服器設定</a>
+                    <br />
+
+                    <a href="#"><b>遊戲管理</b></a>
+                    <a href="?p=ban">封禁</a>
+                    <br />
+
+                    <a href="#"><b>查詢</b></a>
+                    <a href="?p=search">搜尋遊戲</a>
+                    <a href="?p=message">搜尋訊息 / 報告</a>
+                    <a href="?p=admin_log"><font color="Red"><b>管理紀錄</font></b></a>
 
                 <?php } }?>
                 </td>
