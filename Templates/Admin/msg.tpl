@@ -18,7 +18,7 @@ if($msg){
 
 <div id="read_head" class="msg_head"></div>
 <div id="read_content" class="msg_content">
-	<img src="img/x.gif" id="label" class="read" alt="">
+	<img src="../img/x.gif" id="label" class="read" alt="">
 	<div id="heading">
 		<div><span class="b">從</span>: <?php echo $database->getUserField($msg[0]['owner'],'username',0);?></div>
 		<div><span class="b">至</span>: <?php echo $database->getUserField($msg[0]['target'],'username',0);?></div>
