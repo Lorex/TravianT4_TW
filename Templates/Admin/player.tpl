@@ -11,7 +11,7 @@
 ?>
 <?php
 $id = $_GET['uid'];
-require_once("../GameEngine/Ranking.php");
+require_once("../GameEngine/Ranking");
 if(isset($id)){        
 $user = $database->getUserArray($id,1);    
 $varray = $database->getProfileVillages($id);
@@ -97,40 +97,40 @@ if($deletion){
             </tr>
             <tr>
                 <th>人口數</th>
-                <td><?php echo $totalpop;?> <a href="?action=recountPopUsr&uid=<?php echo $user['id'];?>">Recount</a></td>
+                <td><?php echo $totalpop;?><!-- <a href="?action=recountPopUsr&uid=<?php echo $user['id'];?>">Recount</a> --></td>
             </tr>
             <?php 
             if(isset($user['birthday']) && $user['birthday'] != 0) {
             $age = date("Y")-substr($user['birthday'],0,4);
-            echo "<tr><th>Age</th><td>$age</td></tr>";
+            echo "<tr><th>年齡</th><td>$age</td></tr>";
             }
             if(isset($user['gender']) && $user['gender'] != 0) {
-            $gender = ($user['gender']== 1)? "Male" : "Female";
-            echo "<tr><th>Gender</th><td>".$gender."</td></tr>";
+            $gender = ($user['gender']== 1)? "男" : "女";
+            echo "<tr><th>性別</th><td>".$gender."</td></tr>";
             }
                         
-            echo "<tr><th>Location</th><td><input disabled class=\"fm\" name=\"location\" value=\"".$user['location']."\"></td></tr>";
+            echo "<tr><th>區域</th><td><input disabled class=\"fm\" name=\"location\" value=\"".$user['location']."\"></td></tr>";
             echo "<tr><th><b><font color='#71D000'>P</font><font color='#FF6F0F'>l</font><font color='#71D000'>u</font><font color='#FF6F0F'>s</font></b></th><td>";
 			if(date('d.m.Y H:i',$user['plus']) == '01.01.1970 00:00') {
-			echo "Not enabled!</tr></th>";
+			echo "未啟用！</tr></th>";
 			} else { echo "".date('d.m.Y H:i',$user['plus']+3600*2)."</tr></th>"; }
-            echo "<tr><th>Email</th><td><input disabled class=\"fm\" name=\"email\" value=\"".$user['email']."\"></td></tr>";
+            echo "<tr><th>電子郵箱</th><td><input disabled class=\"fm\" name=\"email\" value=\"".$user['email']."\"></td></tr>";
             echo '<tr><td colspan="2" class="empty"></td></tr>';
 		
 			if($_SESSION['access'] == ADMIN){
-            echo '<tr><td colspan="2"><a href="?p=editUser&uid='.$user['id'].'">&raquo; Change profile</a></td></tr>';
+            echo '<tr><td colspan="2"><a href="?p=editUser&uid='.$user['id'].'">&raquo; 修改個人資料</a></td></tr>';
 			} else if($_SESSION['access'] == MULTIHUNTER){
 			echo '';
 			}
-            echo '<tr><td colspan="2"> <a href="nachrichten.php?t=1&id='.$user['id'].'">&raquo; Write message</a></td></tr>';
+            echo '<tr><td colspan="2"> <a href="nachrichten.php?t=1&id='.$user['id'].'">&raquo; 寫新訊息</a></td></tr>';
 
 			 if($_SESSION['access'] == ADMIN){
-            echo '<tr><td colspan="2"> <a class="rn3" href="?p=deletion&uid='.$user['id'].'">&raquo; Delete player</a></td></tr>';
+            echo '<tr><td colspan="2"> <a class="rn3" href="?p=deletion&uid='.$user['id'].'">&raquo; 刪除帳號</a></td></tr>';
 			 } else if($_SESSION['access'] == MULTIHUNTER){
 			echo '';
 			}
 		
-            echo '<tr><td colspan="2"> <a href="?p=ban&uid='.$user['id'].'">&raquo; Ban</a></td></tr>';
+            echo '<tr><td colspan="2"> <a href="?p=ban&uid='.$user['id'].'">&raquo; 封禁</a></td></tr>';
             echo '<tr><td colspan="2" class="desc2"><div class="desc2div"><center>'.nl2br($user['desc1']).'</center></div></td></tr>';
             ?>      
             </table>
@@ -145,99 +145,100 @@ if($deletion){
 <table id="member"> 
   <thead>
     <tr>
-        <th colspan="2">Additional Information</th>
+        <th colspan="2">其他資料</th>
     </tr>
   </thead>    
     <tr>
-        <td>Access</td>
+        <td>權限</td>
         <td><?php 
 		if($user['access'] == 0){
-		echo "Banned";
+		echo "封禁";
 		}
 		else if($user['access'] == 2){
-		echo "Normal user";
+		echo "普通玩家";
 		}
 		else if($user['access'] == 8){
 		echo "<b><font color=\"Blue\">Multihunter</font></b>";
 		}
 		else if($user['access'] == 9){
-		echo "<b><font color=\"Red\">Administrator</font></b>";
+		echo "<b><font color=\"Red\">管理員</font></b>";
 		}?></td>
     </tr>
     <tr>
-        <td>Remaining gold</td>
+        <td>剩餘金幣！</td>
         <td><?php
 		if($user['gold'] == 0){ ?>
-		This user has no gold! (<img src='img/admin/gold_g.gif' class='gold' alt='Gold' title='This user has: <?php echo $user['gold']; ?> gold'/> <?php echo $user['gold']; ?>) <?php if($_SESSION['access'] == ADMIN){ ?><a href='admin.php?p=player&uid=<?php echo $id; ?>&g'>Give gold <?php } ?></a>
+		此玩家沒有金幣！ (<img src='../img/admin/gold_g.gif' class='gold' alt='Gold' title='這個玩家擁有: <?php echo $user['gold']; ?> 金'/> <?php echo $user['gold']; ?>) <?php if($_SESSION['access'] == ADMIN){ ?><a href='index.php?p=player&uid=<?php echo $id; ?>&g'>派金 <?php } ?></a>
 		<?php }
 		else if($user['gold'] > 0){ ?>
-		<img src='img/admin/gold.gif' class='gold' alt='Gold' title='This user has: <?php echo $user['gold']; ?> gold'/> <?php echo $user['gold']; ?>  <?php if($_SESSION['access'] == ADMIN){ ?><a href='admin.php?p=player&uid=<?php echo $id; ?>&g'><img src='img/admin/edit.gif' title='Give Gold'><?php } ?></a></td>
+		<img src='../img/admin/gold.gif' class='gold' alt='Gold' title='這個玩家擁有: <?php echo $user['gold']; ?> 金'/> <?php echo $user['gold']; ?>  <?php if($_SESSION['access'] == ADMIN){ ?><a href='admin.php?p=player&uid=<?php echo $id; ?>&g'><img src='../img/admin/edit.gif' title='派金'><?php } ?></a></td>
 		<?php }
 		?>
     </tr>
 	<?php 	
 	if($_SESSION['access'] == ADMIN){
 	if($_GET['g'] == 'ok'){
-		echo '';
+		echo '成功!';
 	} else {
 		if(isset($_GET['g'])){ ?>
-		<form action="GameEngine/Admin/Mods/gold_1.php" method="POST">
-		<input type="hidden" name="id" value="<?php echo $id; ?>">
-		<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
-		<tr>
-		<td>Insert number and press 'enter'</td>
-		<td><input class="give_gold" name="gold" value="0"> <a href="admin.php?p=player&uid=<?php echo $id; ?>"><img src="img/admin/del.gif" title="Cancel"></a></td>
-		</tr></form>
+		<form action="../GameEngine/Admin/Mods/gold_1.php" method="POST">
+    		<input type="hidden" name="id" value="<?php echo $id; ?>">
+    		<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
+    		<tr>
+    		<td>輸入數量然後按 Enter</td>
+    		<td><input class="give_gold" name="gold" value="0"> <a href="index.php?p=player&uid=<?php echo $id; ?>"><img src="../img/admin/del.gif" title="Cancel"></a></td>
+    		</tr>
+        </form>
 		<?php } } }?>
 	<tr><td></td><td></td></tr>
 	  <tr>
-        <td>Sitter 1</td>
+        <td>介紹人 1</td>
         <td><?php
 		if($user['sit1'] >= 1){
-		echo '<a href="admin.php?p=player&uid='.$user['sit1'].'">'.$database->getUserField($user['sit1'],"username",0).'</a>';
+		echo '<a href="index.php?p=player&uid='.$user['sit1'].'">'.$database->getUserField($user['sit1'],"username",0).'</a>';
 		} 
 		else if($user['sit1'] == 0){
-		echo 'No sitter';
+		echo '-';
 		}
 		?>
 </tr>
   <tr>
-        <td>Sitter 2</td>
+        <td>介紹人 2</td>
         <td><?php
 		if($user['sit2'] >= 1){
-		echo '<a href="admin.php?p=player&uid='.$user['sit2'].'">'.$database->getUserField($user['sit2'],"username",0).'</a>';
+		echo '<a href="index.php?p=player&uid='.$user['sit2'].'">'.$database->getUserField($user['sit2'],"username",0).'</a>';
 		} 
 		else if($user['sit2'] == 0){
-		echo 'No sitter';
+		echo '-';
 		}
 		?>
 </tr>
 <tr><td></td><td></td></tr>
   <tr>
-        <td>Beginners Protection</td>
+        <td>新手保護</td>
         <td><?php 
 		echo ''.date('d.m.Y H:i',$user['protect']+3600*2).'';
 		?>
 </tr>
   <tr>
-        <td>Cultural Points</td>
-        <td><?php echo $user['cp'];?> <?php if($_SESSION['access'] == ADMIN){ ?><a href='admin.php?p=player&uid=<?php echo $id; ?>&cp'><img src='img/admin/edit.gif' title='Give Gold'><?php } ?>
+        <td>文明點</td>
+        <td><?php echo $user['cp'];?> <?php if($_SESSION['access'] == ADMIN){ ?><a href='index.php?p=player&uid=<?php echo $id; ?>&cp'><img src='../img/admin/edit.gif' title='編輯'><?php } ?>
 </tr>
 <?php if($_SESSION['access'] == ADMIN){
 	if($_GET['cp'] == 'ok'){
-	echo '';
+	echo '成功！';
 	} else {
 		if(isset($_GET['cp'])){ ?>
-		<form action="GameEngine/Admin/Mods/cp.php" method="POST">
+		<form action="../GameEngine/Admin/Mods/cp.php" method="POST">
 		<input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
 		<input type="hidden" name="id" value="<?php echo $id; ?>">
 		<tr>
-		<td>Insert number and press 'enter'</td>
-		<td><input class="give_gold" name="cp" value="0"> <a href="admin.php?p=player&uid=<?php echo $id; ?>"><img src="img/admin/del.gif" title="Cancel"></a></td>
+		<td>輸入數量然後按 Enter</td>
+		<td><input class="give_gold" name="cp" value="0"> <a href="index.php?p=player&uid=<?php echo $id; ?>"><img src="../img/admin/del.gif" title="取消"></a></td>
 		</tr></form>
 		<?php } } }?>
   <tr>
-        <td>Last activity</td>
+        <td>最後活動/td>
         <td><?php 
 		echo ''.date('d.m.Y H:i',$user['timestamp']+3600*2).'';
 		?>
@@ -248,7 +249,7 @@ if($deletion){
 include ('villages.tpl');
 include ('add_village.tpl');
 }else{
-  echo "Not found...<a href=\"javascript: history.go(-1)\">Back</a>";
+  echo "找不到玩家...<a href=\"javascript: history.go(-1)\">返回</a>";
 }
 }
 ?>

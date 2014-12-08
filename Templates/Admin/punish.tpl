@@ -17,11 +17,11 @@ $active = $admin->getUserActive();
 
 <style>
 
-.del {width:12px; height:12px; background-image: url(img/admin/icon/del.gif);} 
+.del {width:12px; height:12px; background-image: url(../img/admin/icon/del.gif);} 
 
 </style>  
 
-<form method="post" action="admin.php">
+<form method="post" action="index.php">
 
 <input name="action" type="hidden" value="punish">
 
@@ -35,7 +35,7 @@ $active = $admin->getUserActive();
 
     <tr>
 
-        <th colspan="2">Punish Player</th>
+        <th colspan="2">懲罰玩家</th>
 
     </tr>
 
@@ -58,7 +58,7 @@ $active = $admin->getUserActive();
 
     </tr>
 
-    <!--<tr>
+    <tr>
 
         <td colspan="1" style="text-align: center;">
 
@@ -75,7 +75,7 @@ $active = $admin->getUserActive();
 
         </td>
 
-    </tr> -->     
+    </tr>   
 
 </table>
 
