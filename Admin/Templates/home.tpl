@@ -13,7 +13,7 @@
 <font size="3">
 	<b>
 		<center>
-			WELCOME TO 
+			歡迎來到
 				<?php 
 				if($_SESSION['access'] == MULTIHUNTER)
 				{
@@ -21,7 +21,7 @@
 				} 
 				else if($_SESSION['access'] == ADMIN)
 				{ 
-					echo 'ADMINISTRATOR'; 
+					echo '管理員'; 
 				} ?> 
 			CONTROL PANEL
 		</center>
@@ -31,7 +31,7 @@
 	
 <br /><br /><br /><br />
 
-	Hello <b><?php echo $_SESSION['username']; ?></b>, You are logged in as: <b><font color="Red">Administrator</font></b></center>
+	您好， <b><?php echo $_SESSION['username']; ?></b>, 您現在正以<b><font color="Red">管理員</font></b>權限登入</center>
 	<br /><br /><br />
 	
 	<br /><br /><br /><br /><br />
