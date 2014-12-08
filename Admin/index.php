@@ -73,7 +73,7 @@ include("../GameEngine/Admin/database.php");
                     <a href="?p=search">搜尋</a>
                     <a href="?p=message">訊息 / 報告</a>
                     <a href="?p=ban">封禁</a>
-                	  <a href="?p=gold">給予金子</a>
+                	  <a href="?p=give">給予金子／銀子</a>
                 	  <a href="?p=admin_log"><font color="Red"><b>管理紀錄</font></b></a>
                     <a href="?p=config">設定</a>
                 	  

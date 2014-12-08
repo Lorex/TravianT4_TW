@@ -25,5 +25,5 @@ $silver = $_POST['silver'];
 $q = "UPDATE ".TB_PREFIX."users SET silver = silver + ".$_POST['silver']." WHERE id != '0'";
 mysql_query($q);
 mysql_query("Insert into ".TB_PREFIX."admin_log values (0,$id,'Added <b>$silver</b> silver to all users',".time().")");
-header("Location: ../../../admin.php?p=give&s=$silver");
+header("Location: ../../../Admin/index.php?p=give&g=$silver");
 ?>
