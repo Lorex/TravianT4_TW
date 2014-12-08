@@ -15,15 +15,15 @@
 <table id="member" style="width:225px">
   <thead>
     <tr>
-        <th colspan="2">IGM/Reports</th>
+        <th colspan="2">訊息 / 報告</th>
     </tr>
   </thead> 
     <tr>
-        <td>IGM ID</td>
+        <td>訊息 ID</td>
         <td><form action="" method="get"><input type="hidden" name="p" value="message"><input type="text" class="fm" name="nid" value="<?php echo $_GET['nid'];?>"> <input type="submit" value="ok"></form></td>
     </tr>
     <tr>
-        <td>Report ID</td>
+        <td>報告 ID</td>
         <td><form action="" method="get"><input type="hidden" name="p" value="message"><input type="text" class="fm" name="bid" value="<?php echo $_GET['bid'];?>"> <input type="submit" value="ok"></form></td>
     </tr>
 </table><br>

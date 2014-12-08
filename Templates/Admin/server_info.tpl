@@ -29,12 +29,12 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 <table id="profile">
 	<thead>
 		<tr>
-            <th colspan="2">Player Statistics</th>
+            <th colspan="2">玩家統計</th>
         </tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>Registered players</td>
+			<td>註冊玩家</td>
 			<td>
             	<?php
                     $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users");
@@ -44,7 +44,7 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			</td>
 		</tr>
 		<tr>
-			<td>Active players</td>
+			<td>活躍玩家</td>
 			<td>
             	<?php
                     $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."active");
@@ -54,7 +54,7 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			</td>
 		</tr>
 		<tr>
-			<td>Players online</td>
+			<td>在線玩家</td>
 			<td>
                 <?php
                     $t =time();
@@ -65,7 +65,7 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			</td>
 		</tr>
 		<tr>
-			<td>Players Banned</td>
+			<td>封禁玩家</td>
 			<td>
                 <?php
                     $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE access = 0");
@@ -75,7 +75,7 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			</td>
 		</tr>
 		<tr>
-			<td>Villages settled</td>
+			<td>村莊設置</td>
 			<td>
                 <?php
                     $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."vdata");
@@ -90,15 +90,15 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 <table id="profile">
 	<thead>
 		<tr>
-			<th colspan="3">Player Information</th>
+			<th colspan="3">玩家資訊</th>
 		</tr>
-			<td class="b">Tribe</td>
-			<td class="b">Registered</td>
-			<td class="b">Percent</td>
+			<td class="b">種族</td>
+			<td class="b">數量</td>
+			<td class="b">百分比</td>
 	</thead>
 	<tbody>
 		<tr>
-			<td>Romans</td>
+			<td>羅馬人</td>
 			<td><?php echo $tribes[0]; ?></td>
 			<td>
                 <?php
@@ -109,7 +109,7 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			</td>
 		</tr>
 		<tr>
-			<td>Teutons</td>
+			<td>條頓人</td>
 			<td><?php echo $tribes[1]; ?></td>
 			<td>
                 <?php
@@ -120,7 +120,7 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			</td>
 		</tr>
 		<tr>
-			<td>Gauls</td>
+			<td>高盧人</td>
 			<td><?php echo $tribes[2]; ?></td>
 			<td>
 				<?php
@@ -131,7 +131,7 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			</td>
 		</tr>
 		<tr>
-			<td>Nature</td>
+			<td>自然界</td>
 			<td><?php echo $tribes[3]; ?></td>
 			<td>
 				<?php
@@ -142,7 +142,7 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			</td>
 		</tr>
 		<tr>
-			<td>Natars</td>
+			<td>賴達族</td>
 			<td><?php echo $tribes[4]; ?></td>
 			<td>
 				<?php
