@@ -56,7 +56,7 @@ if($deletion){
             <tr>
 
                 <th>排名</th>
-                <td><?php echo $ranking->getUserRank($id); ?></td>
+                <td><!--?php echo $ranking->getUserRank($id); ?--></td>
             </tr>
             <tr>
                 <th>種族</th>
