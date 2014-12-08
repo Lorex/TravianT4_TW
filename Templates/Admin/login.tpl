@@ -19,7 +19,7 @@
 ?>
 <div align="center"><img src="../img/admin/admin.gif" width="468" height="60" border="0"></div>
 <p>登入管理介面:</p>
-<form method="post" action="admin.php">
+<form method="post" action="index.php">
 	<input type="hidden" name="action" value="login">
 		<table cellspacing="0">
 			<tr>

@@ -9,6 +9,8 @@
 ##  Copyright:     TravianX (c) 2010-2012. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
+header("Location: ../Admin/index.php");
+
 
 session_start();
 include("../GameEngine/Database.php");
