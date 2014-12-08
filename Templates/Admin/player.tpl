@@ -11,20 +11,16 @@
 ?>
 <?php
 $id = $_GET['uid'];
-if(isset($id))
-{
-    include_once("../GameEngine/Rank");        
-    $user = $database->getUserArray($id,1);    
-    $varray = $database->getProfileVillages($id);
-
-if($user)
-{
-    $totalpop = 0;
-    foreach($varray as $vil)
-    {
-    	$totalpop += $vil['pop'];
-    }
-    include('search2.tpl');
+require_once("../GameEngine/Ranking.php");
+if(isset($id)){        
+$user = $database->getUserArray($id,1);    
+$varray = $database->getProfileVillages($id);
+if($user){
+$totalpop = 0;
+foreach($varray as $vil) {
+	$totalpop += $vil['pop'];
+}
+include('search2.tpl');
 ?>
 <?php
 $deletion = false;
@@ -100,8 +96,8 @@ if($deletion){
 
             </tr>
             <tr>
-                <th>總人口數</th>
-                <td><?php echo $totalpop;?> <a href="?action=recountPopUsr&uid=<?php echo $user['id'];?>">重新計算</a></td>
+                <th>人口數</th>
+                <td><?php echo $totalpop;?> <a href="?action=recountPopUsr&uid=<?php echo $user['id'];?>">Recount</a></td>
             </tr>
             <?php 
             if(isset($user['birthday']) && $user['birthday'] != 0) {
