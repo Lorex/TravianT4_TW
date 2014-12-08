@@ -222,68 +222,68 @@ define("Q6_RESP","您收到了？很好");
 //================ UNITS - DO NOT EDIT! ================//
 //======================================================//
 // HEROE UNIT
-define("U0","Hero");
+define("U0","英雄");
 
 //ROMAN UNITS
-define("U1","Legionnaire");
-define("U2","Praetorian");
-define("U3","Imperian");
-define("U4","Equites Legati");
-define("U5","Equites Imperatoris");
-define("U6","Equites Caesaris");
-define("U7","Battering Ram");
-define("U8","Fire Catapult");
-define("U9","Senator");
-define("U10","Settler");
+define("U1","古羅馬步兵");
+define("U2","禁衛兵");
+define("U3","帝國兵");
+define("U4","使者騎士");
+define("U5","帝國騎士");
+define("U6","將軍騎士");
+define("U7","衝撞車");
+define("U8","火焰投石機");
+define("U9","參議員");
+define("U10","開拓者");
 
 //TEUTON UNITS
-define("U11","Clubswinger");
-define("U12","Spearman");
-define("U13","Axeman");
-define("U14","Scout");
-define("U15","Paladin");
-define("U16","Teutonic Knight");
-define("U17","Ram");
-define("U18","Catapult");
-define("U19","Chief");
-define("U20","Settler");
+define("U11","棍棒兵");
+define("U12","矛兵");
+define("U13","斧頭兵");
+define("U14","偵查兵");
+define("U15","遊俠");
+define("U16","條頓騎士");
+define("U17","衝撞車");
+define("U18","投石車");
+define("U19","司令官");
+define("U20","開拓者");
 
 //GAUL UNITS
-define("U21","Phalanx");
-define("U22","Swordsman");
-define("U23","Pathfinder");
-define("U24","Theutates Thunder");
-define("U25","Druidrider");
-define("U26","Haeduan");
-define("U27","Ram");
-define("U28","Trebuchet");
-define("U29","Chieftain");
-define("U30","Settler");
-define("U99","Trap");
+define("U21","方陣兵");
+define("U22","劍士");
+define("U23","探路者");
+define("U24","雷法師");
+define("U25","德魯伊騎兵");
+define("U26","海頓聖騎");
+define("U27","衝撞車");
+define("U28","投石車");
+define("U29","族長");
+define("U30","開拓者");
+define("U99","陷阱");
 
 //NATURE UNITS
-define("U31","Rat");
-define("U32","Spider");
-define("U33","Snake");
-define("U34","Bat");
-define("U35","Wild Boar");
-define("U36","Wolf");
-define("U37","Bear");
-define("U38","Crocodile");
-define("U39","Tiger");
-define("U40","Elephant");
+define("U31","老鼠");
+define("U32","蜘蛛");
+define("U33","毒蛇");
+define("U34","蝙蝠");
+define("U35","野豬");
+define("U36","野狼");
+define("U37","灰熊");
+define("U38","鱷魚");
+define("U39","老虎");
+define("U40","大象");
 
 //NATARS UNITS
-define("U41","Pikeman");
-define("U42","Thorned Warrior");
-define("U43","Guardsman");
-define("U44","Birds Of Prey");
-define("U45","Axerider");
-define("U46","Natarian Knight");
-define("U47","War Elephant");
-define("U48","Ballista");
-define("U49","Natarian Emperor");
-define("U50","Natarian Settler");
+define("U41","賴達矛兵");
+define("U42","賴達戰士");
+define("U43","賴達守衛者");
+define("U44","賴達獵鷹");
+define("U45","賴達斧騎");
+define("U46","賴達聖騎");
+define("U47","賴達戰象");
+define("U48","賴達投石機");
+define("U49","賴達酋長r");
+define("U50","賴達開拓者");
 
 //MONSTER UNITS
 define("U51","Monster Peon");
@@ -295,265 +295,264 @@ define("U56","Monster War Steed");
 define("U57","Monster Ram");
 define("U58","Monster Catapult");
 define("U59","Monster Chief");
-define("U60","Monster Settler");
+define("U60","Monster 開拓者");
 
 //INDEX.php
-define("LOGIN","Login");
-define("PLAYERS","Players");
-define("ONLINE","Online");
-define("TUTORIAL","Tutorial");
-define("PLAYER_STATISTICS","Player statistics");
-define("TOTAL_PLAYERS","".PLAYERS." in total");
-define("ACTIVE_PLAYERS","Active players");
-define("ONLINE_PLAYERS","".PLAYERS." online");
-define("MP_STRATEGY_GAME","".SERVER_NAME." - the multiplayer strategy game");
-define("WHAT_IS","".SERVER_NAME." is one of the most popular browser games in the world. As a player in ".SERVER_NAME.", you will build your own empire, recruit a mighty army, and fight with your allies for game world hegemony.");
-define("REGISTER_FOR_FREE","Register here for free!");
-define("LATEST_GAME_WORLD","Latest game world");
-define("LATEST_GAME_WORLD2","Register on the latest<br/>game world and enjoy<br/>the advantages of<br/>being one of the<br/>first players.");
-define("PLAY_NOW","Play ".SERVER_NAME." now");
-define("LEARN_MORE","Learn more <br/>about ".SERVER_NAME."!");
-define("LEARN_MORE2","Now with a revolutionised<br>server system, completely new<br>graphics <br>This clone is The Shiz!");
-define("COMUNITY","Community");
-define("BECOME_COMUNITY","Become part of our community now!");
-define("BECOME_COMUNITY2","Become a part of one of<br>the biggest gaming<br>communities in the<br>world.");
-define("NEWS","News");
-define("SCREENSHOTS","Screenshots");
-define("LEARN1","Upgrade your fields and mines to increase your resource production. You will need resources to construct buildings and train soldiers.");
-define("LEARN2","Construct and expand the buildings in your village. Buildings improve your overall infrastructure, increase your resource production and allow you to research, train and upgrade your troops.");
-define("LEARN3","View and interact with your surroundings. You can make new friends or new enemies, make use of the nearby oases and observe as your empire grows and becomes stronger.");
-define("LEARN4","Follow your improvement and success and compare yourself to other players. Look at the Top 10 rankings and fight to win a weekly medal.");
-define("LEARN5","Receive detailed reports about your adventures, trades and battles. Don't forget to check the brand new reports about the happenings taking place in your surroundings.");
-define("LEARN6","Exchange information and conduct diplomacy with other players. Always remember that communication is the key to winning new friends and solving old conflicts.");
-define("LOGIN_TO","Log in to ". SERVER_NAME);
-define("REGIN_TO","Register in ". SERVER_NAME);
-define("P_ONLINE","Players online: ");
-define("P_TOTAL","Players in total: ");
-define("CHOOSE","Please choose a server.");
-define("STARTED"," The server started ". round((time()-COMMENCE)/86400) ." days ago.");
+define("LOGIN","登入");
+define("PLAYERS","玩家數量");
+define("ONLINE","在線");
+define("TUTORIAL","新手教學");
+define("PLAYER_STATISTICS","玩家狀態");
+define("TOTAL_PLAYERS","註冊玩家 ".PLAYERS);
+define("ACTIVE_PLAYERS","活躍玩家");
+define("ONLINE_PLAYERS","".PLAYERS." 在線");
+define("MP_STRATEGY_GAME","".SERVER_NAME." - 大型多人即時戰略遊戲");
+define("WHAT_IS","".SERVER_NAME." 是架構於瀏覽器的遊戲，".SERVER_NAME."世界內有數千至數萬名玩家，一名玩家就是一個村莊的領主，他們要不斷攻城掠池，以外交、權謀、諜戰、結盟、分工等等謀略，成為中世紀霸主。");
+define("REGISTER_FOR_FREE","完全免費!");
+define("LATEST_GAME_WORLD","最新的遊戲世界");
+define("LATEST_GAME_WORLD2","你可以在最新的遊戲世界註冊帳號，另你可比<br />別人更早發展你的勢力。");
+define("PLAY_NOW","立即加入 ".SERVER_NAME." !");
+define("LEARN_MORE","了解 ".SERVER_NAME."<br/>更多 !");
+define("LEARN_MORE2","全新的英雄系統、華麗的遊戲介面及強化的<br />互動地圖。");
+define("COMUNITY","社群");
+define("BECOME_COMUNITY","加入我們社群!");
+define("BECOME_COMUNITY2","成為世界最大的遊戲社群一份子。");
+define("NEWS","新聞");
+define("SCREENSHOTS","遊戲畫面");
+define("LEARN1","發展你的資源田以增強村莊的經濟力。資源是發展村莊及軍隊時不可或缺的。");
+define("LEARN2","發展及升級你的建築物可讓你獲得更多的資源和訓練更強的軍隊！");
+define("LEARN3","常常留意你的四周，除了可結交戰友外，亦有不少敵人對你虎視眈眈。");
+define("LEARN4","在各範疇中發展你的帝國，每星期我們都會送給全服中不同方面的最佳十名玩家獨一無二的獎勵。");
+define("LEARN5","留意報告的內容，你可得知你帝國內的詳細資料。");
+define("LEARN6","跟其他玩家互動，認識多一位朋友比樹立多一位敵人要好得多。");
+define("LOGIN_TO","登入 ". SERVER_NAME);
+define("REGIN_TO","註冊 ". SERVER_NAME);
+define("P_ONLINE","在線玩家: ");
+define("P_TOTAL","註冊玩家: ");
+define("CHOOSE","請選擇伺服器");
+define("STARTED","伺服器已於 ". round((time()-COMMENCE)/86400) ." 天前啟動");
 
 //ANMELDEN.php
-define("NICKNAME","Nickname");
-define("EMAIL","Email");
-define("PASSWORD","Password");
-define("ROMANS","Romans");
-define("TEUTONS","Teutons");
-define("GAULS","Gauls");
-define("NW","North West");
-define("NE","North East");
-define("SW","South West");
-define("SE","South East");
-define("RANDOM","random");
-define("ACCEPT_RULES"," I accept the game rules and general terms and conditions.");
-define("ONE_PER_SERVER","Each player may only own ONE account per server.");
-define("BEFORE_REGISTER","Before you register an account you should read the <a href='../anleitung.php' target='_blank'>instructions</a> of TravianX to see the specific advantages and disadvantages of the three tribes.");
-define("BUILDING_UPGRADING","Building:");
-define("HOURS","hours");
+define("NICKNAME","暱稱");
+define("EMAIL","電子郵箱");
+define("PASSWORD","密碼");
+define("ROMANS","羅馬人");
+define("TEUTONS","條頓人");
+define("GAULS","高盧人");
+define("NW","西北");
+define("NE","東北");
+define("SW","西南");
+define("SE","東南");
+define("RANDOM","隨機");
+define("ACCEPT_RULES"," 我接受使用協議。");
+define("ONE_PER_SERVER","每一位使用者只能擁有一個帳號");
+define("BEFORE_REGISTER","在你註冊帳號以前，你可以先閱讀 <a href='../anleitung.php' target='_blank'>伺服器介紹</a> 以確認三個種族的優劣及特性。");
+define("BUILDING_UPGRADING","建築中:");
+define("HOURS","小時");
 
 
 //ATTACKS ETC.
-define("TROOP_MOVEMENTS","Troop Movements:");
-define("ARRIVING_REINF_TROOPS","Arriving reinforcing troops");
-define("ARRIVING_REINF_TROOPS_SHORT","Reinf.");
-define("OWN_ATTACKING_TROOPS","Own attacking troops");
-define("ATTACK","Attack");
-define("OWN_REINFORCING_TROOPS","Own reinforcing troops");
-define("TROOPS_DORF","Troops:");
+define("TROOP_MOVEMENTS","移動中的軍隊:");
+define("ARRIVING_REINF_TROOPS","增援抵達中");
+define("ARRIVING_REINF_TROOPS_SHORT","援軍");
+define("OWN_ATTACKING_TROOPS","進攻中的軍隊");
+define("ATTACK","攻擊");
+define("OWN_REINFORCING_TROOPS","增援中的軍隊");
+define("TROOPS_DORF","軍隊:");
 
 
 //LOGIN.php
-define("COOKIES","You must have cookies enabled to be able to log in. If you share this computer with other people you should log out after each session for your own safety.");
-define("NAME","Name");
-define("PW_FORGOTTEN","Password forgotten?");
-define("PW_REQUEST","Then you can request a new one which will be sent to your email address.");
-define("PW_GENERATE","All fields required");
-define("EMAIL_NOT_VERIFIED","Email not verified!");
-define("EMAIL_FOLLOW","Follow this link to activate your account.");
-define("VERIFY_EMAIL","Verify Email.");
-define("LOGIN_SERVER_START","Server will start in:");
+define("COOKIES","您必須啟用 Cookie 以登入，如果您使用的是公用電腦，基於安全考量請記得登出。");
+define("NAME","帳號");
+define("PW_FORGOTTEN","忘記密碼?");
+define("PW_REQUEST","然後你可以申請一個新的電子郵箱地址");
+define("PW_GENERATE","所有欄位皆為必填");
+define("EMAIL_NOT_VERIFIED","電子郵箱未啟用!");
+define("EMAIL_FOLLOW","點此連結以啟用您的帳號");
+define("VERIFY_EMAIL","電子郵箱驗證");
+define("LOGIN_SERVER_START","伺服器將於以下時間內啟動:");
 
 
 //404.php
-define("NOTHING_HERE","Nothing here!");
-define("WE_LOOKED","We looked 404 times already but can't find anything");
+define("NOTHING_HERE","找不到頁面!");
+define("WE_LOOKED","我們已經搜尋了 404 次，但是還是找不到任何東西 :(");
 
 //TIME RELATED
-define("CALCULATED","Calculated in");
-define("SERVER_TIME","Server time:");
+define("CALCULATED","運算耗時");
+define("SERVER_TIME","伺服器時間:");
 
 //MASSMESSAGE.php
-define("MASS","Message Content");
-define("MASS_SUBJECT","Subject:");
-define("MASS_COLOR","Message color:");
-define("MASS_REQUIRED","All fields required");
-define("MASS_UNITS","Images (units):");
-define("MASS_SHOWHIDE","Show/Hide");
-define("MASS_READ","Read this: after adding smilie, you have to add left or right after number otherwise image will won't work");
-define("MASS_CONFIRM","Confirmation");
-define("MASS_REALLY","Do you really want to send MassIGM?");
-define("MASS_ABORT","Aborting right now");
-define("MASS_SENT","Mass IGM was sent");
+define("MASS","訊息內容");
+define("MASS_SUBJECT","主旨:");
+define("MASS_COLOR","訊息顏色:");
+define("MASS_REQUIRED","所有欄位皆為必填");
+define("MASS_UNITS","圖片 (單位):");
+define("MASS_SHOWHIDE","顯示 / 隱藏");
+define("MASS_READ","注意: 添加表情符號後，您必須將訊息插入在其前或其後，否則圖片將無法正常顯示。");
+define("MASS_CONFIRM","確認");
+define("MASS_REALLY","您確定要送出廣播訊息?");
+define("MASS_ABORT","取消");
+define("MASS_SENT","廣播訊息已寄出");
 
 // Menu items
 
-	define("GAME_TOUR","Game Tour");
-	define("FORUM","Forum");
-	define("FORUM_LINK","http://forum.travian.com");
-	define("MORE_GAMES","More games");
-	define("REGISTER","Register");
-	define("LOGIN","Login");
-	define("MANUAL","Manual");
-	define("TUTORIAL","Tutorial");
-	define("SCREENSHOTS","Screenshots");
+	define("GAME_TOUR","遊戲導覽");
+	define("FORUM","論壇");
+	define("FORUM_LINK","http://220.132.233.59");
+	define("MORE_GAMES","更多遊戲");
+	define("REGISTER","註冊");
+	define("LOGIN","登入");
+	define("MANUAL","幫助");
+	define("TUTORIAL","新手教學");
+	define("SCREENSHOTS","遊戲畫面");
 	define("FAQ","FAQ");
-	define("SPIELREGELN","Game Rules");
-	define("AGB","Terms");
-	define("IMPRINT","Imprint");
-	define("SUPPORT","Support");
-	define("LINKS","Links");
-	define("HOME","Homepage");
-	define("PROFILE","Profile");
-	define("INSTRUCTIONS","Instructions");
-	define("ADMIN_PANEL","Admin Panel");
-	define("MULTIHUNTER_PANEL","Multihunter Panel");
-	define("MASS_MESSAGE","Mass Message");
-	define("UPDATE_TOP_TEN","Update Top 10");
-	define("SYSTEM_MESSAGE","System Message");
-	define("LOGOUT","Logout");
-	define("HELP","Help");
+	define("SPIELREGELN","遊戲規則");
+	define("AGB","使用條款");
+	define("IMPRINT","重要");
+	define("SUPPORT","支援");
+	define("LINKS","連結");
+	define("HOME","首頁");
+	define("PROFILE","個人資料");
+	define("INSTRUCTIONS","說明");
+	define("ADMIN_PANEL","管理員後台");
+	define("MULTIHUNTER_PANEL","MH 後台");
+	define("MASS_MESSAGE","廣播訊息");
+	define("UPDATE_TOP_TEN","更新前十名");
+	define("SYSTEM_MESSAGE","系統訊息");
+	define("LOGOUT","登出");
+	define("HELP","幫助");
 	define("TRAVIAN_PLUS",SERVER_NAME." <b><span class=\"plus_g\">P</span><span class=\"plus_o\">l</span><span class=\"plus_g\">u</span><span class=\"plus_o\">s</span></span></span></b>");
 
 // Index
 
-	define("WELCOME","Welcome to ".SERVER_NAME);
-	define("PLAY_NOW","Play now, for free!");
-	define("WHAT_IS","What is ".SERVER_NAME);
-	define("GAME_DESCRIPTION",SERVER_NAME." is a <b>browser game</b> featuring an engaging ancient world with thousands of other real players.</p><p>It`s <strong>free to play</strong> and requires <strong>no downloads</strong>.");
-	define("CLICK_HERE","Click here to play ".SERVER_NAME);
-	define("ABOUT","About the game");
+	define("WELCOME","歡迎來到 ".SERVER_NAME);
+	define("PLAY_NOW","完全免費!");
+	define("WHAT_IS",SERVER_NAME." 是什麼?");
+	define("GAME_DESCRIPTION",SERVER_NAME." 是架構於瀏覽器的遊戲，TRAVIAN世界內有數千至數萬名玩家，一名玩家就是一個村莊的領主，他們要不斷攻城掠池，以外交、權謀、諜戰、結盟、分工等等謀略，成為中世紀霸主。");
+	define("CLICK_HERE","點這裡開始玩 ".SERVER_NAME);
+	define("ABOUT","遊戲導覽");
 	define("ABOUT1","You will begin as the chief of a tiny village and will embark on an exciting quest.");
 	define("ABOUT2","Build up villages, wage wars or establish trade routes with your neighbours.");
 	define("ABOUT3","Play with and against thousands of other real players and conquer the world of ".SERVER_NAME.".");
-	define("NEWS","News");
-	define("CHOOSE_WORLD","Choose your world");
+	define("NEWS","最新消息");
+	define("CHOOSE_WORLD","選擇世界");
 	
 // Index Travian 4
 
 	define("","");
 
-	$lang['index2']['description'] = 'Master the art of ancient tactics as Roman, Gaul or Teuton!';
-	$lang['index2']['shop title'] = SERVER_NAME.' shop';
-	$lang['index2']['shop'] = 'Go to shop';
+	$lang['index2']['description'] = '掌握古老的羅馬、條頓、高盧的戰爭藝術!';
+	$lang['index2']['shop title'] = SERVER_NAME.' 商店';
+	$lang['index2']['shop'] = '進入商店';
 	$lang['index2']['shop link'] = '#';
-	$lang['index2']['facebook'] = 'http://www.facebook.com/ZravianX';
-	$lang['index2']['strategy game'] = SERVER_NAME.' - the multiplayer strategy game';
-	$lang['index2']['what is'] = SERVER_NAME.' is one of the most popular browser games in the world. As a player in '.SERVER_NAME.', you will build your own empire, recruit a mighty army, and fight with your allies for game world hegemony.';
-	$lang['index2']['register free'] = 'Register here for free!';
-	$lang['index2']['title1'] = 'Latest game world';
-	$lang['index2']['desc1'] = 'Register on the latest<br />game world and enjoy<br />the advantages of<br />being one of the<br />first players.';
-	$lang['index2']['text1'] = 'Play '.SERVER_NAME.' now';
+	$lang['index2']['facebook'] = 'https://www.facebook.com/lorex.yang';
+	$lang['index2']['strategy game'] = SERVER_NAME.' - 網頁遊戲 - 羅馬、高盧和條頓';
+	$lang['index2']['what is'] = SERVER_NAME.' 是架構於瀏覽器的遊戲， '.SERVER_NAME.'世界內有數千至數萬名玩家，一名玩家就是一個村莊的領主，他們要不斷攻城掠池，以外交、權謀、諜戰、結盟、分工等等謀略，成為中世紀霸主。';
+	$lang['index2']['register free'] = '免費註冊!';
+	$lang['index2']['title1'] = '最後登入';
+	$lang['index2']['desc1'] = '你可以在最新的遊戲世界註冊帳號，另你可比<br />別人更早發展你的勢力。';
+	$lang['index2']['text1'] = '立即加入 '.SERVER_NAME.' !';
 	$lang['index2']['link1'] = '#serverRegister';
-	$lang['index2']['title2'] = 'The new '.SERVER_NAME;
-	$lang['index2']['desc2'] = 'Now with a revolutionized<br />hero system,<br />completely new graphics<br />and an interactive<br />map!';
-	$lang['index2']['text2'] = 'Explore the new '.SERVER_NAME;
+	$lang['index2']['title2'] = '全新的 '.SERVER_NAME;
+	$lang['index2']['desc2'] = '全新的英雄系統、華麗的遊戲介面及強化的<br />互動地圖。';
+	$lang['index2']['text2'] = '了解 '.SERVER_NAME.' 的全新功能';
 	$lang['index2']['link2'] = '#serverRegister';
-	$lang['index2']['title3'] = 'Community';
-	$lang['index2']['desc3'] = 'Become a part of one<br />of the biggest gaming<br />communities in the<br />world.';
-	$lang['index2']['text3'] = 'Become part of our community now!';
+	$lang['index2']['title3'] = '遊戲社群';
+	$lang['index2']['desc3'] = '成為世界最大的遊戲社群一份子。';
+	$lang['index2']['text3'] = '成為遊戲社群的一份子。';
 	$lang['index2']['link3'] = '#';
-	$lang['index2']['learn more'] = 'Learn more<br />about '.SERVER_NAME.'!';
-	$lang['index2']['strip1'] = 'Upgrade your fields and mines to increase your resource production. You will need resources to construct buildings and train soldiers.';
-	$lang['index2']['strip2'] = 'Construct and expand the buildings in your village. Buildings improve your overall infrastructure, increase your resource production and allow you to research, train and upgrade your troops.';
-	$lang['index2']['strip3'] = 'View and interact with your surroundings. You can make new friends or new enemies, make use of the nearby oases and observe as your empire grows and becomes stronger.';
-	$lang['index2']['strip4'] = 'Follow your improvement and success and compare yourself to other players. Look at the Top 10 rankings and fight to win a weekly medal.';
-	$lang['index2']['strip5'] = 'Receive detailed reports about your adventures, trades and battles. Don\'t forget to check the brand new reports about the happenings taking place in your surroundings.';
-	$lang['index2']['strip6'] = 'Exchange information and conduct diplomacy with other players. Always remember that communication is the key to winning new friends and solving old conflicts.';
+	$lang['index2']['learn more'] = '了解 '.SERVER_NAME.'<br />更多。';
+	$lang['index2']['strip1'] = '發展你的資源田以增強村莊的經濟力。資源是發展村莊及軍隊時不可或缺的。';
+	$lang['index2']['strip2'] = '發展及升級你的建築物可讓你獲得更多的資源和訓練更強的軍隊！';
+	$lang['index2']['strip3'] = '常常留意你的四周，除了可結交戰友外，亦有不少敵人對你虎視眈眈。';
+	$lang['index2']['strip4'] = '在各範疇中發展你的帝國，每星期我們都會送給全服中不同方面的最佳十名玩家獨一無二的獎勵。';
+	$lang['index2']['strip5'] = '留意報告的內容，你可得知你帝國內的詳細資料。';
+	$lang['index2']['strip6'] = '跟其他玩家互動，認識多一位朋友比樹立多一位敵人要好得多。';
 
 // Screenshots Travian 4
 
-	define("SCREENSHOTS_T4_TITLE1","Village centre");
-	define("SCREENSHOTS_T4_TITLE2","Village overview");
-	define("SCREENSHOTS_T4_TITLE3","The hero");
-	define("SCREENSHOTS_T4_TITLE4","Building information");
-	define("SCREENSHOTS_T4_TITLE5","Surrounding territories");
-	define("SCREENSHOTS_T4_TITLE6","Battle report");
-	define("SCREENSHOTS_T4_TITLE7","Medals system");
-	define("SCREENSHOTS_T4_TITLE8","Task system");
-	define("SCREENSHOTS_T4_DESC1","Your village could like this one day, becoming the starting point for your vast empire.");
-	define("SCREENSHOTS_T4_DESC2","Wood, clay, iron and crop are the vital resources which will fuel the economy of your village and feed your people; they will provide you with the materials necessary for construction and war. With these valuable resources, you can train a powerful conquering army.");
-	define("SCREENSHOTS_T4_DESC2","Lumber, clay, iron and crop are the vital resources which will fuel the economy of your village and feed your people; they will provide you with the materials necessary for construction and war. With these valuable resources, you can train a powerful conquering army.");
+	define("SCREENSHOTS_T4_TITLE1","村莊中心");
+	define("SCREENSHOTS_T4_TITLE2","村莊總覽");
+	define("SCREENSHOTS_T4_TITLE3","英雄系統");
+	define("SCREENSHOTS_T4_TITLE4","建築物");
+	define("SCREENSHOTS_T4_TITLE5","外來威脅");
+	define("SCREENSHOTS_T4_TITLE6","戰爭報告");
+	define("SCREENSHOTS_T4_TITLE7","徽章系統");
+	define("SCREENSHOTS_T4_TITLE8","任務系統");
 
-	define("SCREENSHOTS_T4_DESC3","You can send your hero to adventures, where he will have to face great danger and pass difficult challenges. If your hero is successful, he stands a chance of bringing something valuable home.");
-	define("SCREENSHOTS_T4_DESC4","For it to become powerful and productive, your village will need a great number of buildings. At the beginning, choose well what you want to construct first, as resources are scarce.");
-	define("SCREENSHOTS_T4_DESC5","Explore your surrounding territories in order to get to know your neighbors; you can opt for a path of peace, creating alliances and confederacies, or you can wage war and conquer the surrounding lands. There may be rich oases in your vicinity; conquer them to gain various valuable bonuses, but always be aware of the dangerous wild animals that inhabit them.");
-	define("SCREENSHOTS_T4_DESC6","It is wise to train your army early on, so you can defend yourself and attack others. This way, you can raid more resources and build up your empire more quickly.");
-	define("SCREENSHOTS_T4_DESC7","At the end of every week, the very best 10 players and alliances will be elected, topping in different categories; as a reward for their prowess they will receive medals, celebrating their achievements.");
-	define("SCREENSHOTS_T4_DESC8","To assist you when you first start managing your empire, we have sent the Taskmaster; he will guide you with tips and advice in order to help you build up your village. Just click on the image of the Taskmaster to your left to activate him.");
+	define("SCREENSHOTS_T4_DESC1","帝國不是一天可建成的，一切都從一個小村莊開始。");
+	define("SCREENSHOTS_T4_DESC2","發展經濟及養活你的人民，當有足夠的基礎時，你可以開始發展你的戰力。");
+	define("SCREENSHOTS_T4_DESC2","發展經濟及養活你的人民，當有足夠的基礎時，你可以開始發展你的戰力。");
+	define("SCREENSHOTS_T4_DESC3","英雄可在新設的冒險系統中得到極為有用的道具。而且在 OC TRAVIAN T4 中，英雄更會協助村莊的生產。");
+	define("SCREENSHOTS_T4_DESC4","要發展成一個大帝國，不同的建築物是不可或缺的。而且建築的先後次序絕對影響日後的發展。");
+	define("SCREENSHOTS_T4_DESC5","TRAVIAN 中是有成千上萬的玩家在競爭，是和是戰，全取決於你的外交手段。");
+	define("SCREENSHOTS_T4_DESC6","愈早建立部隊，你愈早可以有足夠的防衛力量。而且更可攻擊其他的玩家以獲取大量的資源。");
+	define("SCREENSHOTS_T4_DESC7","每一個星期初，各範疇的最佳十名玩家都會獲得獨一無二的徽章以表揚他們的成就。");
+	define("SCREENSHOTS_T4_DESC8","TRAVIAN 中設有任務指導，讓新加入的玩家更快的掌握遊戲技巧，而且提供不少的獎勵。");
 
-	$lang['screenshots2']['desc1'] = 'Your village could like this one day, becoming the starting point for your vast empire.';
-	$lang['screenshots2']['desc2'] = 'Wood, clay, iron and crop are the vital resources which will fuel the economy of your village and feed your people; they will provide you with the materials necessary for construction and war. With these valuable resources, you can train a powerful conquering army.';
-	$lang['screenshots2']['desc2'] = 'Lumber, clay, iron and crop are the vital resources which will fuel the economy of your village and feed your people; they will provide you with the materials necessary for construction and war. With these valuable resources, you can train a powerful conquering army.';
-
-	$lang['screenshots2']['desc3'] = 'You can send your hero to adventures, where he will have to face great danger and pass difficult challenges. If your hero is successful, he stands a chance of bringing something valuable home.';
-	$lang['screenshots2']['desc4'] = 'For it to become powerful and productive, your village will need a great number of buildings. At the beginning, choose well what you want to construct first, as resources are scarce.';
-	$lang['screenshots2']['desc5'] = 'Explore your surrounding territories in order to get to know your neighbors; you can opt for a path of peace, creating alliances and confederacies, or you can wage war and conquer the surrounding lands. There may be rich oases in your vicinity; conquer them to gain various valuable bonuses, but always be aware of the dangerous wild animals that inhabit them.';
-	$lang['screenshots2']['desc6'] = 'It is wise to train your army early on, so you can defend yourself and attack others. This way, you can raid more resources and build up your empire more quickly.';
-	$lang['screenshots2']['desc7'] = 'At the end of every week, the very best 10 players and alliances will be elected, topping in different categories; as a reward for their prowess they will receive medals, celebrating their achievements.';
-	$lang['screenshots2']['desc8'] = 'To assist you when you first start managing your empire, we have sent the Taskmaster; he will guide you with tips and advice in order to help you build up your village. Just click on the image of the Taskmaster to your left to activate him.';
+	$lang['screenshots2']['desc1'] = '帝國不是一天可建成的，一切都從一個小村莊開始。';
+	$lang['screenshots2']['desc2'] = '發展經濟及養活你的人民，當有足夠的基礎時，你可以開始發展你的戰力。';
+	$lang['screenshots2']['desc2'] = '發展經濟及養活你的人民，當有足夠的基礎時，你可以開始發展你的戰力。';
+	$lang['screenshots2']['desc3'] = '英雄可在新設的冒險系統中得到極為有用的道具。而且在 OC TRAVIAN T4 中，英雄更會協助村莊的生產。';
+	$lang['screenshots2']['desc4'] = '要發展成一個大帝國，不同的建築物是不可或缺的。而且建築的先後次序絕對影響日後的發展。';
+	$lang['screenshots2']['desc5'] = 'TRAVIAN 中是有成千上萬的玩家在競爭，是和是戰，全取決於你的外交手段。';
+	$lang['screenshots2']['desc6'] = '愈早建立部隊，你愈早可以有足夠的防衛力量。而且更可攻擊其他的玩家以獲取大量的資源。';
+	$lang['screenshots2']['desc7'] = '每一個星期初，各範疇的最佳十名玩家都會獲得獨一無二的徽章以表揚他們的成就。';
+	$lang['screenshots2']['desc8'] = 'TRAVIAN 中設有任務指導，讓新加入的玩家更快的掌握遊戲技巧，而且提供不少的獎勵。';
 
 // Player statics
 
-	define("TOTAL_PLAYERS","Players in total");
-	define("PLAYERS_ACTIVE","Active players");
-	define("PLAYERS_ONLINE","Players online");
-	define("PLAYERS","Players");
-	define("ACTIVE","Active");
-	define("ONLINE","Online");
-	define("PLAYER_STATISTICS","Players statistics");
+	define("TOTAL_PLAYERS","註冊玩家：");
+	define("PLAYERS_ACTIVE","活躍玩家：");
+	define("PLAYERS_ONLINE","在線玩家：");
+	define("PLAYERS","註冊玩家");
+	define("ACTIVE","活躍玩家");
+	define("ONLINE","在線玩家");
+	define("PLAYER_STATISTICS","玩家統計");
 	
 //NOTICES
-define("REPORT_SUBJECT","Subject:");
-define("REPORT_ATTACKER","Attacker");
-define("REPORT_DEFENDER","Defender");
-define("REPORT_RESOURCES","Resources");
-define("REPORT_FROM_VIL","from village");
-define("REPORT_FROM_ALLY","from ally");
-define("REPORT_SENT","Sent on:");
-define("REPORT_SENDER","Sender");
-define("REPORT_RECEIVER","Receiver");
-define("REPORT_AT","At");
-define("REPORT_TO","To");
-define("REPORT_SEND_RES","send resources");
-define("REPORT_DEL_BTN","delete report");
-define("REPORT_DEL_QST","Are you sure that you want to delete the report?");
-define("REPORT_WARSIM","combat simulator");
-define("REPORT_ATK_AGAIN","return on the attack");
-define("REPORT_TROOPS","Troops");
-define("REPORT_REINF","Reinforecment");
-define("REPORT_CASUALTIES","Casualties");
-define("REPORT_PRISONERS","Prisoners");
-define("REPORT_INFORMATION","information");
-define("REPORT_BOUNTY","Bounty");
-define("REPORT_CLOCK","Time");
-define("REPORT_UPKEEP","Upkeep");
-define("REPORT_PER_HOURS","per hour");
-define("REPORT_SEND_REINF_TO","send reinforcement to village");
+define("REPORT_SUBJECT","主旨:");
+define("REPORT_ATTACKER","攻擊方");
+define("REPORT_DEFENDER","防禦方");
+define("REPORT_RESOURCES","資源");
+define("REPORT_FROM_VIL","從村莊");
+define("REPORT_FROM_ALLY","從援軍");
+define("REPORT_SENT","發送時間");
+define("REPORT_SENDER","發送者");
+define("REPORT_RECEIVER","接收者");
+define("REPORT_AT","從");
+define("REPORT_TO","至");
+define("REPORT_SEND_RES","發送資源");
+define("REPORT_DEL_BTN","刪除報告");
+define("REPORT_DEL_QST","你確定要刪除報告嗎?");
+define("REPORT_WARSIM","戰鬥模擬器");
+define("REPORT_ATK_AGAIN","回到戰鬥畫面");
+define("REPORT_TROOPS","軍隊");
+define("REPORT_REINF","增援");
+define("REPORT_CASUALTIES","傷亡");
+define("REPORT_PRISONERS","俘虜");
+define("REPORT_INFORMATION","資訊");
+define("REPORT_BOUNTY","賞金");
+define("REPORT_CLOCK","時間");
+define("REPORT_UPKEEP","維持");
+define("REPORT_PER_HOURS","每小時");
+define("REPORT_SEND_REINF_TO","發送援軍至村莊");
 
 //added by Danter14
 
 //Help.php
-$lang['HELP1']['TITRE'] = "system help";
-$lang['HELP1']['Partie_1'] = "FAQ - Answers";
-$lang['HELP1']['Text_1'] = "Here you will find the answer to your question about Travian. If that does not satisfy you or seems incomplete or if you still missing elements, you can contact support game.";
-$lang['HELP1']['Partie_2'] = "Rules of the game";
-$lang['HELP1']['Text_2'] = "Rules of the game.";
-$lang['HELP1']['Partie_3'] = "Contact the game medium";
-$lang['HELP1']['Text_3'] = "If you have not found your answer: contact support play here.";
-$lang['HELP1']['Partie_4'] = "More Questions";
-$lang['HELP1']['Text_4'] ="Here you can ask your question about options or more payment systems.";
-$lang['HELP1']['Partie_5'] = "Forum";
-$lang['HELP1']['Text_5'] ="On the forum, chat with other players.";
-$lang['HELP1']['Partie_6'] = "Quick information";
-$lang['HELP1']['Text_6'] ="Here you can find short and quick information about the troops and buildings Travian";
+$lang['HELP1']['TITRE'] = "系統幫助";
+$lang['HELP1']['Partie_1'] = "FAQ - 知識庫";
+$lang['HELP1']['Text_1'] = "您可在這裡找到有關 Travian 的知識。";
+$lang['HELP1']['Partie_2'] = "遊戲規則";
+$lang['HELP1']['Text_2'] = "遊戲規則";
+$lang['HELP1']['Partie_3'] = "聯絡我們";
+$lang['HELP1']['Text_3'] = "如果在遊戲中有任何問題，請聯絡 Lorex。";
+$lang['HELP1']['Partie_4'] = "更多問題";
+$lang['HELP1']['Text_4'] ="您可以在這裡找到關於遊戲交易方面的解答。";
+$lang['HELP1']['Partie_5'] = "討論區";
+$lang['HELP1']['Text_5'] ="與其他玩家討論。";
+$lang['HELP1']['Partie_6'] = "快速幫助";
+$lang['HELP1']['Text_6'] ="您可以在這裡快速取得遊戲資訊。";
 
 ?>
