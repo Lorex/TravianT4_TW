@@ -28,7 +28,7 @@ if($rep1)
 	<h1>Under Construction</h1>
 	<div id="content" class="reports" style="padding: 0;">
 	<?php
-		include("Notice/all.tpl");
+		include("../Templates/Notice/all.tpl");
 	?>
 	</div>
 	<?php
@@ -42,13 +42,13 @@ if($rep)
 
 	<br />
 
-	<span class="b">reporte de</span>: <?php echo $database->getUserField($rep[0]['uid'],'username',0);?><br />
+	<span class="b">報告至</span>: <?php echo $database->getUserField($rep[0]['uid'],'username',0);?><br />
 
 	<div id="content" class="reports">
-		<h1>Reporte</h1>
+		<h1>報告</h1>
 <?php
 $type = $rep[0]['ntype'];
-		include("Notice/".$type.".tpl");
+		include("../Templates/Notice/".$type.".tpl");
 
 }
 else

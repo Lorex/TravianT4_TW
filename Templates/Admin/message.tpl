@@ -10,7 +10,7 @@
 #################################################################################
 ?>
 <style>
-.del {width:12px; height:12px; background-image: url(img/admin/icon/del.gif);} 
+.del {width:12px; height:12px; background-image: url(../img/admin/icon/del.gif);} 
 </style>
 <table id="member" style="width:225px">
   <thead>
