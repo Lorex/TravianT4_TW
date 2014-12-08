@@ -120,7 +120,7 @@ define("ALLI_OWNER","在刪除前請先指派盟主");
 define("SIT_ERROR","介紹人早已設定");
 define("USR_NT_FOUND","此帳號不存在");
 define("LOGIN_PW_ERROR","密碼錯誤");
-define("WEL_TOPIC","錦囊妙計");
+define("WEL_TOPIC","歡迎！");
 define("ATAG_EMPTY","標籤不能為空");
 define("ANAME_EMPTY","聯盟名稱不能為空");
 define("ATAG_EXIST","此標籤已被使用");
