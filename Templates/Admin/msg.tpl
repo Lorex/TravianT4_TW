@@ -37,6 +37,6 @@ if($msg){
 </div>
 <?php
 }else{
-echo "Message id ".$_GET['nid']." wasn´t found.";
+echo "訊息 ID ".$_GET['nid']." 找不到";
 }
 ?>
