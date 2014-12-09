@@ -12,7 +12,7 @@ include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome login qualificationServerLogin">
 	<div id="wrapper">
-		<img id="staticElements" src="img/x.gif" alt="">
+		<img id="staticElements" src="../img/x.gif" alt="">
 		<div class="bodyWrapper">
 			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="">
 			<div id="header">

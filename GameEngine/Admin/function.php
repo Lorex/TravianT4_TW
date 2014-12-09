@@ -60,7 +60,7 @@ class funct {
       break; 
     } 
     if($get['action'] == 'logout'){
-      header("Location: admin.php");  
+      header("Location: index.php");  
     }else{
       header("Location: ".$_SERVER['HTTP_REFERER']);
     }                
