@@ -31,7 +31,7 @@
 for ($i = 0; $i <= count($varray)-1; $i++) {
 $coorproc = $database->getCoor($varray[$i]['wref']);
 if($varray[$i]['capital']){
-$capital = '<span class="c">(Capital)</span>';
+$capital = '<span class="c">(主村)</span>';
 $delLink = '<a href="#"><img src="../img/Admin/del_g.gif" class="del"></a>'; 
 }else{
 $capital = '';

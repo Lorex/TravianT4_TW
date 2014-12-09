@@ -164,7 +164,7 @@ if($deletion){
 		}?></td>
     </tr>
     <tr>
-        <td>剩餘金幣！</td>
+        <td>剩餘金幣</td>
         <td><?php
 		if($user['gold'] == 0){ ?>
 		此玩家沒有金幣！ (<img src='../img/admin/gold_g.gif' class='gold' alt='Gold' title='這個玩家擁有: <?php echo $user['gold']; ?> 金'/> <?php echo $user['gold']; ?>) <?php if($_SESSION['access'] == ADMIN){ ?><a href='index.php?p=player&uid=<?php echo $id; ?>&g'>派金 <?php } ?></a>
@@ -237,7 +237,7 @@ if($deletion){
 		</tr></form>
 		<?php } } }?>
   <tr>
-        <td>最後活動/td>
+        <td>最後活動</td>
         <td><?php 
 		echo ''.date('d.m.Y H:i',$user['timestamp']+3600*2).'';
 		?>

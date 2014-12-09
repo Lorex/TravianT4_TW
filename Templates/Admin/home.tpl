@@ -28,28 +28,19 @@
 
 <br /><br /><br /><br />
 
-您好， <b><?php echo $_SESSION['username']; ?></b>:
-<br />
-<br />
+您好，<b><?php echo $_SESSION['username']; ?></b>:
+
+<br /><br />
+
+
 <center>
     您現在正以 <b><?php if($_SESSION['access'] == MULTIHUNTER) { echo '<font color="Blue">Multihunter</font>'; } else if($_SESSION['access'] == ADMIN){ echo '<font color="Red">管理員</font>'; } ?></b>權限登入
 </center>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
 <font color="#c5c5c5" size="1">
 	Translation and Rebuild by <b>Lorex</b>.
 </font>

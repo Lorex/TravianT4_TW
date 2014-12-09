@@ -12,7 +12,7 @@
 <style>
 .del {width:12px; height:12px; background-image: url(img/admin/icon/del.gif);} 
 </style>  
-<form method="post" action="admin.php">
+<form method="post" action="index.php">
 <input name="action" type="hidden" value="addVillage">
 <input name="uid" type="hidden" value="<?php echo $user['id'];?>">
 <table id="member" style="width: 225px;"> 

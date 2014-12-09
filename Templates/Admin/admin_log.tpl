@@ -26,17 +26,17 @@
 ?>
 ----------------------------------------
 <br />
-<b>Log ID:</b> <?php echo $log[$i]['id']; ?>
+<b>紀錄 ID:</b> <?php echo $log[$i]['id']; ?>
 <br />
-<b>Admin:</b>&nbsp;<?php
+<b>管理員:</b>&nbsp;<?php
                         $user = $database->getUserField($admid,"username",0);
                         if($user == 'Multihunter') {
-                            echo '<b>CONTROL PANEL</b>';
-                            } else { echo '<a href="admin.php?p=player&uid='.$admid.'">'.$user.'</a>'; }
+                            echo '<b>管理後台</b>';
+                            } else { echo '<a href="index.php?p=player&uid='.$admid.'">'.$user.'</a>'; }
 					?>
 <br />
-<b>Log:</b> <?php echo $log[$i]['log']; ?>
+<b>紀錄:</b> <?php echo $log[$i]['log']; ?>
 <br />
-<b>Date:</b> <?php echo date("d.m.Y H:i:s",$log[$i]['time']+3600*2); ?>
+<b>時間:</b> <?php echo date("d.m.Y H:i:s",$log[$i]['time']+3600*2); ?>
 <br />
 <?php } ?>
