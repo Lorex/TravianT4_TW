@@ -31,23 +31,23 @@ foreach($varray as $vil) {
 <table id="member">    
   <thead>
     <tr>
-        <th colspan="4">Delete player</th>
+        <th colspan="4">刪除玩家帳號</th>
     </tr>
   </thead> 
     <tr>
-        <td>Name:</td>
+        <td>名稱</td>
         <td><a href="?p=player&uid=<?php echo $user['id'];?>"><?php echo $user['username'];?></a></td>
-        <td>Gold:</td>
+        <td>金幣:</td>
         <td><?php echo $user['gold'];?></td>
     </tr>
     <tr>
-        <td>Rank:</td>
-        <td>???.</td>
-        <td>Population:</td>
+        <td>排行</td>
+        <td>???</td>
+        <td>人口數:</td>
         <td><?php echo $totalpop;?></td>
     </tr>
     <tr>
-        <td>Villages:</td>
+        <td>村莊</td>
         <td><?php
 
     $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."vdata WHERE owner = ".$user['id']."");
@@ -62,44 +62,44 @@ foreach($varray as $vil) {
 		echo $plus;?></td>
     </tr> 
     <tr>
-        <td>Alliance:</td>
+        <td>聯盟</td>
         <td><?php echo $database->getAllianceName($user['alliance']);?></td>
-        <td>Status:</td>
+        <td>狀態</td>
         <td>-</td>
     </tr>
     <tr>
     <td colspan="4" class="empty"></td>
     </tr>
     <tr>
-        <td>Password:</td>
+        <td>密碼</td>
         <td><input type="text" name="pass"></td>
-        <td colspan="2"><input type="submit" class="c5" value="Delete player"></td>
+        <td colspan="2"><input type="submit" class="c5" value="刪除玩家帳號"></td>
     </tr>  
 </table>
-<br /><br /><font color="Red"><b>NOTICE: DELETE ALL PLAYER VILLAGES BELLOW BEFORE DELETING PLAYER!</font></b><br /><br />
+<br /><br /><font color="Red"><b>刪除玩家帳號以前，請先刪除以下村莊！</font></b><br /><br />
 <table id="profile">    
     <tr>
-        <td>Name</td>
-        <td>Population</td>
-        <td>Coordinates</td>
+        <td>名稱</td>
+        <td>人口數</td>
+        <td>座標</td>
 		<td></td>
     </tr>
 <?php         
 for ($i = 0; $i <= count($varray)-1; $i++) {
 $coorproc = $database->getCoor($varray[$i]['wref']);
 if($varray[$i]['capital']){
-$capital = '<span class="c">(Capital)</span>';
-$delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return del(\'did\','.$varray[$i]['wref'].');"><img src="img/admin/del.gif" class="del"></a>';
+$capital = '<span class="c">(主村)</span>';
+$delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return del(\'did\','.$varray[$i]['wref'].');"><img src="../img/admin/del.gif" class="del"></a>';
 }else{
 $capital = '';
-$delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return del(\'did\','.$varray[$i]['wref'].');"><img src="img/admin/del.gif" class="del"></a>';
+$delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return del(\'did\','.$varray[$i]['wref'].');"><img src="../img/admin/del.gif" class="del"></a>';
   
 }
 
 echo '
     <tr>
         <td><a href="?p=village&did='.$varray[$i]['wref'].'">'.$varray[$i]['name'].'</a> '.$capital.'</td>
-        <td>'.$varray[$i]['pop'].' <a href="?action=recountPop&did='.$varray[$i]['wref'].'">Check<a/></td>
+        <td>'.$varray[$i]['pop'].'</td>
         <td>('.$coorproc['x'].'|'.$coorproc['y'].')</td>
 		<td>'.$delLink.' </td>
     </tr>  
