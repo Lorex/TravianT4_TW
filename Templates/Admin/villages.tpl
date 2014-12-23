@@ -45,6 +45,7 @@ $delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return
 echo '
     <tr>
         <td><a href="?p=village&did='.$varray[$i]['wref'].'">'.$varray[$i]['name'].'</a> '.$capital.'</td>
+        <td>'.$varray[$i]['pop'].' <a href="?action=recountPop&did='.$varray[$i]['wref'].'">重新計算<a/></td>
         <td>('.$coorproc['x'].'|'.$coorproc['y'].')</td>
 		<td>'.$delLink.' </td>
     </tr>  
