@@ -113,11 +113,11 @@ if($village and $user){
 
             if($i != 3){
 
-              echo $typ[$i].'x <img src="img/admin/r/'.$a.'.gif">| ';
+              echo $typ[$i].'x <img src="../img/admin/r/'.$a.'.gif">| ';
 
             }else{
 
-              echo $typ[$i].'x <img src="img/admin/r/'.$a.'.gif"> ';
+              echo $typ[$i].'x <img src="../img/admin/r/'.$a.'.gif"> ';
 
             }               
 
@@ -139,15 +139,15 @@ if($village and $user){
 
     <tr>
 
-        <th colspan="4">資源</th>
+        <th colspan="4">目前資源</th>
 
     </tr> 
 
     <tr>
 
-        <td class="hab">Resource</td>
+        <td class="hab">資源</td>
 
-        <td class="hab" colspan="2">Warehouse</td>  
+        <td class="hab" colspan="2">倉庫／糧倉</td>  
        
 
     </tr>                                     
@@ -156,7 +156,7 @@ if($village and $user){
 
     <tr>
 
-        <td><img src="img/admin/r/1.gif"> Lumber</td>
+        <td><img src="img/admin/r/1.gif"> 木材</td>
 
         <td class="hab"><?php echo floor($village['wood']);?></td>
 
@@ -166,7 +166,7 @@ if($village and $user){
 
     <tr>
 
-        <td><img src="img/admin/r/2.gif"> Clay</td>
+        <td><img src="img/admin/r/2.gif"> 磚塊</td>
 
         <td class="hab"><?php echo floor($village['clay']);?></td>
       
@@ -175,7 +175,7 @@ if($village and $user){
 
     <tr>
 
-        <td><img src="img/admin/r/3.gif"> Iron</td>
+        <td><img src="img/admin/r/3.gif"> 鋼鐵</td>
 
         <td class="hab"><?php echo floor($village['iron']);?></td>    
 
@@ -183,7 +183,7 @@ if($village and $user){
 
     <tr>
 
-        <td><img src="img/admin/r/4.gif"> Crop</td>
+        <td><img src="img/admin/r/4.gif"> 穀物<td>
 
         <td class="hab"><?php echo floor($village['crop']);?></td>
 
@@ -208,7 +208,7 @@ if($village and $user){
 
     <tr>
 
-        <th colspan="5">Oasis</th>
+        <th colspan="5">綠洲</th>
 
     </tr>  
 
@@ -216,13 +216,13 @@ if($village and $user){
 
         <td class="ra"></td>
 
-        <td class="hab">Name</td>
+        <td class="hab">名稱</td>
 
-        <td class="hab">Coordinates</td>  
+        <td class="hab">座標</td>  
 
-        <td class="hab">Loyalty</td>
+        <td class="hab">忠誠度</td>
 
-        <td class="hab">Resource</td>         
+        <td class="hab">資源</td>         
 
     </tr>                                     
 
@@ -230,7 +230,7 @@ if($village and $user){
 
     <tr>
 
-        <td><a href="?delOas&oid=" onClick="return del(\'oas\','.$varray[$i]['wref'].');"><img src="img/admin/del.gif"></a></td>
+        <td><a href="?delOas&oid=" onClick="return del(\'oas\','.$varray[$i]['wref'].');"><img src="../img/admin/del.gif"></a></td>
 
         <td class="hab">Cooming soon</td>
 
@@ -256,7 +256,7 @@ if($village and $user){
 
     <tr>
 
-        <th colspan="10">Troops in village</th>
+        <th colspan="10">軍隊</th>
 		<?php
 #== Romans ==#          
 #========================================
@@ -876,8 +876,8 @@ echo '
 	}
 	?>
 </tbody></table>
-<?php if($_SESSION['access'] == ADMIN){ echo '<div align="right"><a href="admin.php?p=addTroops&did='.$id.'">Edit troops</div></a>'; 
-	} else if($_SESSION['access'] == MULTIHUNTER){ echo '<a href="#"><b><div align="right"><font color="#bcbdbc">Edit troops</font></div></a></b>'; } 
+<?php if($_SESSION['access'] == ADMIN){ echo '<div align="right"><a href="admin.php?p=addTroops&did='.$id.'">編輯軍隊</div></a>'; 
+	} else if($_SESSION['access'] == MULTIHUNTER){ echo '<a href="#"><b><div align="right"><font color="#bcbdbc">編輯軍隊</font></div></a></b>'; } 
 	?>
 
 <table id="member" cellpadding="1" cellspacing="1" >
@@ -886,7 +886,7 @@ echo '
 
     <tr>
 
-        <th colspan="4">Buildings</th>
+        <th colspan="4">建築物</th>
 
     </tr> 
 
@@ -896,9 +896,9 @@ echo '
 
         <td class="on">GID</td>
 
-        <td class="hab">Name</td>
+        <td class="hab">建築</td>
 
-        <td class="on">Level</td>        
+        <td class="on">等級</td>        
 
     </tr>                                     
 
@@ -948,7 +948,7 @@ echo '
 
 }else{
 
-  echo "Not found...<a href=\"javascript: history.go(-1)\">Back</a>";
+  echo "找不到村莊...<a href=\"javascript: history.go(-1)\">返回</a>";
 
 }
 

@@ -160,7 +160,7 @@ else if(isset($_GET['t'])) {
 		}
 		break;
 		case 4:
-		if($session->plus) {
+		if($session->plus) { 
 			$message->loadNotes();
 			include("Templates/Message/notes.tpl");
 		}
