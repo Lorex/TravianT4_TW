@@ -37,7 +37,7 @@
     </tr>
 	
     <tr>
-        <td colspan="2"><center><input value="Add Village" type="submit" <?php if($_SESSION['access'] == ADMIN){ echo ''; } else if($_SESSION['access'] == MULTIHUNTER){ echo 'disabled="disabled"'; } ?>></center></td>
+        <td colspan="2"><center><input value="新增村莊" type="submit" <?php if($_SESSION['access'] == ADMIN){ echo ''; } else if($_SESSION['access'] == MULTIHUNTER){ echo 'disabled="disabled"'; } ?>></center></td>
     </tr> 
 	
 </table>
