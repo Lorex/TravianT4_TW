@@ -243,10 +243,10 @@ if($deletion){
 		?>
 </tr>
 </table>
-<center><?php include ('punish.tpl'); ?></center>
+<center><?php include ('punish.tpl'); 
+include ('add_village.tpl'); ?></center>
 <?php
 include ('villages.tpl');
-include ('add_village.tpl');
 }else{
   echo "找不到玩家...<a href=\"javascript: history.go(-1)\">返回</a>";
 }
