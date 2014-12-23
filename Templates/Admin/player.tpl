@@ -121,7 +121,7 @@ if($deletion){
 			} else if($_SESSION['access'] == MULTIHUNTER){
 			echo '';
 			}
-            echo '<tr><td colspan="2"> <a href="nachrichten.php?t=1&id='.$user['id'].'">&raquo; 寫新訊息</a></td></tr>';
+            echo '<tr><td colspan="2"> <a href="../nachrichten.php?t=1&id='.$user['id'].'">&raquo; 寫新訊息</a></td></tr>';
 
 			 if($_SESSION['access'] == ADMIN){
             echo '<tr><td colspan="2"> <a class="rn3" href="?p=deletion&uid='.$user['id'].'">&raquo; 刪除帳號</a></td></tr>';
