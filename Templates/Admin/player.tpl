@@ -243,8 +243,13 @@ if($deletion){
 		?>
 </tr>
 </table>
-<center><?php include ('punish.tpl'); 
-include ('add_village.tpl'); ?></center>
+<div style="float: left; width: 50%;">
+    <center> <?php include ('punish.tpl'); ?> </center>
+</div>
+<div style="float: right; width: 50%;">
+    <center> <?php include ('add_village.tpl'); ?> </center>
+</div>
+
 <?php
 include ('villages.tpl');
 }else{
