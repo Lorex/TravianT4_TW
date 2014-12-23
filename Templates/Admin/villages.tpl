@@ -15,23 +15,23 @@
 <table id="member">
   <thead>
     <tr>
-        <th>Villages</th>
+        <th>村莊</th>
     </tr>
   </thead> 
 
 </table>
 <table id="profile">    
     <tr>
-        <td>Name</td>
-        <td>Population</td>
-        <td>Coordinates</td>
+        <td>名稱</td>
+        <td>人口數</td>
+        <td>座標</td>
 		<td></td>
     </tr>
 <?php         
 for ($i = 0; $i <= count($varray)-1; $i++) {
 $coorproc = $database->getCoor($varray[$i]['wref']);
 if($varray[$i]['capital']){
-$capital = '<span class="c">(Capital)</span>';
+$capital = '<span class="c">(主村)</span>';
 $delLink = '<a href="#"><img src="img/admin/x.gif" class="del"></a>'; 
 }else{
 $capital = '';
@@ -45,7 +45,6 @@ $delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return
 echo '
     <tr>
         <td><a href="?p=village&did='.$varray[$i]['wref'].'">'.$varray[$i]['name'].'</a> '.$capital.'</td>
-        <td>'.$varray[$i]['pop'].' <a href="?action=recountPop&did='.$varray[$i]['wref'].'">Recount<a/></td>
         <td>('.$coorproc['x'].'|'.$coorproc['y'].')</td>
 		<td>'.$delLink.' </td>
     </tr>  
