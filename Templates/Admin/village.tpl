@@ -63,7 +63,7 @@ if($village and $user){
 
     <tr>
 
-        <th colspan="2">Village Information</th>
+        <th colspan="2">村莊資訊</th>
 
     </tr>                                       
 
@@ -71,7 +71,7 @@ if($village and $user){
 
     <tr>
 
-        <td>Village name:</td>
+        <td>村莊名稱</td>
 
         <td><?php echo $village['name'];?></td>     
 
@@ -79,7 +79,7 @@ if($village and $user){
 
     <tr>
 
-        <td>Population</td>
+        <td>人口數</td>
 
         <td><?php echo $village['pop'];?></td>     
 
@@ -88,14 +88,14 @@ if($village and $user){
 
     <tr>
 
-        <td>Coordinates:</td>
+        <td>座標</td>
 
         <td>(<?php echo $coor['x'];?>|<?php echo $coor['y'];?>)</td>     
 
     </tr>
 		<tr>
 
-        <td>Village ID</td>
+        <td>村莊 ID</td>
 
         <td><?php echo $village['wref'];?></td>     
 
@@ -103,7 +103,7 @@ if($village and $user){
 
     <tr>
 
-        <td>Field type</td>
+        <td>資源田分布</td>
 
         <td><?php        
 
@@ -139,7 +139,7 @@ if($village and $user){
 
     <tr>
 
-        <th colspan="4">Resources</th>
+        <th colspan="4">資源</th>
 
     </tr> 
 
