@@ -62,7 +62,7 @@ $active = $admin->getUserActive();
 
         <td colspan="1" style="text-align: center;">
 
-          <input type="checkbox" name="del_troop" value="1"> Delete troops
+          <input type="checkbox" name="del_troop" value="1"> 清兵
 
         </td>
 
@@ -71,7 +71,7 @@ $active = $admin->getUserActive();
 
         <td colspan="1" style="text-align: center;">
 
-          <input type="checkbox" name="clean_ware" value="1"> Empty warehouses 
+          <input type="checkbox" name="clean_ware" value="1"> 清空資源 
 
         </td>
 
