@@ -22,7 +22,7 @@
 <div id="wrapper">
 <img id="staticElements" src="img\x.gif" alt="" />
 <div class="bodyWrapper">
-					
+
 <img style="filter:chroma();" src="img\x.gif" id="msfilter" alt="" />
 <div id="header">
 <div id="mtop">
@@ -45,7 +45,7 @@
 							<div class="contentContainer">
 								<div id="content" class="statistics">
 <h1 class="titleInHeader">TravianT4 Installation Script</h1>
-                <?php 
+                <?php
                 if(!isset($_GET['s'])) {
                 include("templates/greet.tpl");
                 }
@@ -76,10 +76,10 @@
 <div class="clear"></div></div>
 <div class="contentFooter">&nbsp;</div></div>
 		<div id="side_info">
-        
-            
+
+
 		</div>
-        
+
         <div class="clear"></div>
 				</div>
 

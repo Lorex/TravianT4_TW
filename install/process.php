@@ -2,7 +2,7 @@
 
 date_default_timezone_set('Asia/Tehran');
         if(file_exists("include/constant.php") && file_exists("include/connection.php")) {
-        	include ("include/database.php");
+        	include_once("include/database.php");
         }
         class Process {
 
