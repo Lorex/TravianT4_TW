@@ -4,8 +4,8 @@ session_start();
 error_reporting(0);
 include ("../GameEngine/Database/connection.php");
 include ("../GameEngine/config.php");
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 // Liberty reverse Settings
 $conf_merchantAccountNumber = 'U8035881';
@@ -22,7 +22,7 @@ $username = $_SESSION['username'];
 if ($_GET[gold])
 {
 	$gold = $_GET[gold];
-	
+
 	$Desc = ''.$gold.' Gold';
 	$PageTitle = 'Buy '.$gold.' gold';
 	if ($gold=='250')
@@ -37,9 +37,9 @@ if ($_GET[gold])
 		$Price = '95';
 	else
 		die('Undefiend Gold Count !');
-		
+
 	$orderid = time().rand(1000,9999);
-	$query = mysql_query("INSERT INTO `transactions` (`username`, `amunt`, `gold`, `orderid`, `time`) VALUES ('".$username."', '".$Price."', '".$gold."', '".$orderid."', '".time()."')");
+	$query = mysqli_query($con,"INSERT INTO `transactions` (`username`, `amunt`, `gold`, `orderid`, `time`) VALUES ('".$username."', '".$Price."', '".$gold."', '".$orderid."', '".time()."')");
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -58,18 +58,18 @@ if ($_GET[gold])
         </div>
         <form name="payform" method="post" action="https://sci.libertyreserve.com">
             <input type="hidden" name="lr_acc" value="<?=$conf_merchantAccountNumber?>">
-            <input type="hidden" name="lr_amnt" value="<? echo $Price;?>">      
+            <input type="hidden" name="lr_amnt" value="<? echo $Price;?>">
             <input type="hidden" name="lr_currency" value="LRUSD">
             <input type="hidden" name="lr_comments" value="<? echo $Desc;?>">
             <input type="hidden" name="lr_merchant_ref" value="">
             <input type="hidden" name="lr_success_url" value="<? echo $succesUrl?>">
             <input type="hidden" name="lr_fail_url" value="<? echo $failUrl?>">
             <input type="hidden" name="order_id" value="<? echo $orderid;?>" />
-            <input type="hidden" name="item_name" value="<? echo $Desc;?>" />      
+            <input type="hidden" name="item_name" value="<? echo $Desc;?>" />
         </form>
         <?
 		}
-ob_end_flush();		
+ob_end_flush();
 	?>
 </body>
 </html>

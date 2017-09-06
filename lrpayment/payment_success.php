@@ -4,8 +4,8 @@ session_start();
 error_reporting(0);
 include ("../GameEngine/Database/connection.php");
 include ("../GameEngine/config.php");
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 $serverUrlAndPath = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["REQUEST_URI"]);
 $serverUrlAndPath = str_replace("\\", "/", $serverUrlAndPath);
@@ -25,15 +25,15 @@ $orderid = $_REQUEST["order_id"];
 	<?
     	if ($orderid)
 		{
-			$query = mysql_query("SELECT * FROM `transactions` WHERE `orderid`='".$orderid."' AND status='0'");
-			$row = mysql_fetch_array($query);
-			
+			$query = mysqli_query($con,"SELECT * FROM `transactions` WHERE `orderid`='".$orderid."' AND status='0'");
+			$row = mysqli_fetch_array($query);
+
 			if ($row)
 			{
 				$gold = $row['gold'];
-				$query = mysql_query("UPDATE `s1_users` SET `gold` = `gold` + '".$gold."' WHERE username = '".$_SESSION['username']."'");
-				$query = mysql_query("UPDATE `transactions` SET `status` = '1' WHERE `orderid`='".$orderid."'");
-				
+				$query = mysqli_query($con,"UPDATE `s1_users` SET `gold` = `gold` + '".$gold."' WHERE username = '".$_SESSION['username']."'");
+				$query = mysqli_query($con,"UPDATE `transactions` SET `status` = '1' WHERE `orderid`='".$orderid."'");
+
 				?>
 				<div style="text-align:center; padding:8px;">
 				Payment Successfull

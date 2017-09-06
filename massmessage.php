@@ -12,9 +12,9 @@
 
 include_once("GameEngine/Account.php");
 $max_per_pass = 1000;
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
-if (mysql_num_rows(mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE access = 9 AND id = ".$session->uid)) != '1') die("Hacking attemp!");
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
+if (mysqli_num_rows(mysqli_query($con,"SELECT id FROM ".TB_PREFIX."users WHERE access = 9 AND id = ".$session->uid)) != '1') die("Hacking attemp!");
 
 if (@$_POST['submit'] == "Send")
 {
@@ -44,7 +44,7 @@ if (isset($_GET['send']) && isset($_GET['from']))
 	$_SESSION['m_message'] = preg_replace("/\[url\=([a-z0-9\_\.\:\/\-]*)\]([a-z0-9\_\.\:\/\-]*)\[\/url\]/i", "<a href='$1'>$2</a>",  $_SESSION['m_message']);
 	$_SESSION['m_message'] = preg_replace("/\*u([0-9]*)(left|right)\*/i", "<img src='img/u2/u$1.gif' style='float:$2;' alt='unit$1' />",  $_SESSION['m_message']);
 
-	$users_count = mysql_fetch_assoc(mysql_query("SELECT count(*) as count FROM ".TB_PREFIX."users WHERE id != 0"));
+	$users_count = mysqli_fetch_assoc(mysqli_query($con,"SELECT count(*) as count FROM ".TB_PREFIX."users WHERE id != 0"));
 	$users_count = $users_count['count'];
 	if ($_GET['from'] + $max_per_pass <= $users_count) $plus = $max_per_pass; else $plus = $users_count - $_GET['from'];
 	$sql = "INSERT INTO ".TB_PREFIX."mdata (`target`, `owner`, `topic`, `message`, `viewed`, `archived`, `send`, `time`) VALUES ";
@@ -66,7 +66,7 @@ if (isset($_GET['send']) && isset($_GET['from']))
 	{
 		$sql .= "($i, 0, '{$_SESSION['m_subject']}', \"{$_SESSION['m_message']}\", 0, 0, 0, ".time()."),";
 	}
-	mysql_query($sql);
+	mysqli_query($con,$sql);
 	if (($users_count - $_GET['from']) > $max_per_pass) echo header("Location: massmessage.php?send=true&from=",$_GET['from'] + $max_per_pass); else $done = true;
 }
 
@@ -90,8 +90,8 @@ if (isset($_GET['send']) && isset($_GET['from']))
         text-align:center;
         width:100%;
         }
-        
-        
+
+
         .uu1 {background-image: url(img/u2/u1.gif);}
         .uu2 {background-image: url(img/u2/u2.gif);}
         .uu3 {background-image: url(img/u2/u3.gif);}
@@ -127,7 +127,7 @@ if (isset($_GET['send']) && isset($_GET['from']))
 	    height: 150px;
 	    width: 150px;
 	}
-	
+
 	div.messages div#message_container div#message_toolbarWindows div, div#text_container div#text_toolbarWindows div {
 	background:none repeat scroll 0 0 #EFEFEF;
 	border:1px solid #71D000;
@@ -157,7 +157,7 @@ function toggleDisplay(e){
     element.display='none';
 }
 </script>
-    
+
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -180,10 +180,10 @@ function toggleDisplay(e){
 
 		window.addEvent('domready', start);
 	</script>
-</head> 
+</head>
 
 
- 
+
 <body class="v35 ie ie8">
 <div class="wrapper">
 <img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" />
@@ -195,42 +195,42 @@ function toggleDisplay(e){
 <div id="content"  class="login">
 <?php if (@!$NextStep && @!$NextStep2 && @!$done){?>
 <form method="POST" action="massmessage.php" name="myform" id="myform">
-			<table cellspacing="1" cellpadding="2" class="tbg" style="background-color:#C0C0C0; border: 0px solid #C0C0C0; font-size: 10pt;">    
+			<table cellspacing="1" cellpadding="2" class="tbg" style="background-color:#C0C0C0; border: 0px solid #C0C0C0; font-size: 10pt;">
 			  <tbody>
-			    <tr>	
-			      <td class="rbg" style="font-size: 10pt; text-align:center;" colspan="2"><?php echo MASS; ?></td>    
+			    <tr>
+			      <td class="rbg" style="font-size: 10pt; text-align:center;" colspan="2"><?php echo MASS; ?></td>
 			    </tr>
-			    <tr>	
+			    <tr>
 			      <td style="font-size: 10pt; text-align: left; width: 200px;"><?php echo MASS_SUBJECT; ?></td>
 			      <td style="font-size: 10pt; text-align: left;">
-			        <input type="text" style="width: 240px;" class="fm" name="subject" value="" size="30"></td>    
+			        <input type="text" style="width: 240px;" class="fm" name="subject" value="" size="30"></td>
 			    </tr>
-			    <tr>	
+			    <tr>
 			      <td style="font-size: 10pt; text-align: left;"><?php echo MASS_COLOR; ?></td>
 			      <td style="font-size: 10pt; text-align: left;">
-			      
 
-			        <input type="text" style="width: 240px;" class="fm" name="color" size="30"></td>    
+
+			        <input type="text" style="width: 240px;" class="fm" name="color" size="30"></td>
 			    </tr>
-			    <tr>	
+			    <tr>
 			      <td colspan="2" style="font-size: 10pt; text-align:center;"><?php echo MASS; ?>			        <br>
-			<textarea class="fm" name="message" cols="60" rows="23"></textarea></td>    
+			<textarea class="fm" name="message" cols="60" rows="23"></textarea></td>
 			    </tr>
-			    <tr>	
-			      <td colspan="2"  style="text-align:center;"><?php echo MASS_REQUIRED; ?><td>    
+			    <tr>
+			      <td colspan="2"  style="text-align:center;"><?php echo MASS_REQUIRED; ?><td>
 			    </tr>
-			    <tr>	
+			    <tr>
 			      <td colspan="2"  style="text-align:center;">
 			        <input type="submit" value="Send" name="submit" />    </td>
 			    </tr>
 			  </tbody>
-			</table> 
+			</table>
 			</form>
 			<?php if (@!$NextStep && @!$NextStep2 && @!$done){?>
 <?php echo MASS_UNITS; ?>
 <a href="javascript:toggleDisplay('message_smilies')"><?php echo MASS_SHOWHIDE; ?></a>
 
-<div name="smilll" id="message_smilies" style="background:none repeat scroll 0 0 #EFEFEF;border:1px solid #71D000;left:20px;margin-top:5px;max-width:660px;padding:5px;position:relative;display: none;"> 
+<div name="smilll" id="message_smilies" style="background:none repeat scroll 0 0 #EFEFEF;border:1px solid #71D000;left:20px;margin-top:5px;max-width:660px;padding:5px;position:relative;display: none;">
 <?php echo MASS_READ; ?>
 <a href="#" onclick="smilie('*u1*')"><img src="img/x.gif" class="uu1" /></a>
 <a href="#" onclick="smilie('*u2*')"><img src="img/x.gif" class="uu2" /></a>
@@ -263,19 +263,19 @@ function toggleDisplay(e){
 
 <?php }elseif (@$NextStep){?>
 <form method="POST" action="massmessage.php">
-			<table cellspacing="1" cellpadding="2" class="tbg">    
+			<table cellspacing="1" cellpadding="2" class="tbg">
 			  <tbody>
-			    <tr>	
-			      <td class="rbg" colspan="2"><?php echo MASS_CONFIRM; ?></td>    
+			    <tr>
+			      <td class="rbg" colspan="2"><?php echo MASS_CONFIRM; ?></td>
 			    </tr>
-			    <tr>	
+			    <tr>
 			      <td style="text-align: left; width: 200px;"><?php echo MASS_REALLY; ?></td>
 			      <td style="text-align: left;">
 			        <input type="submit" style="width: 240px;" class="fm" name="confirm" value="Yes">
-			        <input type="submit" style="width: 240px;" class="fm" name="confirm" value="No"></td>    
+			        <input type="submit" style="width: 240px;" class="fm" name="confirm" value="No"></td>
 			    </tr>
 			  </tbody>
-			</table> 
+			</table>
 </form>
 <?php }elseif (@$NextStep2){?>
 <script>document.location.href='massmessage.php?send=true&from=0'</script>
@@ -295,9 +295,9 @@ function toggleDisplay(e){
 
 			<div class="footer-stopper outgame"></div>
             <div class="clear"></div>
-            
+
 <?php include("Templates/footer.tpl"); ?>
 <div id="ce"></div>
 </body>
 </html>
-<?php mysql_close(); ?>
+<?php mysqli_close(); ?>

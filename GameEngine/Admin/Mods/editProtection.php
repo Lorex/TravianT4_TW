@@ -11,14 +11,14 @@
 
 include_once("../../config.php");
 
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 $session = $_POST['admid'];
 $id = $_POST['id'];
 
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id = ".$session."");
-$access = mysql_fetch_array($sql);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE id = ".$session."");
+$access = mysqli_fetch_array($sql);
 $sessionaccess = $access['access'];
 
 if($sessionaccess != 9) die("<h1><font color=\"red\">Access Denied: You are not Admin!</font></h1>");
@@ -26,9 +26,9 @@ if($sessionaccess != 9) die("<h1><font color=\"red\">Access Denied: You are not 
 $dur = $_POST['protect'] * 86400;
 $protection = (time() + $dur);
 
-mysql_query("UPDATE ".TB_PREFIX."users SET 
-	protect = '".$protection."' 
-	WHERE id = $id") or die(mysql_error());
+mysqli_query($con,"UPDATE ".TB_PREFIX."users SET
+	protect = '".$protection."'
+	WHERE id = $id") or die(mysqli_error());
 
 header("Location: ../../../Admin/admin.php?p=player&uid=".$id."");
 ?>

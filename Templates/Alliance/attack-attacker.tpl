@@ -1,14 +1,14 @@
 <?php
 $prefix = "".TB_PREFIX."ndata";
 $limit = "ntype!=0 AND ntype!=4 AND ntype!=5 AND ntype!=6 AND ntype!=7 AND ntype!=8 AND ntype!=9 AND ntype!=10 AND ntype!=11 AND ntype!=12 AND ntype!=13 AND ntype!=14 AND ntype!=15 AND ntype!=16 AND ntype!=17 AND ntype!=20 AND ntype!=21";
-$sql = mysql_query("SELECT * FROM $prefix WHERE ally = $session->alliance AND $limit ORDER BY time DESC LIMIT 20");
-$query = mysql_num_rows($sql);
+$sql = mysqli_query($con,"SELECT * FROM $prefix WHERE ally = $session->alliance AND $limit ORDER BY time DESC LIMIT 20");
+$query = mysqli_num_rows($sql);
 $outputList = '';
 $name = 1;
 if($query == 0) {
     $outputList .= "<td colspan=\"4\" class=\"none\">There are no reports available.</td>";
 }else{
-while($row = mysql_fetch_array($sql)){ 
+while($row = mysqli_fetch_array($sql)){
 	$dataarray = explode(",",$row['data']);
     $id = $row["id"];
     $uid = $row["uid"];
@@ -19,7 +19,7 @@ while($row = mysql_fetch_array($sql)){
     $time = $row["time"];
     $viewed = $row["viewed"];
     $archive = $row["archive"];
-	
+
     $outputList .= "<tr>";
 	$outputList .= "<td class=\"sub\">";
 if($ntype==4 || $ntype==5 || $ntype==6 || $ntype==7){
@@ -39,23 +39,23 @@ if($ntype==4 || $ntype==5 || $ntype==6 || $ntype==7){
     if($ntype==0){ $nn = " scouts "; }else{ $nn = " attacks "; }
 
     $outputList .= $database->getUserField($dataarray[0],username,0);
-       
+
     $outputList .= $nn;
     $outputList .= $database->getUserField($dataarray[28],username,0);
     $getUserAlly = $database->getUserField($dataarray[28],alliance,0);
     $getAllyName = $database->getAllianceName($getUserAlly);
-    
+
     if($getUserAlly==$session->alliance || !$getUserAlly){
     	$allyName = "-";
     }else{
     	$allyName = "<a href=\"allianz.php?aid=".$getUserAlly."\">".$getAllyName."</a>";
     }
-    
+
     $outputList .= "<td class=\"al\">".$allyName."</td>";
     $date = $generator->procMtime($time);
     $outputList .= "<td class=\"dat\">".$date[0]." ".date('H:i',$time)."</td>";
 	$outputList .= "</tr>";
-    
+
 	$name++;
 }
 }

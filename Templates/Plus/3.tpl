@@ -1,30 +1,30 @@
 ﻿<?php
 
-    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
-    $golds = mysql_fetch_array($MyGold);
+    $MyGold = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysqli_error());
+    $golds = mysqli_fetch_array($MyGold);
 
 if($golds['b1'] <= time()) {
-mysql_query("UPDATE ".TB_PREFIX."users set b1 = '0' where `id`='".$session->uid."'") or die(mysql_error());
+mysqli_query($con,"UPDATE ".TB_PREFIX."users set b1 = '0' where `id`='".$session->uid."'") or die(mysqli_error());
 }
 
 if($golds['b2'] <= time()) {
-mysql_query("UPDATE ".TB_PREFIX."users set b2 = '0' where `id`='".$session->uid."'") or die(mysql_error());
+mysqli_query($con,"UPDATE ".TB_PREFIX."users set b2 = '0' where `id`='".$session->uid."'") or die(mysqli_error());
 }
 if($golds['b3'] <= time()) {
-mysql_query("UPDATE ".TB_PREFIX."users set b3 = '0' where `id`='".$session->uid."'") or die(mysql_error());
+mysqli_query($con,"UPDATE ".TB_PREFIX."users set b3 = '0' where `id`='".$session->uid."'") or die(mysqli_error());
 }
 
 if($golds['b4'] <= time()) {
-mysql_query("UPDATE ".TB_PREFIX."users set b4 = '0' where `id`='".$session->uid."'") or die(mysql_error());
+mysqli_query($con,"UPDATE ".TB_PREFIX."users set b4 = '0' where `id`='".$session->uid."'") or die(mysqli_error());
 }
 
 include("Templates/Plus/pmenu.tpl");
-    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
-    $golds = mysql_fetch_array($MyGold);
+    $MyGold = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysqli_error());
+    $golds = mysqli_fetch_array($MyGold);
 
         $today = date("mdHi");
 
-if (mysql_num_rows($MyGold)) {
+if (mysqli_num_rows($MyGold)) {
 	if($session->gold == 0) {
 		echo "<div class=\"boxes boxesColor gray goldBalance\"><div class=\"boxes-tl\"></div><div class=\"boxes-tr\"></div><div class=\"boxes-tc\"></div><div class=\"boxes-ml\"></div><div class=\"boxes-mr\"></div><div class=\"boxes-mc\"></div><div class=\"boxes-bl\"></div><div class=\"boxes-br\"></div><div class=\"boxes-bc\"></div><div class=\"boxes-contents\">You don't have any Gold!</div></div>";
 	} else {
@@ -35,15 +35,15 @@ if (mysql_num_rows($MyGold)) {
 if($_GET['action']==FinishBuilding){
 	$golds = $database->getUserArray($session->uid, 1);
 
-    $MyVilId = mysql_query("SELECT * FROM ".TB_PREFIX."bdata WHERE `wid`='".$village->wid."'") or die(mysql_error());
-    $uuVilid = mysql_fetch_array($MyVilId);
-    $MyVilId2 = mysql_query("SELECT * FROM ".TB_PREFIX."research WHERE `vref`='".$village->wid."'") or die(mysql_error());
-    $uuVilid2 = mysql_fetch_array($MyVilId2);
-	
-    $buildnum = mysql_num_rows($MyVilId);
-    $resnum = mysql_num_rows($MyVilId2);
-    
-    $goldlog = mysql_query("SELECT * FROM ".TB_PREFIX."gold_fin_log") or die(mysql_error());
+    $MyVilId = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."bdata WHERE `wid`='".$village->wid."'") or die(mysqli_error());
+    $uuVilid = mysqli_fetch_array($MyVilId);
+    $MyVilId2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."research WHERE `vref`='".$village->wid."'") or die(mysqli_error());
+    $uuVilid2 = mysqli_fetch_array($MyVilId2);
+
+    $buildnum = mysqli_num_rows($MyVilId);
+    $resnum = mysqli_num_rows($MyVilId2);
+
+    $goldlog = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."gold_fin_log") or die(mysqli_error());
 
 if($session->gold >= 2) {
 
@@ -120,7 +120,7 @@ if($session->gold >= 2) {
 }
  ?>
 <!-- TODO - Show Construction and research in progress here? -->
-<!-- <h4 class="spacer">ساخت</h4> --> 
+<!-- <h4 class="spacer">ساخت</h4> -->
 <br><br>
 <?php echo $done1; ?>
 <table class="plusFunctions" cellpadding="1" cellspacing="1">
@@ -137,7 +137,7 @@ if($session->gold >= 2) {
 		<tr>
 			<td class="desc">
 				Plus <b><font color="#71D000">Account</font></b><br><span class="run">
-<?php 
+<?php
 $datetimep=$golds['plus'];
 $datetime1=$golds['b1'];
 $datetime2=$golds['b2'];
@@ -145,22 +145,22 @@ $datetime3=$golds['b3'];
 $datetime4=$golds['b4'];
 $datetimeap=$golds['ap'];
 $datetimedp=$golds['dp'];
-//Retrieve the current date/time  
-$date2=strtotime("NOW"); 
+//Retrieve the current date/time
+$date2=strtotime("NOW");
 
 
 	if ($datetimep == 0) {
 		print "";
 	}elseif ($datetimep <= $date2) {
-		mysql_query("UPDATE ".TB_PREFIX."users set plus = '0' where `id`='".$session->uid."'") or die(mysql_error());
+		mysqli_query($con,"UPDATE ".TB_PREFIX."users set plus = '0' where `id`='".$session->uid."'") or die(mysqli_error());
  	} else {
-   
+
 $holdtotmin=(($datetimep-$date2)/60);
-$holdtothr=(($datetimep-$date2)/3600); 
+$holdtothr=(($datetimep-$date2)/3600);
 $holdtotday=round(($datetimep-$date2)/86400, 1);
-$holdhr=intval($holdtothr-($holdtotday*24));	
-$holdmr=intval($holdtotmin-(($holdhr*60)+($holdtotday*1440))); 
-    
+$holdhr=intval($holdtothr-($holdtotday*24));
+$holdmr=intval($holdtotmin-(($holdhr*60)+($holdtotday*1440)));
+
     echo "You have <b>".$holdtotday. "</b> days left till ".date('H:i',$golds['plus'])."";
  }
 ?>
@@ -173,10 +173,10 @@ $holdmr=intval($holdtotmin-(($holdhr*60)+($holdtotday*1440)));
 			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">10</td>
 			<td class="act">
 <?php
-    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
-    $golds = mysql_fetch_array($MyGold);
+    $MyGold = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysqli_error());
+    $golds = mysqli_fetch_array($MyGold);
 
-if (mysql_num_rows($MyGold)) {
+if (mysqli_num_rows($MyGold)) {
 	if($golds['gold'] > 9 && $datetimep < $date2) {
 	echo "<button type=\"button\" value=\"فعال سازی\" onclick=\"window.location.href = 'plus.php?id=8'; return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activate</div></div></button>";
 }elseif
@@ -187,7 +187,7 @@ if (mysql_num_rows($MyGold)) {
 	echo "<button type=\"button\" value=\"فعال سازی\" class=\" disabled\" onclick=\"(new Event(event)).stop(); return false;\" onfocus=\"$$('button', 'input[type!=hidden]', 'select')[0].focus(); (new Event(event)).stop(); return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Needs Gold</div></div></button>";
     }
 }
- ?>            
+ ?>
             </td>
 		</tr>
   </tbody>
@@ -213,10 +213,10 @@ $tl_b1=$golds['b1'];
      print "";
  } else {
 $holdtotmin1=(($tl_b1-$date2)/60);
-$holdtothr1=(($tl_b1-$date2)/3600); 
+$holdtothr1=(($tl_b1-$date2)/3600);
 $holdtotday1=round(($tl_b1-$date2)/86400, 1);
-$holdhr1=intval($holdtothr1-($holdtotday1*24));	
-$holdmr1=intval($holdtotmin1-(($holdhr1*60)+($holdtotday1*1440))); 
+$holdhr1=intval($holdtothr1-($holdtotday1*24));
+$holdmr1=intval($holdtotmin1-(($holdhr1*60)+($holdtotday1*1440)));
 }
 
  if ($tl_b1 < $date2) {
@@ -225,8 +225,8 @@ $holdmr1=intval($holdtotmin1-(($holdhr1*60)+($holdtotday1*1440)));
 echo "    <br>You have <b>".$holdtotday1. "</b> days left till   ".date('H:i',$golds['b1'])."";
 
  }
-?>               
-                
+?>
+
                 </span>			</td>
 			<td class="dur"><?php if(PLUS_PRODUCTION >= 86400){
 			echo ''.(PLUS_PRODUCTION/86400).' Days';
@@ -237,7 +237,7 @@ echo "    <br>You have <b>".$holdtotday1. "</b> days left till   ".date('H:i',$g
 			<td class="act">
 <?php
 
-if (mysql_num_rows($MyGold)) {
+if (mysqli_num_rows($MyGold)) {
 	if($golds['gold'] > 4 && $tl_b1 < $date2) {
 		echo "<button type=\"button\" value=\"فعال سازی\" onclick=\"window.location.href = 'plus.php?id=9'; return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activate</div></div></button>";
 }elseif
@@ -247,7 +247,7 @@ if (mysql_num_rows($MyGold)) {
 	echo "<button type=\"button\" value=\"فعال سازی\" class=\" disabled\" onclick=\"(new Event(event)).stop(); return false;\" onfocus=\"$$('button', 'input[type!=hidden]', 'select')[0].focus(); (new Event(event)).stop(); return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Needs Gold</div></div></button>";
     }
 }
-?>            
+?>
             </td>
 		</tr>
 			<tr>
@@ -261,21 +261,21 @@ $tl_b2=$golds['b2'];
      print " ";
  } else {
 $holdtotmin2=(($tl_b2-$date2)/60);
-$holdtothr2=(($tl_b2-$date2)/3600); 
+$holdtothr2=(($tl_b2-$date2)/3600);
 $holdtotday2=round(($tl_b2-$date2)/86400, 1);
-$holdhr2=intval($holdtothr2-($holdtotday2*24));	
-$holdmr2=intval($holdtotmin2-(($holdhr2*60)+($holdtotday2*1440))); 
+$holdhr2=intval($holdtothr2-($holdtotday2*24));
+$holdmr2=intval($holdtotmin2-(($holdhr2*60)+($holdtotday2*1440)));
 }
 
  if ($tl_b2 < $date2) {
      print " ";
- } else {		
+ } else {
 
 echo "<br> You have <b>".$holdtotday2. "</b> days left till ".date('H:i',$golds['b2'])."";
 
  }
 ?>
-                
+
                 </span>			</td>
 			<td class="dur"><?php if(PLUS_PRODUCTION >= 86400){
 			echo ''.(PLUS_PRODUCTION/86400).' Days';
@@ -286,7 +286,7 @@ echo "<br> You have <b>".$holdtotday2. "</b> days left till ".date('H:i',$golds[
 			<td class="act">
 <?php
 
-if (mysql_num_rows($MyGold)) {
+if (mysqli_num_rows($MyGold)) {
 	if($golds['gold'] > 4 && $tl_b2 < $date2) {
 		echo "<button type=\"button\" value=\"فعال سازی\" onclick=\"window.location.href = 'plus.php?id=10'; return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activate</div></div></button>";
 }elseif
@@ -297,7 +297,7 @@ if (mysql_num_rows($MyGold)) {
     }
     }
  ?>
-            
+
             </td>
 		</tr>
 			<tr>
@@ -311,20 +311,20 @@ $tl_b3=$golds['b3'];
      print " ";
  } else {
 $holdtotmin3=(($tl_b3-$date2)/60);
-$holdtothr3=(($tl_b3-$date2)/3600); 
+$holdtothr3=(($tl_b3-$date2)/3600);
 $holdtotday3=round(($tl_b3-$date2)/86400, 1);
-$holdhr3=intval($holdtothr3-($holdtotday3*24));	
-$holdmr3=intval($holdtotmin3-(($holdhr3*60)+($holdtotday3*1440))); 
+$holdhr3=intval($holdtothr3-($holdtotday3*24));
+$holdmr3=intval($holdtotmin3-(($holdhr3*60)+($holdtotday3*1440)));
 }
 
  if ($tl_b3 < $date2) {
      print " ";
- } else {		
+ } else {
 echo " <br> You have <b>".$holdtotday3. "</b> Days left till ".date('H:i',$golds['b3'])."";
 
  }
 ?>
-                
+
                 </span>			</td>
 			<td class="dur"><?php if(PLUS_PRODUCTION >= 86400){
 			echo ''.(PLUS_PRODUCTION/86400).' Days';
@@ -335,7 +335,7 @@ echo " <br> You have <b>".$holdtotday3. "</b> Days left till ".date('H:i',$golds
 			<td class="act">
 <?php
 
-if (mysql_num_rows($MyGold)) {
+if (mysqli_num_rows($MyGold)) {
 	if($golds['gold'] > 4 && $tl_b3  < $date2) {
 		echo "<button type=\"button\" value=\"فعال سازی\" onclick=\"window.location.href = 'plus.php?id=11'; return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activate</div></div></button>";
 }elseif
@@ -344,7 +344,7 @@ if (mysql_num_rows($MyGold)) {
 } else  {
 	echo "<button type=\"button\" value=\"فعال سازی\" class=\" disabled\" onclick=\"(new Event(event)).stop(); return false;\" onfocus=\"$$('button', 'input[type!=hidden]', 'select')[0].focus(); (new Event(event)).stop(); return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Needs Gold</div></div></button>";
 } }
- ?>            
+ ?>
             </td>
 		</tr>
 			<tr>
@@ -357,15 +357,15 @@ $tl_b4=$golds['b4'];
      print " ";
  } else {
 $holdtotmin4=(($tl_b4-$date2)/60);
-$holdtothr4=(($tl_b4-$date2)/3600); 
+$holdtothr4=(($tl_b4-$date2)/3600);
 $holdtotday4=round(($tl_b4-$date2)/86400, 1);
-$holdhr4=intval($holdtothr4-($holdtotday4*24));	
-$holdmr4=intval($holdtotmin4-(($holdhr4*60)+($holdtotday4*1440))); 
+$holdhr4=intval($holdtothr4-($holdtotday4*24));
+$holdmr4=intval($holdtotmin4-(($holdhr4*60)+($holdtotday4*1440)));
 }
 
  if ($tl_b4 < $date2) {
      print " ";
- } else {		
+ } else {
 
 echo "<br> You have <b>".$holdtotday4. "</b> days left till ".date('H:i',$golds['b4'])."";
  }
@@ -380,7 +380,7 @@ echo "<br> You have <b>".$holdtotday4. "</b> days left till ".date('H:i',$golds[
 			<td class="act">
 <?php
 
-if (mysql_num_rows($MyGold)) {
+if (mysqli_num_rows($MyGold)) {
 	if($golds['gold'] > 4 && $tl_b4 < $date2) {
 		echo "<button type=\"button\" value=\"فعال سازی\" onclick=\"window.location.href = 'plus.php?id=12'; return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activate</div></div></button>";
 }elseif
@@ -390,7 +390,7 @@ if (mysql_num_rows($MyGold)) {
 	echo "<button type=\"button\" value=\"فعال سازی\" class=\" disabled\" onclick=\"(new Event(event)).stop(); return false;\" onfocus=\"$$('button', 'input[type!=hidden]', 'select')[0].focus(); (new Event(event)).stop(); return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Needs Gold</div></div></button>";
 } }
 ?>
-            
+
             </td>
 		</tr>
   </tbody>
@@ -405,14 +405,14 @@ if (mysql_num_rows($MyGold)) {
 		</tr>
 	</thead>
 	<tbody>
-		
+
 		<tr>
 			<td class="desc">Complete all Building and Researches immediately.</td>
 			<td class="dur">Instant</td>
 			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">2</td>
 			<td class="act">
 <?php
-if (mysql_num_rows($MyGold)) {
+if (mysqli_num_rows($MyGold)) {
 	if($golds['gold'] > 1) {
 		echo "<button type=\"button\" value=\"فعال سازی\" onclick=\"window.location.href = 'plus.php?id=3&action=FinishBuilding'; return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Complete</div></div></button>";
 
@@ -464,7 +464,7 @@ if (mysql_num_rows($MyGold)) {
 				</td>
 				<td class="dur">
 					The whole Game
-					
+
 				</td>
 				<td class="cost"><img src="img/x.gif" class="gold" alt="gold">100</td>
 				<td class="act">

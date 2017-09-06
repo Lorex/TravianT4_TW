@@ -1,11 +1,11 @@
 ﻿<?php
     // @todo re-check this once artefacts are available
     $artefact = $database->getOwnArtefactInfo($village->wid);
-    $result = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = " . $village->wid . ""));
+    $result = mysqli_num_rows(mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = " . $village->wid . ""));
     if ($result)
     {
        $wref = $village->wid;
-       $coor = $database->getCoor($wref); 
+       $coor = $database->getCoor($wref);
        $coor2= $database->getCoor($artefact['vref']);
      }
    function getDistance($coorx1, $coory1, $coorx2, $coory2) {
@@ -78,7 +78,7 @@
         <tbody>
           <?php
 
-        if(mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "artefacts")) == 0) {
+        if(mysqli_num_rows(mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "artefacts")) == 0) {
         	echo '<td colspan="4" class="none">There are no Artefacts nearby</td>';
         } else {
 
@@ -96,13 +96,13 @@
 
         	unset($reqlvl);
         	unset($effect);
-        	$arts = mysql_query("SELECT * FROM " . TB_PREFIX . "ereklyék");
+        	$arts = mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "ereklyék");
         	$rows = array();
-        	while($row = mysql_fetch_array($arts)) {
-        		$query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'wdata` WHERE `id` = ' . $row['vref']);
-        		$coor2 = mysql_fetch_assoc($query);
+        	while($row = mysqli_fetch_array($arts)) {
+        		$query = mysqli_query($con,'SELECT * FROM `' . TB_PREFIX . 'wdata` WHERE `id` = ' . $row['vref']);
+        		$coor2 = mysqli_fetch_assoc($query);
 
-        		
+
         		$dist = haversine($coor['y'], $coor['x'], $coor2['y'], $coor2['x']);
 
         		$rows[$dist] = $row;

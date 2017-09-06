@@ -3,14 +3,14 @@
 $noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender","Scout Report");
 $prefix = "".TB_PREFIX."ndata";
 $limit2 = "and (ntype = 8)";
-$sql = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive = 0 $limit2 and del = 0 ORDER BY time DESC");
-$query = mysql_num_rows($sql);
+$sql = mysqli_query($con,"SELECT * FROM $prefix WHERE uid = $session->uid and archive = 0 $limit2 and del = 0 ORDER BY time DESC");
+$query = mysqli_num_rows($sql);
 
 if (isset($_GET['page'])) {
     $page = preg_replace('#[^0-9]#i', '', $_GET['page']);
 } else {
     $page = 1;
-} 
+}
 
 $itemsPerPage = 10;
 $lastPage = ceil($query / $itemsPerPage);
@@ -19,7 +19,7 @@ if ($page < 1) {
     $page = 1;
 } else if ($page > $lastPage) {
     $page = $lastPage;
-} 
+}
 
 $centerPages = "";
 $sub1 = $page - 1;
@@ -84,7 +84,7 @@ if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $add1 . '">' . $add1 . '</a>';
-    
+
 } else if ($page > 1 && $page < $lastPage) {
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
@@ -97,7 +97,7 @@ if ($page <= 1 && $lastPage <= 1) {
 
 $limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage;
 
-$sql2 = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 $limit2 and del = 0 ORDER BY time DESC $limit");
+$sql2 = mysqli_query($con,"SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 $limit2 and del = 0 ORDER BY time DESC $limit");
 $paginationDisplay = "";
 $nextPage = $_GET['page'] + 1;
 $previous = $_GET['page'] - 1;
@@ -140,10 +140,10 @@ $paginationDisplay .=  '<img alt="Utolsó" src="img/x.gif" class="last disabled"
 
 $outputList = '';
 $name = 1;
-if($query == 0) {        
+if($query == 0) {
     $outputList .= "<td colspan=\"4\" class=\"none\">There are no reports available.</td>";
 }else{
-while($row = mysql_fetch_array($sql2)){ 
+while($row = mysqli_fetch_array($sql2)){
     $id = $row["id"];
     $toWref = $row["toWref"];
     $topic = $row["topic"];
@@ -173,7 +173,7 @@ while($row = mysql_fetch_array($sql2)){
 	<table cellpadding="1" cellspacing="1" id="overview" class="row_table_data">
 		<thead><tr><th colspan="2">Subject:</th><th class="sent">Sent:</th></tr></thead>
         <tbody>
-   <?php 
+   <?php
 
     if(isset($_GET['s'])) {
     $s = $_GET['s'];
@@ -181,13 +181,13 @@ while($row = mysql_fetch_array($sql2)){
     else {
     $s = 0;
     }
-    
+
     print "$outputList";
-    
+
     ?>
 
-      
-      
+
+
 </tbody>
 </table>
 
@@ -213,7 +213,7 @@ while($row = mysql_fetch_array($sql2)){
 <button name="delntc" type="submit" value="del" id="del" class="delete">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Delete</div></div>
 </button>
-                    
+
 <?php if($session->plus) { ?>
 <button name="archive" type="submit" value="archive" id="archive" class="delete">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Archive</div></div>

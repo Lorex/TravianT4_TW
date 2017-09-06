@@ -32,7 +32,7 @@ class Account {
 			}
 		}
 	}
-	
+
 	private function Signup() {
 		global $database,$form,$mailer,$generator,$session;
 		if(!isset($_POST['name']) || trim($_POST['name']) == "") {
@@ -50,7 +50,7 @@ class Account {
 			else if($database->checkExist_activate($_POST['name'],0)) {
 				$form->addError("name",USRNM_TAKEN);
 			}
-			
+
 		}
 		if(!isset($_POST['pw']) || $_POST['pw'] == "") {
 			$form->addError("pw",PW_EMPTY);
@@ -84,14 +84,14 @@ class Account {
 		if($form->returnErrors() > 0) {
 			$_SESSION['errorarray'] = $form->getErrors();
 			$_SESSION['valuearray'] = $_POST;
-			
+
 			header("Location: anmelden.php");
 		} else {
 			if(AUTH_EMAIL){
 				$act = $generator->generateRandStr(10);
 				$act2 = $generator->generateRandStr(5);
 				$uid = $database->activate($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$_POST['kid'],$act,$act2);
-			
+
 				if($uid) {
 					$mailer->sendActivate($_POST['email'],$_POST['name'],$_POST['pw'],$act);
 					header("Location: activate.php?id=$uid&q=$act2");
@@ -99,15 +99,15 @@ class Account {
 			} else {
 				$uid = $database->register($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$_POST['kid'],$act);
 				$frandom0 = rand(0,3);$frandom1 = rand(0,3);$frandom2 = rand(0,4);$frandom3 = rand(0,3);
-				
+
 				if($uid) {
 				$database->addHeroFace($uid,$frandom0,$frandom1,$frandom2,$frandom3,$frandom3,$frandom2,$frandom1,$frandom0,$frandom2);
 				$database->addHero($uid);
 				$database->addHeroinventory($uid);
-				
+
 					setcookie("COOKUSR",$_POST['name'],time()+COOKIE_EXPIRE,COOKIE_PATH);
 					setcookie("COOKEMAIL",$_POST['email'],time()+COOKIE_EXPIRE,COOKIE_PATH);
-	
+
 					$database->updateUserField($uid,"act","",1);
 					$database->updateUserField($uid,"invited",$_POST['invited'],1);
 					$this->generateBase($_POST['kid'],$uid,$_POST['name']);
@@ -121,17 +121,17 @@ class Account {
 			}
 		}
 	}
-	
+
 	private function Activate() {
 		global $database;
 		$q = "SELECT * FROM ".TB_PREFIX."activate where act = '".$_POST['id']."'";
-		$result = mysql_query($q, $database->connection);
-		$dbarray = mysql_fetch_array($result);
+		$result = mysqli_query($con,$q, $database->connection);
+		$dbarray = mysqli_fetch_array($result);
 		if($dbarray['act'] == $_POST['id']) {
 			$uid = $database->register($dbarray['username'],$dbarray['password'],$dbarray['email'],$dbarray['tribe'],$dbarray['location'],"");
 			$frandom0 = rand(0,4);$frandom1 = rand(0,3);$frandom2 = rand(0,4);$frandom3 = rand(0,3);
-			
-			
+
+
 			if($uid) {
 			$database->addHeroFace($uid,$frandom0,$frandom1,$frandom2,$frandom3,$frandom3,$frandom2,$frandom1,$frandom0,$frandom2);
 			$database->addHero($uid);
@@ -150,12 +150,12 @@ class Account {
 			header("Location: activate.php?e=3");
 		}
 	}
-	
+
 	private function Unreg() {
 		global $database;
 		$q = "SELECT * FROM ".TB_PREFIX."activate where id = '".$_POST['id']."'";
-		$result = mysql_query($q, $database->connection);
-		$dbarray = mysql_fetch_array($result);
+		$result = mysqli_query($con,$q, $database->connection);
+		$dbarray = mysqli_fetch_array($result);
 		if(md5($_POST['pw']) == $dbarray['password']) {
 			$database->unreg($dbarray['username']);
 			header("Location: anmelden.php");
@@ -164,7 +164,7 @@ class Account {
 			header("Location: activate.php?e=3");
 		}
 	}
-	
+
 	private function Login() {
 		global $database,$session,$form;
 		if(!isset($_POST['user']) || $_POST['user'] == "") {
@@ -185,7 +185,7 @@ class Account {
 		if($form->returnErrors() > 0) {
 			$_SESSION['errorarray'] = $form->getErrors();
 			$_SESSION['valuearray'] = $_POST;
-			
+
 			header("Location: login.php");
 		}
 		else {
@@ -195,19 +195,19 @@ class Account {
 			}else{
 				$database->UpdateOnline("login" ,$_POST['user'],0);
 			}
-			
+
 			$session->login($_POST['user']);
 		}
 	}
-	
+
 	private function Logout() {
 		global $session,$database;
 		unset($_SESSION['wid']);
 		$database->activeModify($session->username,1);
-		$database->UpdateOnline("logout") or die(mysql_error());
+		$database->UpdateOnline("logout") or die(mysqli_error());
 		$session->Logout();
 	}
-	
+
 	private function forgotPassword($email) {
 		global $database,$generator,$form,$mailer;
 		$npw = $generator->generateRandStr(6);
@@ -233,7 +233,7 @@ class Account {
 			header("Location: login.php?action=forgotPassword&finish=true");
 		}
 	}
-	
+
 	private function validEmail($email) {
 	  $regexp="/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i";
 	  if ( !preg_match($regexp, $email) ) {
@@ -241,17 +241,17 @@ class Account {
 	  }
 	  return true;
 	}
-	
+
 	function generateBase($kid,$uid,$username) {
 		global $database,$message;
-		
+
 		if($kid == 0) {
 			$kid = rand(1,4);
 		}
 		else{
 			$kid = $_POST['kid'];
 		}
-		
+
 		$wid = $database->generateBase($kid);
 		$database->setFieldTaken($wid);
 		$database->addVillage($wid,$uid,$username,1);
@@ -263,7 +263,7 @@ class Account {
 		$database->updateUserField($uid,"location","",1);
 		$message->sendWelcome($uid,$username);
 	}
-	
+
 };
 $account = new Account;
 ?>

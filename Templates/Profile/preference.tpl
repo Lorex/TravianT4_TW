@@ -1,4 +1,4 @@
-﻿<?php 
+﻿<?php
 if(isset($_GET['del']) && is_numeric($_GET['del'])){
 	$database->removeLinks($_GET['del'],$session->uid);
 	header("Location: spieler.php?s=2");
@@ -16,68 +16,68 @@ if(isset($_GET['del']) && is_numeric($_GET['del'])){
 // Save new link or just edit a link
 if($_POST) {
     $links = array();
-    
+
     // let's do some complicated code x'D
     foreach($_POST as $key => $value) {
         if(substr($key, 0, 2) == 'nr') {
             $i = substr($key, 2);
-            $links[$i]['nr'] = mysql_escape_string($value);
+            $links[$i]['nr'] = mysqli_escape_string($value);
         }
-        
+
         if(substr($key, 0, 2) == 'id') {
             $i = substr($key, 2);
-            $links[$i]['id'] = mysql_escape_string($value);
+            $links[$i]['id'] = mysqli_escape_string($value);
         }
-        
+
         if(substr($key, 0, 8) == 'linkname') {
             $i = substr($key, 8);
-            $links[$i]['linkname'] = mysql_escape_string($value);
+            $links[$i]['linkname'] = mysqli_escape_string($value);
         }
-        
+
         if(substr($key, 0, 8) == 'linkziel') {
             $i = substr($key, 8);
-            $links[$i]['linkziel'] = mysql_escape_string($value);
+            $links[$i]['linkziel'] = mysqli_escape_string($value);
         }
     }
-    
+
     // Save
     foreach($links as $link) {
         settype($link['nr'], 'int');
-        
+
         if(trim($link['nr']) != '' AND trim($link['linkname']) != '' AND trim($link['linkziel']) != '' AND trim($link['id']) == '') {
             // Add new link
             $userid = $session->uid;
-            
-            $query = mysql_query('INSERT INTO `' . TB_PREFIX . 'links` (`userid`, `name`, `url`, `pos`) VALUES (' . $userid . ', \'' . $link['linkname'] . '\', \'' . $link['linkziel'] . '\', ' . $link['nr'] . ')');
+
+            $query = mysqli_query($con,'INSERT INTO `' . TB_PREFIX . 'links` (`userid`, `name`, `url`, `pos`) VALUES (' . $userid . ', \'' . $link['linkname'] . '\', \'' . $link['linkziel'] . '\', ' . $link['nr'] . ')');
         } elseif(trim($link['nr']) != '' AND trim($link['linkname']) != '' AND trim($link['linkziel']) != '' AND trim($link['id']) != '') {
             // Update link
-            $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
-            $data = mysql_fetch_assoc($query);
-            
+            $query = mysqli_query($con,'SELECT * FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
+            $data = mysqli_fetch_assoc($query);
+
             // May the user update this entry?
             if($data['userid'] == $session->uid) {
-                $query2 = mysql_query('UPDATE `' . TB_PREFIX . 'links` SET `name` = \'' . $link['linkname'] . '\', `url` = \'' . $link['linkziel'] . '\', `pos` = ' . $link['nr'] . ' WHERE `id` = ' . $link['id']);
+                $query2 = mysqli_query($con,'UPDATE `' . TB_PREFIX . 'links` SET `name` = \'' . $link['linkname'] . '\', `url` = \'' . $link['linkziel'] . '\', `pos` = ' . $link['nr'] . ' WHERE `id` = ' . $link['id']);
             }
         } elseif(trim($link['nr']) == '' AND trim($link['linkname']) == '' AND trim($link['linkziel']) == '' AND trim($link['id']) != '') {
             // Delete entry
-            $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
-            $data = mysql_fetch_assoc($query);
-            
+            $query = mysqli_query($con,'SELECT * FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
+            $data = mysqli_fetch_assoc($query);
+
             // May the user delete this entry?
             if($data['userid'] == $session->uid) {
-                $query2 = mysql_query('DELETE FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
+                $query2 = mysqli_query($con,'DELETE FROM `' . TB_PREFIX . 'links` WHERE `id` = ' . $link['id']);
             }
         }
     }
-    
+
     print '';
 }
 
 
 // Fetch all links
-$query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'links` WHERE `userid` = ' . $session->uid . ' ORDER BY `pos` ASC') or die(mysql_error());
+$query = mysqli_query($con,'SELECT * FROM `' . TB_PREFIX . 'links` WHERE `userid` = ' . $session->uid . ' ORDER BY `pos` ASC') or die(mysqli_error());
 $links = array();
-while($data = mysql_fetch_assoc($query)) {
+while($data = mysqli_fetch_assoc($query)) {
     $links[] = $data;
 }
 ?>
@@ -115,7 +115,7 @@ while($data = mysql_fetch_assoc($query)) {
 					<td class="add">
 					</td>
 				</tr>
-							<?php ++$i; $last_pos = $link['pos']; endforeach; ?>		
+							<?php ++$i; $last_pos = $link['pos']; endforeach; ?>
 						<tr class="addLine templateElement insertElement">
 					<td></td>
 					<td class="nr">
@@ -156,8 +156,8 @@ while($data = mysql_fetch_assoc($query)) {
 			});
 		</script>
 
-	
-	
+
+
 	<div class="submitButtonContainer">
 		<button type="submit" value="Mentés" name="s1" id="btn_ok"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Save</div></div></button>
         </div>

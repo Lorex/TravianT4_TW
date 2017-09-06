@@ -22,14 +22,14 @@ $automation->isWinner();
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome alliance">
-<div id="wrapper"> 
-<img id="staticElements" src="img/x.gif" alt="" /> 
-<div id="logoutContainer"> 
-<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a> 
-</div> 
-<div class="bodyWrapper"> 
-<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" /> 
-<div id="header"> 
+<div id="wrapper">
+<img id="staticElements" src="img/x.gif" alt="" />
+<div id="logoutContainer">
+<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a>
+</div>
+<div class="bodyWrapper">
+<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" />
+<div id="header">
 <div id="mtop">
 <a id="logo" href="<?php echo HOMEPAGE; ?>" target="_blank" title="<?php echo SERVER_NAME ?>"></a>					<ul id="navigation">
 						<li id="n1" class="resources">
@@ -48,12 +48,12 @@ include "Templates/html.tpl";
     	if(count($database->getMessage($session->uid,9)) >= 1000) {
 			$unmsg = "+1000";
 		} else { $unmsg = count($database->getMessage($session->uid,9)); }
-		
+
     	if(count($database->getNotice5($session->uid)) >= 1000) {
 			$unnotice = "+1000";
 		} else { $unnotice = count($database->getNotice5($session->uid)); }
 ?>
-<li id="n5" class="reports"> 
+<li id="n5" class="reports">
 <a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getNotice5($session->uid)).')'; } ?>"></a>
 <?php
 if($message->nunread){
@@ -64,8 +64,8 @@ if($message->nunread){
 }
 ?>
 </li>
-<li id="n6" class="messages"> 
-<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a> 
+<li id="n6" class="messages">
+<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a>
 <?php
 if($message->unread) {
 	echo "<div class=\"ltr bubble\" title=\"".$unmsg." ".HEADER_MESSAGES_NEW."\" style=\"display:block\">
@@ -77,12 +77,12 @@ if($message->unread) {
 </li>
 
 </ul>
-<div class="clear"></div> 
-</div> 
+<div class="clear"></div>
+</div>
 </div>
 					<div id="mid">
 <a id="ingameManual" href="help.php"><img class="question" alt="Help" src="img/x.gif"></a>
-												<div class="clear"></div> 
+												<div class="clear"></div>
 
 
 <div id="contentOuterContainer">
@@ -100,8 +100,8 @@ if($message->unread) {
 <?php
 if(isset($_GET['fid'])){
 $fid = preg_replace("/[^0-9]/","",$_GET['fid']);
-$forum = mysql_query("SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".$fid."");
-$forum_type = mysql_fetch_array($forum);
+$forum = mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".$fid."");
+$forum_type = mysqli_fetch_array($forum);
 if($forum_type['forum_name'] != "" && $forum_type['forum_area'] == 0){
 if($forum_type['alliance'] != $session->alliance){
 	header("Location: ".$_SERVER['PHP_SELF']);
@@ -109,8 +109,8 @@ if($forum_type['alliance'] != $session->alliance){
 }
 }else if(isset($_GET['fid2'])){
 $fid = preg_replace("/[^0-9]/","",$_GET['fid2']);
-$forum = mysql_query("SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".$fid."");
-$forum_type = mysql_fetch_array($forum);
+$forum = mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".$fid."");
+$forum_type = mysqli_fetch_array($forum);
 if($forum_type['forum_name'] != "" && $forum_type['forum_area'] != 1){
 if($forum_type['forum_area'] == 0){
 if($forum_type['alliance'] != $session->alliance){
@@ -270,7 +270,7 @@ if($ally_exist['id']!=0 or $_GET['fid'] or $_GET['fid2'] or $session->alliance!=
 <div class="clear"></div>
 </div>
 <div class="contentFooter">&nbsp;</div>
-</div>                    
+</div>
 <?php
 include("Templates/sideinfo.tpl");
 include("Templates/footer.tpl");

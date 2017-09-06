@@ -9,8 +9,8 @@
 #################################################################################
 
 include_once("../../GameEngine/Account.php");
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 if ($session->access < ADMIN) die("Access Denied: You are not Admin!");
 
 $uid = $_POST['uid'];
@@ -20,7 +20,7 @@ $time = time();
 
 $query = "INSERT INTO ".TB_PREFIX."mdata (target, owner, topic, message, viewed, time) VALUES ('$uid', 1, '$topic', '$message', 0, '$time')";
 
-mysql_query($query);
+mysqli_query($con,$query);
 
 header("Location: ../../../Admin/admin.php?p=Newmessage&uid=".$uid."&msg=ok");
 ?>

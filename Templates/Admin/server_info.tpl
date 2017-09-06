@@ -17,12 +17,12 @@
 ##                                                                             ##
 #################################################################################
 
-$tribe1 = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 1");
-$tribe2 = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 2");
-$tribe3 = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 3");
-$tribe4 = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 4");
-$tribe5 = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 5");
-$tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($tribe3),mysql_num_rows($tribe4),mysql_num_rows($tribe5));
+$tribe1 = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 1");
+$tribe2 = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 2");
+$tribe3 = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 3");
+$tribe4 = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 4");
+$tribe5 = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 5");
+$tribes = Array(mysqli_num_rows($tribe1),mysqli_num_rows($tribe2),mysqli_num_rows($tribe3),mysqli_num_rows($tribe4),mysqli_num_rows($tribe5));
 ?>
 <br />
 <br />
@@ -37,8 +37,8 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			<td>註冊玩家</td>
 			<td>
             	<?php
-                    $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users");
-                    $users = mysql_num_rows($result);
+                    $result = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users");
+                    $users = mysqli_num_rows($result);
                     echo $users;
                 ?>
 			</td>
@@ -47,8 +47,8 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			<td>活躍玩家</td>
 			<td>
             	<?php
-                    $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."active");
-                    $num_rows = mysql_num_rows($result);
+                    $result = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."active");
+                    $num_rows = mysqli_num_rows($result);
                     echo $num_rows;
                 ?>
 			</td>
@@ -58,8 +58,8 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			<td>
                 <?php
                     $t =time();
-                    $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE ".$t." - timestamp < 300") or die(mysql_error());;
-                    $num_rows = mysql_num_rows($result);
+                    $result = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE ".$t." - timestamp < 300") or die(mysqli_error());;
+                    $num_rows = mysqli_num_rows($result);
                     echo $num_rows;
                 ?>
 			</td>
@@ -68,8 +68,8 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			<td>封禁玩家</td>
 			<td>
                 <?php
-                    $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE access = 0");
-                    $num_rows = mysql_num_rows($result);
+                    $result = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE access = 0");
+                    $num_rows = mysqli_num_rows($result);
                     echo $num_rows;
                 ?>
 			</td>
@@ -78,8 +78,8 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 			<td>村莊設置</td>
 			<td>
                 <?php
-                    $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."vdata");
-                    $num_rows = mysql_num_rows($result);
+                    $result = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."vdata");
+                    $num_rows = mysqli_num_rows($result);
                     echo $num_rows;
                 ?>
 			</td>

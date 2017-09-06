@@ -15,11 +15,11 @@ include_once("GameEngine/Account.php");
 
 $max_per_pass = 1000;
 
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
 
-mysql_select_db(SQL_DB);
+mysqli_select_db($con,SQL_DB);
 
-if (mysql_num_rows(mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE access = 9 AND id = ".$session->uid)) != '1') die("Hacking attempt!");
+if (mysqli_num_rows(mysqli_query($con,"SELECT id FROM ".TB_PREFIX."users WHERE access = 9 AND id = ".$session->uid)) != '1') die("Hacking attempt!");
 
 
 
@@ -27,13 +27,13 @@ if(isset($_GET['del'])){
 
 			$query="SELECT * FROM ".TB_PREFIX."users ORDER BY id + 0 DESC";
 
-			$result=mysql_query($query) or die (mysql_error());
+			$result=mysqli_query($con,$query) or die (mysqli_error());
 
-			for ($i=0; $row=mysql_fetch_row($result); $i++) {
+			for ($i=0; $row=mysqli_fetch_row($result); $i++) {
 
-					$updateattquery = mysql_query("UPDATE ".TB_PREFIX."users SET ok = '0' WHERE id = '".$row[0]."'")
+					$updateattquery = mysqli_query($con,"UPDATE ".TB_PREFIX."users SET ok = '0' WHERE id = '".$row[0]."'")
 
-					or die(mysql_error());	
+					or die(mysqli_error());
 
 			}
 
@@ -76,7 +76,7 @@ if (@isset($_POST['confirm']))
 
 		$text = file_get_contents("Templates/text_format.tpl");
 
-		$text = preg_replace("'%TEKST%'",$_SESSION['m_message'] ,$text);																	
+		$text = preg_replace("'%TEKST%'",$_SESSION['m_message'] ,$text);
 
 		fwrite($fh, $text);
 
@@ -84,13 +84,13 @@ if (@isset($_POST['confirm']))
 
 			$query="SELECT * FROM ".TB_PREFIX."users ORDER BY id + 0 DESC";
 
-			$result=mysql_query($query) or die (mysql_error());
+			$result=mysqli_query($con,$query) or die (mysqli_error());
 
-			for ($i=0; $row=mysql_fetch_row($result); $i++) {
+			for ($i=0; $row=mysqli_fetch_row($result); $i++) {
 
-					$updateattquery = mysql_query("UPDATE ".TB_PREFIX."users SET ok = '1' WHERE id = '".$row[0]."'")
+					$updateattquery = mysqli_query($con,"UPDATE ".TB_PREFIX."users SET ok = '1' WHERE id = '".$row[0]."'")
 
-					or die(mysql_error());	
+					or die(mysqli_error());
 
 			}
 
@@ -102,7 +102,7 @@ if (@isset($_POST['confirm']))
 
 
 
-?>	
+?>
 
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -144,7 +144,7 @@ if (@isset($_POST['confirm']))
 
 	</script>
 
-</head> 
+</head>
 
 <body class="v35 ie ie8">
 
@@ -170,31 +170,31 @@ if (@isset($_POST['confirm']))
 
 <form method="POST" action="sysmsg.php" name="myform" id="myform">
 
-			<table cellspacing="1" cellpadding="1" class="tbg" style="background-color:#C0C0C0; border: 0px solid #C0C0C0; font-size: 10pt;">    
+			<table cellspacing="1" cellpadding="1" class="tbg" style="background-color:#C0C0C0; border: 0px solid #C0C0C0; font-size: 10pt;">
 
 			  <tbody>
 
-			    <tr>	
+			    <tr>
 
-			      <td class="rbg" style="font-size: 10pt; text-align:center;">System Message</td>    
+			      <td class="rbg" style="font-size: 10pt; text-align:center;">System Message</td>
 
 			    </tr>
 
-			    <tr>	
+			    <tr>
 
 			      <td style="font-size: 10pt; text-align:center;">Text BBCode:<br><b>[b] txt [/b]</b> - <i>[i] txt [/i]</i> - <u>[u] txt [/u]</u> <br />
 
-			<textarea class="fm" name="message" cols="60" rows="23"></textarea></td>    
+			<textarea class="fm" name="message" cols="60" rows="23"></textarea></td>
 
 			    </tr>
 
-			    <tr>	
+			    <tr>
 
-			      <td style="text-align:center;">All fields required</td>    
+			      <td style="text-align:center;">All fields required</td>
 
 			    </tr>
 
-			    <tr>	
+			    <tr>
 
 			      <td style="text-align:center;">
 
@@ -204,7 +204,7 @@ if (@isset($_POST['confirm']))
 
 			  </tbody>
 
-			</table> 
+			</table>
 
 			</form>
 
@@ -214,17 +214,17 @@ if (@isset($_POST['confirm']))
 
 <form method="POST" action="sysmsg.php">
 
-			<table cellspacing="1" cellpadding="2" class="tbg">    
+			<table cellspacing="1" cellpadding="2" class="tbg">
 
 			  <tbody>
 
-			    <tr>	
+			    <tr>
 
-			      <td class="rbg" colspan="2">Confirmation</td>    
+			      <td class="rbg" colspan="2">Confirmation</td>
 
 			    </tr>
 
-			    <tr>	
+			    <tr>
 
 			      <td style="text-align: left; width: 200px;">Do you really want to send System Message?</td>
 
@@ -232,13 +232,13 @@ if (@isset($_POST['confirm']))
 
 			        <input type="submit" style="width: 240px;" class="fm" name="confirm" value="Yes">
 
-			        <input type="submit" style="width: 240px;" class="fm" name="confirm" value="No"></td>    
+			        <input type="submit" style="width: 240px;" class="fm" name="confirm" value="No"></td>
 
 			    </tr>
 
 			  </tbody>
 
-			</table> 
+			</table>
 
 </form>
 
@@ -294,7 +294,7 @@ System Message was sent
 
             <div class="clear"></div>
 
-            
+
 
 <?php include("Templates/footer.tpl"); ?>
 
@@ -304,5 +304,5 @@ System Message was sent
 
 </html>
 
-<?php mysql_close(); ?>
+<?php mysqli_close(); ?>
 

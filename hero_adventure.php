@@ -5,14 +5,14 @@ $start = $generator->pageLoadTimeStart();
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome hero_adventure">
-	<div id="wrapper"> 
-		<img id="staticElements" src="img/x.gif" alt="" /> 
-		<div id="logoutContainer"> 
-			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a> 
-		</div> 
-		<div class="bodyWrapper"> 
-			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" /> 
-			<div id="header"> 
+	<div id="wrapper">
+		<img id="staticElements" src="img/x.gif" alt="" />
+		<div id="logoutContainer">
+			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a>
+		</div>
+		<div class="bodyWrapper">
+			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" />
+			<div id="header">
 				<div id="mtop">
 					<a id="logo" href="<?php echo HOMEPAGE; ?>" target="_blank" title="<?php echo SERVER_NAME ?>"></a>
 					<ul id="navigation">
@@ -32,12 +32,12 @@ include "Templates/html.tpl";
     	if(count($database->getMessage($session->uid,9)) >= 1000) {
 			$unmsg = "+1000";
 		} else { $unmsg = count($database->getMessage($session->uid,9)); }
-		
+
     	if(count($database->getNotice5($session->uid)) >= 1000) {
 			$unnotice = "+1000";
 		} else { $unnotice = count($database->getNotice5($session->uid)); }
 ?>
-<li id="n5" class="reports"> 
+<li id="n5" class="reports">
 <a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getNotice5($session->uid)).')'; } ?>"></a>
 <?php
 if($message->nunread){
@@ -48,8 +48,8 @@ if($message->nunread){
 }
 ?>
 </li>
-<li id="n6" class="messages"> 
-<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a> 
+<li id="n6" class="messages">
+<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a>
 <?php
 if($message->unread) {
 	echo "<div class=\"ltr bubble\" title=\"".$unmsg." ".HEADER_MESSAGES_NEW."\" style=\"display:block\">
@@ -61,14 +61,14 @@ if($message->unread) {
 </li>
 
 </ul>
-<div class="clear"></div> 
-</div> 
+<div class="clear"></div>
+</div>
 </div>
 					<div id="mid">
 <a id="ingameManual" href="help.php"><img class="question" alt="Help" src="img/x.gif"></a>
-												<div class="clear"></div> 
-						<div id="contentOuterContainer"> 
-							<div class="contentTitle">&nbsp;</div> 
+												<div class="clear"></div>
+						<div id="contentOuterContainer">
+							<div class="contentTitle">&nbsp;</div>
 
 <div class="contentContainer">
 <div id="content" class="hero_adventure">
@@ -116,15 +116,15 @@ if($message->unread) {
 	</thead>
 	<tbody>
 <?php
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."adventure WHERE end = 0 and uid = ".$session->uid." ORDER BY time ASC");
-$query = mysql_num_rows($sql);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."adventure WHERE end = 0 and uid = ".$session->uid." ORDER BY time ASC");
+$query = mysqli_num_rows($sql);
 
 $outputList = '';
 $timer = 1;
-if($query == 0) {        
+if($query == 0) {
     $outputList .= "<td colspan=\"6\" class=\"none\"><center>No adventure found.</center></td>";
 }else{
-	while($row = mysql_fetch_array($sql)){ 
+	while($row = mysqli_fetch_array($sql)){
 include "Templates/Auction/alt.tpl";
 
 //find slowest unit.
@@ -168,7 +168,7 @@ break;
 }
 
 	$outputList .= "<tr><td class=\"location\">".$tname."</td>";
-	
+
 	$outputList .= '<td class="coords"><a href="karte.php?x='.$coor['y'].'&amp;y='.$coor['x'].'">
         <span class="coordinates coordinatesAligned">
         <span class="coordinateY">('.$coor['y'].'</span>
@@ -180,16 +180,16 @@ break;
 	if(!$row['dif']){
 		$outputList .= "<td class='difficulty'><img src='img/x.gif' class='adventureDifficulty2' title='Normális' /></td>";
 	}else{
-		$outputList .= "<td class='difficulty'><img src='img/x.gif' class='adventureDifficulty0' title='Veszélyes' /></td>";	
+		$outputList .= "<td class='difficulty'><img src='img/x.gif' class='adventureDifficulty0' title='Veszélyes' /></td>";
 	}
 	$outputList .= "<td class=\"timeLeft\"><span id=\"timer".$timer."\">".$generator->getTimeFormat($row['time']-time())."</span></td>";
-	$outputList .= "<td class=\"goTo\"><a class=\"gotoAdventure arrow\" href=\"a2b.php?id=".$row['wref']."&h=1\">To the Adventure</a></td></tr>";	
+	$outputList .= "<td class=\"goTo\"><a class=\"gotoAdventure arrow\" href=\"a2b.php?id=".$row['wref']."&h=1\">To the Adventure</a></td></tr>";
     $timer++;
 	}
 }
 echo $outputList;
 ?>
-	
+
     </tbody>
 </table>
 
@@ -201,7 +201,7 @@ echo $outputList;
 
                         <div class="contentFooter">&nbsp;</div>
 
-					</div>                    
+					</div>
 <?php
 include("Templates/sideinfo.tpl");
 include("Templates/footer.tpl");

@@ -11,19 +11,19 @@
 
 include_once("../../config.php");
 
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 $session = $_POST['admid'];
 
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id = ".$session."");
-$access = mysql_fetch_array($sql);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE id = ".$session."");
+$access = mysqli_fetch_array($sql);
 $sessionaccess = $access['access'];
 
 if($sessionaccess != 9) die("<h1><font color=\"red\">Access Denied: You are not Admin!</font></h1>");
 
-##mysql_query("INSERT INTO ".TB_PREFIX."banlist (`uid`, `name`, `reason`, `time`, `end`, `admin`, `active`) VALUES (".$row['id'].", '".$row['username']."' , '$reason', '$startts', '$endts', '$admin', '1')");
-mysql_query("TRUNCATE ".TB_PREFIX."banlist");
+##mysqli_query($con,"INSERT INTO ".TB_PREFIX."banlist (`uid`, `name`, `reason`, `time`, `end`, `admin`, `active`) VALUES (".$row['id'].", '".$row['username']."' , '$reason', '$startts', '$endts', '$admin', '1')");
+mysqli_query($con,"TRUNCATE ".TB_PREFIX."banlist");
 
 header("Location: ../../../Admin/admin.php?p=ban");
 ?>

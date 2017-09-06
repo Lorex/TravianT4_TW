@@ -4,10 +4,10 @@
         include ("../../GameEngine/Admin/database.php");
         include ("../../GameEngine/config.php");
 
-        mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-        mysql_select_db(SQL_DB);
+        $con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+        mysqli_select_db($con,SQL_DB);
 
-        $database->poulateOasisdata();  
+        $database->poulateOasisdata();
         $database->populateOasis();
 		$database->populateOasisUnitsLow();
 

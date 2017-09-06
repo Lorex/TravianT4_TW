@@ -4,14 +4,14 @@ $start = $generator->pageLoadTimeStart();
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome hero_auction">
-	<div id="wrapper"> 
-		<img id="staticElements" src="img/x.gif" alt="" /> 
-		<div id="logoutContainer"> 
-			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a> 
-		</div> 
-		<div class="bodyWrapper"> 
-			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" /> 
-			<div id="header"> 
+	<div id="wrapper">
+		<img id="staticElements" src="img/x.gif" alt="" />
+		<div id="logoutContainer">
+			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a>
+		</div>
+		<div class="bodyWrapper">
+			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" />
+			<div id="header">
 				<div id="mtop">
 					<a id="logo" href="<?php echo HOMEPAGE; ?>" target="_blank" title="<?php echo SERVER_NAME ?>"></a>
 					<ul id="navigation">
@@ -31,12 +31,12 @@ include "Templates/html.tpl";
     	if(count($database->getMessage($session->uid,9)) >= 1000) {
 			$unmsg = "+1000";
 		} else { $unmsg = count($database->getMessage($session->uid,9)); }
-		
+
     	if(count($database->getNotice5($session->uid)) >= 1000) {
 			$unnotice = "+1000";
 		} else { $unnotice = count($database->getNotice5($session->uid)); }
 ?>
-<li id="n5" class="reports"> 
+<li id="n5" class="reports">
 <a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getNotice5($session->uid)).')'; } ?>"></a>
 <?php
 if($message->nunread){
@@ -47,8 +47,8 @@ if($message->nunread){
 }
 ?>
 </li>
-<li id="n6" class="messages"> 
-<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a> 
+<li id="n6" class="messages">
+<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a>
 <?php
 if($message->unread) {
 	echo "<div class=\"ltr bubble\" title=\"".$unmsg." ".HEADER_MESSAGES_NEW."\" style=\"display:block\">
@@ -60,14 +60,14 @@ if($message->unread) {
 </li>
 
 </ul>
-<div class="clear"></div> 
-</div> 
+<div class="clear"></div>
+</div>
 </div>
 					<div id="mid">
 <a id="ingameManual" href="help.php"><img class="question" alt="Help" src="img/x.gif"></a>
-												<div class="clear"></div> 
-						<div id="contentOuterContainer"> 
-							<div class="contentTitle">&nbsp;</div> 
+												<div class="clear"></div>
+						<div id="contentOuterContainer">
+							<div class="contentTitle">&nbsp;</div>
 
 <div class="contentContainer">
 								<div id="content" class="hero_auction"><h1 class="titleInHeader">Hero</h1>
@@ -103,13 +103,13 @@ if($message->unread) {
 					});
 				</script>
 
-<?php		
+<?php
 
 if($_GET['action']=='sell' && $_GET['abort']){
 	$database->delAuction($_GET['abort']);
 }
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."auction WHERE finish = 0 and owner = '".$session->uid."'");
-$query = mysql_num_rows($sql);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."auction WHERE finish = 0 and owner = '".$session->uid."'");
+$query = mysqli_num_rows($sql);
 if($_GET['action']=='sell' && $_POST['a']=='e45'){
 	if($query < 5){
 		$data = $database->getItemData($_POST['id']);
@@ -127,12 +127,12 @@ $total_silver = $_POST['silver'] + $session->silver;
 		$bidError .= "You haven't enough silver for this bid.";
 	}else{
 		if($database->checkBid($_POST['a'], $_POST['maxBid'])){
-			
+
 			if($getBidData['uid']==0){
 				$database->addBid($_POST['a'], $session->uid, $_POST['maxBid']);
 				$database->setSilver($session->uid,$_POST['maxBid'],0);
 				$database->setNewSilver($_POST['a'],$_POST['maxBid']);
-				
+
 			}elseif($getBidData['uid']==$session->uid){
 				$maxBid = $_POST['maxBid'] - $getBidData['newsilver'];
 				$database->setSilver($session->uid,$maxBid,0);
@@ -145,7 +145,7 @@ $total_silver = $_POST['silver'] + $session->silver;
 			}
 			if(isset($_POST['page'])){ $page = "&page=".$_POST['page']; }else{ $page = ""; }
 			if($_POST['action']=='bids'){ $ssss = 'bids'; } elseif($_POST['action']=='buy'){ $ssss = 'buy'; }
-			header("Location: ?action=".$ssss."".$page."&a=".$_POST['a']);	
+			header("Location: ?action=".$ssss."".$page."&a=".$_POST['a']);
 		}else{
 			if($getBidData['uid']==$session->uid){
 				$maxBid = $getBidData['newsilver'] - $_POST['maxBid'];
@@ -157,10 +157,10 @@ $total_silver = $_POST['silver'] + $session->silver;
 			}
 			if(isset($_POST['page'])){ $page = "&page=".$_POST['page']; }else{ $page = ""; }
 			if($_POST['action']=='bids'){ $ssss = 'bids'; } elseif($_POST['action']=='buy'){ $ssss = 'buy'; }
-			header("Location: ?action=".$ssss."".$page."&a=".$_POST['a']);	
+			header("Location: ?action=".$ssss."".$page."&a=".$_POST['a']);
 		}
 	}
-	
+
 }
 
 include("Templates/Auction/menu.tpl");
@@ -182,7 +182,7 @@ if(isset($_GET['action'])){
 		<div class="clear"></div>
 			</div>
 		<div class="contentFooter">&nbsp;</div>
-    </div>                    
+    </div>
 <?php
 include("Templates/sideinfo.tpl");
 include("Templates/footer.tpl");

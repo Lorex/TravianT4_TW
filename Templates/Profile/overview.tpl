@@ -11,7 +11,7 @@ $totalpop = 0;
 foreach($varray as $vil) {
 	$totalpop += $vil['pop'];
 }
-		
+
 ?>
 
 <h4 class="round">Information</h4>
@@ -29,7 +29,7 @@ foreach($varray as $vil) {
 	</tr>
 	<tr>
 		<th>Tribe</th>
-		<td><?php 
+		<td><?php
                 if($displayarray['tribe'] == 1) {
                 echo "Roman";
                 }
@@ -41,7 +41,7 @@ foreach($varray as $vil) {
                 }
 				else if($displayarray['tribe'] == 4) {
                 echo "Nature";
-                
+
                 }else if($displayarray['tribe'] == 5) {
                 echo "Natar";
                 }				?></td>
@@ -64,7 +64,7 @@ foreach($varray as $vil) {
 		<th>Population</th>
 		<td><?php echo $totalpop;?></td>
 	</tr>
-    <?php 
+    <?php
 			//Date of Birth
             if(isset($displayarray['birthday']) && $displayarray['birthday'] != 0) {
 			$age = date('Y') - substr($displayarray['birthday'],0,4);
@@ -99,7 +99,7 @@ foreach($varray as $vil) {
 	</tr>
 </table>
 
-	
+
 <div class="clear"></div>
 <br />
 
@@ -123,7 +123,7 @@ foreach($varray as $vil) {
 		</tr>
 	</thead>
 	<tbody>
-        <?php 
+        <?php
     foreach($varray as $vil) {
     	$coor = $database->getCoor($vil['wref']);
     	echo "<tr><td class=\"name\"><a href=\"position_details.php?x=".$coor['x']."&amp;y=".$coor['y']."\">".$vil['name']."</a> ";
@@ -131,11 +131,11 @@ foreach($varray as $vil) {
         echo "<span class=\"mainVillage\">(Capital)</span>";
         }
         echo "</td><td class=\"oases\">";
-        
+
 $prefix = "".TB_PREFIX."odata";
 $uid = $_GET['uid']; $wref = $vil['wref'];
-$sql2 = mysql_query("SELECT * FROM $prefix WHERE owner = $uid AND conqured = $wref");
-while($row = mysql_fetch_array($sql2)){
+$sql2 = mysqli_query($con,"SELECT * FROM $prefix WHERE owner = $uid AND conqured = $wref");
+while($row = mysqli_fetch_array($sql2)){
 $type = $row["type"];
 switch($type) {
 case 1:

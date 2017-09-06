@@ -5,7 +5,7 @@
 		<li><a id="a_title_3" onclick="SetCurrent(3);" href="#">Profile server</a></li>
 	</ul>
 </div>
-				
+
 <div id="div_1">
 	<table style="width:100%;">
 		<tr>
@@ -102,20 +102,20 @@
 	</table>
 </div>
 <div id="div_2" style="display:none;">
-    <table id="member" border="1" cellpadding="3"> 
+    <table id="member" border="1" cellpadding="3">
         <tr>
             <td><b>Log ID</b></td>
             <td><b>Admin</b></td>
-            <td><b>LOG</b></td> 
+            <td><b>LOG</b></td>
             <td><b>Date</b></td>
             <td><b>Operations</b></td>
         </tr>
     <?php
-    
-    $sql = mysql_query("SELECT * FROM ".TB_PREFIX."admin_log ORDER BY id DESC LIMIT 10");
+
+    $sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."admin_log ORDER BY id DESC LIMIT 10");
     $query = count($sql);
         if($query>0){
-            while($row = mysql_fetch_array($sql)){
+            while($row = mysqli_fetch_array($sql)){
                 $admid = $row['user'];
                 $user = $database->getUserField($admid,"username",0);
                 if($user == 'Multihunter') {
@@ -139,23 +139,23 @@
 </div>
 <div id="div_3" style="display:none;">
 	<?php
-    $tribe1 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE tribe = 1 and id>3");
-    $tribe2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE tribe = 2 and id>3");
-    $tribe3 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE tribe = 3 and id>3");
-    $tribes = array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($tribe3));
-    $users = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id>3"));
-    $actives = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."active"));
-    $onlines = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE ".time()." - timestamp < 300"));
-    $banned = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE access = 0"));
-    $villages = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."vdata"));
-    $alliances = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."alidata"));
-    $adventures = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."adventure"));
-    $auctions = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."auction WHERE finish = 0"));
-    $notices = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."ndata"));
-    $movements = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."movement WHERE proc = 0"));
-    $allvillages = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."wdata WHERE oasistype = 0"));
-    $alloasis = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."wdata WHERE fieldtype = 0"));
-    $occoasis = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."wdata WHERE fieldtype = 0 and occupied!=0"));
+    $tribe1 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE tribe = 1 and id>3");
+    $tribe2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE tribe = 2 and id>3");
+    $tribe3 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE tribe = 3 and id>3");
+    $tribes = array(mysqli_num_rows($tribe1),mysqli_num_rows($tribe2),mysqli_num_rows($tribe3));
+    $users = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE id>3"));
+    $actives = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."active"));
+    $onlines = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE ".time()." - timestamp < 300"));
+    $banned = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE access = 0"));
+    $villages = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."vdata"));
+    $alliances = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata"));
+    $adventures = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."adventure"));
+    $auctions = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."auction WHERE finish = 0"));
+    $notices = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."ndata"));
+    $movements = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."movement WHERE proc = 0"));
+    $allvillages = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."wdata WHERE oasistype = 0"));
+    $alloasis = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."wdata WHERE fieldtype = 0"));
+    $occoasis = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."wdata WHERE fieldtype = 0 and occupied!=0"));
     ?><br />
     <table id="server_info" width="170" border="1" bgcolor="#E5E5E5" cellpadding="2">
             <tbody>
@@ -214,7 +214,7 @@
             </tr>
         </thead>
         <tbody>
-            
+
             <tr>
                 <td>Romans:</td>
                 <td><?php echo $tribes[0]; ?></td>
@@ -233,7 +233,7 @@
         </tbody>
     </table>
     </div>
-    
+
     <div style="margin-right:400px;margin-top:-104px;">
     <table id="server_info" width="170" border="1" bgcolor="#E5E5E5" cellpadding="2">
         <thead align="center">
@@ -242,7 +242,7 @@
             </tr>
         </thead>
         <tbody>
-            
+
             <tr>
                 <td>The whole village:</td>
                 <td><?php echo $allvillages; ?></td>

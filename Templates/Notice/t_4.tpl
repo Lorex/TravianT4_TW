@@ -2,14 +2,14 @@
 <?php
 $noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender","Scout Report");
 $prefix = "".TB_PREFIX."ndata";
-$sql = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive = 1 and del = 0 ORDER BY time DESC");
-$query = mysql_num_rows($sql);
+$sql = mysqli_query($con,"SELECT * FROM $prefix WHERE uid = $session->uid and archive = 1 and del = 0 ORDER BY time DESC");
+$query = mysqli_num_rows($sql);
 
 if (isset($_GET['page'])) {
     $page = preg_replace('#[^0-9]#i', '', $_GET['page']);
 } else {
     $page = 1;
-} 
+}
 
 $itemsPerPage = 10;
 $lastPage = ceil($query / $itemsPerPage);
@@ -18,7 +18,7 @@ if ($page < 1) {
     $page = 1;
 } else if ($page > $lastPage) {
     $page = $lastPage;
-} 
+}
 
 $centerPages = "";
 $sub1 = $page - 1;
@@ -30,37 +30,37 @@ $add3 = $page + 3;
 
 if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<span class="number currentPage">1</span>';
-	
+
 }elseif ($page == 1 && $lastPage == 2) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=2">2</a>';
-	
+
 }elseif ($page == 1 && $lastPage == 3) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=2">2</a> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=3">3</a>';
-	
+
 }elseif ($page == 1) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $add1 . '">' . $add1 . '</a> ';
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $add2 . '">' . $add2 . '</a> ... ';
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $lastPage . '">' . $lastPage . '</a>';
-	
+
 } else if ($page == $lastPage && $lastPage == 2) {
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == $lastPage && $lastPage == 3) {
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=2">2</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == $lastPage) {
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ... ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub2 . '">' . $sub2 . '</a> ';
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == ($lastPage - 1) && $lastPage == 3) {
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
@@ -72,7 +72,7 @@ if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $add1 . '">' . $add1 . '</a> ... ';
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $lastPage . '">' . $lastPage . '</a>';
-	
+
 }else if ($page == ($lastPage - 1)) {
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ... ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub1 . '">' . $sub1 . '</a> ';
@@ -83,7 +83,7 @@ if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $add1 . '">' . $add1 . '</a>';
-    
+
 } else if ($page > 1 && $page < $lastPage) {
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
@@ -96,7 +96,7 @@ if ($page <= 1 && $lastPage <= 1) {
 
 $limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage;
 
-$sql2 = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=1 and del = 0 ORDER BY time DESC $limit");
+$sql2 = mysqli_query($con,"SELECT * FROM $prefix WHERE uid = $session->uid and archive=1 and del = 0 ORDER BY time DESC $limit");
 $paginationDisplay = "";
 $nextPage = $_GET['page'] + 1;
 $previous = $_GET['page'] - 1;
@@ -140,10 +140,10 @@ $paginationDisplay .=  '<img alt="Utolsó" src="img/x.gif" class="last disabled"
 
 $outputList = '';
 $name = 1;
-if($query == 0) {        
+if($query == 0) {
     $outputList .= "<td colspan=\"4\" class=\"none\">There are no reports available.</td>";
 }else{
-while($row = mysql_fetch_array($sql2)){ 
+while($row = mysqli_fetch_array($sql2)){
     $id = $row["id"];
     $toWref = $row["toWref"];
     $topic = $row["topic"];
@@ -154,10 +154,10 @@ while($row = mysql_fetch_array($sql2)){
     $archive = $row["archive"];
 	$type = (isset($_GET['t']) && $_GET['t'] == 5)? $archive : $ntype;
     $dataarray = explode(",",$data);
-    
-    
+
+
     $outputList .= "<tr><td class=\"sel\"><input class=\"check\" type=\"checkbox\" name=\"n".$name."\" value=\"".$id."\" /></td><td class=\"sub\">";
-    
+
     if($type==9){
     	$outputList .= "<img src=\"img/x.gif\" class=\"iReport iReport21\" alt=\"".$noticeClass[$ntype]."\" title=\"".$noticeClass[$ntype]."\" /> <div>";
     }else{
@@ -173,9 +173,9 @@ if($type==1 || $type==2 || $type==5 || $type==6 || $type==7){
     $style = "full";
     }
     $carry = ($dataarray[24]+$dataarray[25]+$dataarray[26]+$dataarray[27])."/".$dataarray[28];
-    
+
     $outputList .= "<div class=\"reportInfoIcon\"><img title=\"".$carry."\" src=\"img/x.gif\" class=\"reportInfo carry ".$style."\"></div>";
-    
+
 }elseif($type==9){
 $btype = $dataarray[1];
 $type = $dataarray[2];
@@ -201,7 +201,7 @@ if($dataarray[1]){
 	<table cellpadding="1" cellspacing="1" id="overview" class="row_table_data">
 		<thead><tr><th colspan="2">Subject:</th><th class="sent">Sent</th></tr></thead>
         <tbody>
-   <?php 
+   <?php
 
     if(isset($_GET['s'])) {
     $s = $_GET['s'];
@@ -209,13 +209,13 @@ if($dataarray[1]){
     else {
     $s = 0;
     }
-    
+
     print "$outputList";
-    
+
     ?>
 
-      
-      
+
+
 </tbody>
 </table>
 
@@ -241,7 +241,7 @@ if($dataarray[1]){
 <button name="delntc" type="submit" value="del" id="del" class="delete">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Delete</div></div>
 </button>
-                    
+
 <?php if($session->plus) { ?>
 <button name="start" type="submit" value="start" id="start" class="delete">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">UnArchive</div></div>

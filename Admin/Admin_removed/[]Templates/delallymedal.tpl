@@ -1,4 +1,4 @@
-<?php 
+<?php
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
@@ -12,8 +12,8 @@
 if($_SESSION['access'] < ADMIN) die("Access Denied: You are not Admin!");
 include("../GameEngine/config.php");
 $id = $_SESSION['id'];
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."allimedal");
-$nummedals = mysql_num_rows($sql);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."allimedal");
+$nummedals = mysqli_num_rows($sql);
 ?>
 
 
@@ -25,7 +25,7 @@ $nummedals = mysql_num_rows($sql);
 		<tr>
 			<th>Medal Information</th>
 		</tr>
-	</thead> 
+	</thead>
 </table>
 <table id="profile">
 	<thead>
@@ -36,10 +36,10 @@ $nummedals = mysql_num_rows($sql);
 	</thead>
 	<tbody>
 		<?php
-			$sql = mysql_query("SELECT * FROM ".TB_PREFIX."allimedal");
-			$tot = mysql_num_rows($sql);
-			$sql = mysql_query("SELECT week FROM ".TB_PREFIX."allimedal ORDER BY week DESC LIMIT 1");
-			$week = mysql_result($sql, 0);
+			$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."allimedal");
+			$tot = mysqli_num_rows($sql);
+			$sql = mysqli_query($con,"SELECT week FROM ".TB_PREFIX."allimedal ORDER BY week DESC LIMIT 1");
+			$week = mysqli_result($sql, 0);
 			echo "<tr><td><center>$week</center></td><td><center>$tot</center></td></tr>";
 		?>
 	</tbody>
@@ -56,7 +56,7 @@ $nummedals = mysql_num_rows($sql);
 		<tr>
 			<th>Medal Week by Week</th>
 		</tr>
-	</thead> 
+	</thead>
 </table>
 <table id="profile">
 	<thead>
@@ -71,8 +71,8 @@ $nummedals = mysql_num_rows($sql);
 			for($j = 0; $j<$week; $j++)
 			{
 				$newweek = $j+1;
-				$sql = mysql_query("SELECT * FROM ".TB_PREFIX."allimedal WHERE week = $newweek");
-				$tot = mysql_num_rows($sql);
+				$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."allimedal WHERE week = $newweek");
+				$tot = mysqli_num_rows($sql);
 				echo "<tr>
 				<td>$newweek</td>
 				<td>$tot</td>
@@ -90,7 +90,7 @@ $nummedals = mysql_num_rows($sql);
 		<tr>
 			<th>All Medals (<?php echo $nummedals; ?>)</th>
 		</tr>
-	</thead> 
+	</thead>
 </table>
 <table id="profile">
 	<thead>
@@ -107,12 +107,12 @@ $nummedals = mysql_num_rows($sql);
 	<tbody>
 		<?php
 			$query = "SELECT * FROM ".TB_PREFIX."allimedal ORDER BY id DESC";
-			$result = mysql_query($query);
-			while($row = mysql_fetch_array($result))
+			$result = mysqli_query($con,$query);
+			while($row = mysqli_fetch_array($result))
 			{
 				$i = $i + 1;
 				$titel="Bonus";
-				switch ($row['categorie']) 
+				switch ($row['categorie'])
 				{
 					case "1": 	$titel="Attackers"; break;
 					case "2": 	$titel="Defenders"; break;
@@ -125,11 +125,11 @@ $nummedals = mysql_num_rows($sql);
 				$points = $row['points'];
 				$bb = $row['id'];
 				$allyid = $row['allyid'];
-				
+
 				$unq = "SELECT name FROM ".TB_PREFIX."alidata WHERE id = ".$allyid."";
-				$user = mysql_result(mysql_query($unq), 0);
+				$user = mysqli_result(mysqli_query($con,$unq), 0);
 				$allyname = $user;
-				
+
 				$alliance = '<a href="admin.php?p=alliance&aid='.$allyid.'">'.$allyname.'</a>';
 				echo"
 				<tr>

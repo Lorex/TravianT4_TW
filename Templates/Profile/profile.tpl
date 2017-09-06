@@ -1,4 +1,4 @@
-﻿<?php 
+﻿<?php
 $varmedal = $database->getProfileMedal($session->uid);  ?>
 <form action="spieler.php" method="POST">
     <input type="hidden" name="ft" value="p1" />
@@ -8,7 +8,7 @@ $varmedal = $database->getProfileMedal($session->uid);  ?>
 	<table cellpadding="1" cellspacing="1" id="editDetails" class="transparent">
 		<tbody>
 			<tr>
-                <?php 
+                <?php
     if($session->userinfo['birthday'] != 0) {
    $bday = explode("-",$session->userinfo['birthday']);
    }
@@ -19,7 +19,7 @@ $varmedal = $database->getProfileMedal($session->uid);  ?>
 
 				<th class="birth">Birthday</th>
 				<td class="birth">
-					
+
 					<input tabindex="3" type="text" name="jahr" value="<?php echo $bday[0]; ?>" maxlength="4" class="text year">
                     <select tabindex="2" name="monat" class="dropdown">
 <option value="0"></option><option value="1" <?php if($bday[1] == 1) { echo "selected"; } ?>>January</option><option value="2"<?php if($bday[1] == 2) { echo "selected"; } ?>>Febuary</option><option value="3"<?php if($bday[1] == 3) { echo "selected"; } ?>>Március</option><option value="4"<?php if($bday[1] == 4) { echo "selected"; } ?>>Ápril</option><option value="5"<?php if($bday[1] == 5) { echo "selected"; } ?>>May</option><option value="6"<?php if($bday[1] == 6) { echo "selected"; } ?>>June</option><option value="7"<?php if($bday[1] == 7) { echo "selected"; } ?>>July</option><option value="8"<?php if($bday[1] == 8) { echo "selected"; } ?>>August</option><option value="9"<?php if($bday[1] == 9) { echo "selected"; } ?>>September</option><option value="10"<?php if($bday[1] == 10) { echo "selected"; } ?>>October</option><option value="11"<?php if($bday[1] == 11) { echo "selected"; } ?>>November</option><option value="12"<?php if($bday[1] == 12) { echo "selected"; } ?>>December</option>                	</select>
@@ -82,9 +82,9 @@ INDELING CATEGORIEEN:
 == 7. in top 3 - Defenders           ==
 == 8. in top 3 - Climbers            ==
 == 9. in top 3 - Raiders             ==
-******************************/				
-				
-				
+******************************/
+
+
 	foreach($varmedal as $medal) {
 	$titel="Medal";
 	switch ($medal['categorie']) {
@@ -124,19 +124,19 @@ INDELING CATEGORIEEN:
     case "12":
         $titel="Attackers of the Week ".$medal['points']." top 10.";
         break;
-	}			
+	}
 				 echo"<tr>
 				   <td class=\"typ\"> ".$titel."</td>
 				   <td class=\"ra\">".$medal['plaats']."</td>
 				   <td class=\"we\">".$medal['week']."</td>
 				   <td class=\"bb\">[#".$medal['id']."]</td>
 			 	 </tr>";
-				 } ?>				
-				
+				 } ?>
+
 
 			</tbody>
 		</table>
-	
+
 		<h4 class="round spacer">Villages</h4>
 
 	<table cellpadding="1" cellspacing="1" id="villages">
@@ -151,10 +151,10 @@ INDELING CATEGORIEEN:
 		<tbody>
 <?php
 $prefix = "".TB_PREFIX."vdata";
-	$sql = mysql_query("SELECT * FROM $prefix WHERE owner = $session->uid ORDER BY pop DESC");
+	$sql = mysqli_query($con,"SELECT * FROM $prefix WHERE owner = $session->uid ORDER BY pop DESC");
     $name = 0;
 
-	while($row = mysql_fetch_array($sql)){ 
+	while($row = mysqli_fetch_array($sql)){
     echo "<tr>";
     echo "<td class=\"name\"><input tabindex=\"6\" type=\"text\" name=\"dname$name\" value=\"".$row['name']."\" maxlength=\"30\" class=\"text\"> ";
     if($row['capital'] == 1) {
@@ -163,8 +163,8 @@ $prefix = "".TB_PREFIX."vdata";
     echo "</td>";
     echo "<td class=\"oases\">";
 $prefix = "".TB_PREFIX."odata";
-$sql2 = mysql_query("SELECT * FROM $prefix WHERE owner = ".$session->uid." AND conqured = ".$row['wref']."");
-while($row2 = mysql_fetch_array($sql2)){
+$sql2 = mysqli_query($con,"SELECT * FROM $prefix WHERE owner = ".$session->uid." AND conqured = ".$row['wref']."");
+while($row2 = mysqli_fetch_array($sql2)){
 $type = $row2["type"];
 switch($type) {
 case 1:
@@ -197,8 +197,8 @@ break;
     echo "</td>";
     echo "<td class=\"inhabitants\"> ".$row['pop']." </td>";
     $prefix = "".TB_PREFIX."wdata";
-    $sql2 = mysql_query("SELECT * FROM $prefix WHERE id = ".$row['wref']."");
-    $coords = mysql_fetch_array($sql2);
+    $sql2 = mysqli_query($con,"SELECT * FROM $prefix WHERE id = ".$row['wref']."");
+    $coords = mysqli_fetch_array($sql2);
     echo "<td class=\"coords\"><a href=\"karte.php?x=".$coords['x']."&y=".$coords['y']."\">
     	  <span class=\"coordinates coordinatesAligned\">
           	<span class=\"coordinatesWrapper\">

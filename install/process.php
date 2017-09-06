@@ -53,7 +53,7 @@ date_default_timezone_set('Asia/Tehran');
 				$text = preg_replace("'%STORAGE_MULTIPLIER%'", $_POST['storage_multiplier'], $text);
         		fwrite($fh, $text);
 				fclose($fh);
-				
+
 				$myFile = "include/connection.php";
         		$fh = fopen($myFile, 'w') or die("<br/><br/><br/>Can't open file: install\include\connection.php");
         		$text = file_get_contents("data/connection.tpl");
@@ -65,7 +65,7 @@ date_default_timezone_set('Asia/Tehran');
         		$text = preg_replace("'%CONNECTT%'", $_POST['connectt'], $text);
 
         		fwrite($fh, $text);
-				
+
         		if(file_exists("include/constant.php") && file_exists("include/connection.php")) {
 					include 'include/database.php';
 					$str = file_get_contents("data/config.sql");
@@ -73,10 +73,10 @@ date_default_timezone_set('Asia/Tehran');
 					if(DB_TYPE) {
         				$database->connection->multi_query($str);
         			} else {
-        				$database->mysql_exec_batch($str);
+        				$database->mysqli_exec_batch($str);
         			}
-					mysql_query("INSERT into ".$_POST['prefix']."config values ('".$_POST['servername']."', '".$_POST['lang']."', '".$_POST['speed']."', 'gpack/travian_Travian_4.0_41/', '".$_POST['incspeed']."', '".$_POST['evaspeed']."', '".$_POST['healspeed']."', '".$_POST['advspeed']."', '".$_POST['demolish']."', '".$_POST['quest']."', '".$_POST['beginner']."', '".$_POST['auction_time']."', '".$_POST['ww']."', '".$_POST['activate']."', '".$_POST['plus_time']."', '".$_POST['plus_production']."', '".$_POST['log_build']."', '".$_POST['log_tech']."', '".$_POST['log_login']."', '".$_POST['log_gold_fin']."', '".$_POST['log_admin']."', '".$_POST['log_war']."', '".$_POST['log_market']."', '".$_POST['log_illegal']."', '".$_POST['box1']."', '".$_POST['box2']."', '".$_POST['box3']."', '".$_POST['home1']."', '".$_POST['home2']."', '".$_POST['home3']."', '".$_POST['aemail']."', '".$_POST['homepage']."')");
-					
+					mysqli_query($con,"INSERT into ".$_POST['prefix']."config values ('".$_POST['servername']."', '".$_POST['lang']."', '".$_POST['speed']."', 'gpack/travian_Travian_4.0_41/', '".$_POST['incspeed']."', '".$_POST['evaspeed']."', '".$_POST['healspeed']."', '".$_POST['advspeed']."', '".$_POST['demolish']."', '".$_POST['quest']."', '".$_POST['beginner']."', '".$_POST['auction_time']."', '".$_POST['ww']."', '".$_POST['activate']."', '".$_POST['plus_time']."', '".$_POST['plus_production']."', '".$_POST['log_build']."', '".$_POST['log_tech']."', '".$_POST['log_login']."', '".$_POST['log_gold_fin']."', '".$_POST['log_admin']."', '".$_POST['log_war']."', '".$_POST['log_market']."', '".$_POST['log_illegal']."', '".$_POST['box1']."', '".$_POST['box2']."', '".$_POST['box3']."', '".$_POST['home1']."', '".$_POST['home2']."', '".$_POST['home3']."', '".$_POST['aemail']."', '".$_POST['homepage']."')");
+
         			header("Location: index.php?s=2");
         		} else {
         			header("Location: index.php?s=1&c=1");
@@ -92,7 +92,7 @@ date_default_timezone_set('Asia/Tehran');
         		if(DB_TYPE) {
         			$result = $database->connection->multi_query($str);
         		} else {
-        			$result = $database->mysql_exec_batch($str);
+        			$result = $database->mysqli_exec_batch($str);
         		}
         		if($result) {
         			header("Location: index.php?s=3");
@@ -104,7 +104,7 @@ date_default_timezone_set('Asia/Tehran');
         	function createWdata() {
         		header("Location: include/wdata.php");
         	}
-            
+
         }
         ;
 

@@ -79,17 +79,17 @@
                     	<h3 class="stat bold grey"><?php echo PLAYER_STATISTICS; ?></h3>
                     	<div>
 	                    	<div class="stat type"><?php echo TOTAL_PLAYERS; ?>:</div>
-                            <div class="stat value"><?php $users = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users"));
+                            <div class="stat value"><?php $users = mysqli_num_rows(mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "users"));
 							echo $users-4; ?></div>
                             <div class="clear"></div>
 							<div class="stat type"><?php echo PLAYERS_ACTIVE; ?>:</div>
                             <div class="stat value"><?php $time = time() - 3600*24;
-							$active = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE timestamp > $time AND tribe!=0 AND tribe!=4 AND tribe!=5"));							
+							$active = mysqli_num_rows(mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "users WHERE timestamp > $time AND tribe!=0 AND tribe!=4 AND tribe!=5"));
 							echo $active; ?></div>
 							<div class="clear"></div>
                             <div class="stat type"><?php echo PLAYERS_ONLINE; ?>:</div>
                             <div class="stat value"><?php $time = time() - 60*10;
-							$online = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "users WHERE timestamp > $time AND tribe!=0 AND tribe!=4 AND tribe!=5"));
+							$online = mysqli_num_rows(mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "users WHERE timestamp > $time AND tribe!=0 AND tribe!=4 AND tribe!=5"));
 							echo $online; ?></div>
 							<div class="clear"></div>
 	                	</div>
@@ -346,7 +346,7 @@
                         stagenav:$$("#buttons-click li"),
                         stagelink:$$(".stage-link"),
                     });
-            
+
                     //tooltip
                     var tooltipwidget = new tooltipWidget({
                         tips: $$("#strips li"),
@@ -364,7 +364,7 @@
                         prev_items:$('preview_items'),
                         close:$('close')
                     });
-            
+
                     //slideshow [footer]
                     $('screenshotp').addEvents(
                     {
@@ -387,10 +387,10 @@
                                 close:$('close'),
                                 directcall:true
                             });
-            
+
                         }
                     });
-            
+
                     //popup anchor
                     var url = new URI();
                     var anchor = url.get('fragment');

@@ -3,12 +3,12 @@
 /*
 |--------------------------------------------------------------------------
 |   PLEASE DO NOT REMOVE THIS COPYRIGHT NOTICE!
-|--------------------------------------------------------------------------  
+|--------------------------------------------------------------------------
 |
 |   Project owner:   Dzoki < dzoki.travian@gmail.com >
-|  
+|
 |   This script is property of TravianX Project. You are allowed to change
-|   its source and release it under own name, not under name `TravianX`. 
+|   its source and release it under own name, not under name `TravianX`.
 |   You have no rights to remove copyright notices.
 |
 |   TravianX All rights reserved
@@ -329,13 +329,13 @@
 		/*****************************************
 		Function to kick a user from alliance
 		*****************************************/
-		private function kickAlliUser($post) 
+		private function kickAlliUser($post)
         {
 			global $database, $session, $form;
 			if($session->access != BANNED)
             {
                 $UserData = $database->getUserArray($post['a_user'], 1);
-                if($this->userPermArray['opt2'] == 0) 
+                if($this->userPermArray['opt2'] == 0)
                 {
                     $form->addError("perm", NO_PERMISSION);
                 }
@@ -379,7 +379,7 @@
 		/*****************************************
 		Function to quit  alliance
 		*****************************************/
-		private function quitally($post) 
+		private function quitally($post)
         {
 			global $database, $session, $form;
 			if($session->access != BANNED)
@@ -402,11 +402,11 @@
                          * Not ideal as its pop based but hopefully this scenario will not happen often
                          */
                         $allmembers = $database->getAllMember($session->alliance);
-                        $newleader = $allmembers[1]; 
+                        $newleader = $allmembers[1];
                         $q = "UPDATE " . TB_PREFIX . "alidata set leader = ".$newleader['id']." where id = ".$session->alliance."";
                         $database->query($q);
                         $database->updateAlliPermissions($newleader['id'], $session->alliance, 'Interim Leader', 1,1,1,1,1,1,1,1);
-                        
+
                         $database->updateUserField($session->uid, 'alliance', 0, 1);
                         $database->deleteAlliPermissions($session->uid);
                         // log the notice
@@ -467,11 +467,11 @@
 			header("Location: banned.php");
 			}
 		}
-		
+
 		private function updateMax($leader) {
 			global $bid18, $database;
-			$q = mysql_query("SELECT * FROM " . TB_PREFIX . "alidata where leader = $leader");
-			if(mysql_num_rows($q) > 0){
+			$q = mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "alidata where leader = $leader");
+			if(mysqli_num_rows($q) > 0){
 			$villages = $database->getVillagesID2($leader);
 			$max = 0;
 			foreach($villages as $village){

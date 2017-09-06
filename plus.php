@@ -19,14 +19,14 @@ $automation->isWinner();
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome plus">
-	<div id="wrapper"> 
-		<img id="staticElements" src="img/x.gif" alt="" /> 
-		<div id="logoutContainer"> 
-			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a> 
-		</div> 
-		<div class="bodyWrapper"> 
-			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" /> 
-			<div id="header"> 
+	<div id="wrapper">
+		<img id="staticElements" src="img/x.gif" alt="" />
+		<div id="logoutContainer">
+			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a>
+		</div>
+		<div class="bodyWrapper">
+			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" />
+			<div id="header">
 				<div id="mtop">
 					<a id="logo" href="<?php echo HOMEPAGE; ?>" target="_blank" title="<?php echo SERVER_NAME ?>"></a>
 					<ul id="navigation">
@@ -46,12 +46,12 @@ include "Templates/html.tpl";
     	if(count($database->getMessage($session->uid,9)) >= 1000) {
 			$unmsg = "+1000";
 		} else { $unmsg = count($database->getMessage($session->uid,9)); }
-		
+
     	if(count($database->getNotice5($session->uid)) >= 1000) {
 			$unnotice = "+1000";
 		} else { $unnotice = count($database->getNotice5($session->uid)); }
 ?>
-<li id="n5" class="reports"> 
+<li id="n5" class="reports">
 <a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getNotice5($session->uid)).')'; } ?>"></a>
 <?php
 if($message->nunread){
@@ -62,8 +62,8 @@ if($message->nunread){
 }
 ?>
 </li>
-<li id="n6" class="messages"> 
-<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a> 
+<li id="n6" class="messages">
+<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a>
 <?php
 if($message->unread) {
 	echo "<div class=\"ltr bubble\" title=\"".$unmsg." ".HEADER_MESSAGES_NEW."\" style=\"display:block\">
@@ -75,15 +75,15 @@ if($message->unread) {
 </li>
 
 </ul>
-<div class="clear"></div> 
-</div> 
+<div class="clear"></div>
 </div>
-					<div id="mid"> 
- 
-												<div class="clear"></div> 
-						<div id="contentOuterContainer"> 
-							<div class="contentTitle">&nbsp;</div> 
-							<div class="contentContainer"> 
+</div>
+					<div id="mid">
+
+												<div class="clear"></div>
+						<div id="contentOuterContainer">
+							<div class="contentTitle">&nbsp;</div>
+							<div class="contentContainer">
 						<div id="content" class="plus">
                         <script type="text/javascript">
 					window.addEvent('domready', function()
@@ -114,69 +114,69 @@ if ($id == "") {
 		$golds = $database->getUserArray($session->username, 0);
 		if($id == 7){
 			if($session->gold >= 2) {
-				$MyVilId = mysql_query("SELECT * FROM ".TB_PREFIX."bdata WHERE `wid` = '".$village->wid."'");
-				$uuVilid = mysql_fetch_array($MyVilId);
-				$MyVilId2 = mysql_query("SELECT * FROM ".TB_PREFIX."research WHERE `vref` = '".$village->wid."'");
-				$uuVilid2 = mysql_fetch_array($MyVilId2);
-				if (mysql_num_rows($MyVilId) || mysql_num_rows($MyVilId2)) {
-					mysql_query("UPDATE ".TB_PREFIX."bdata set timestamp = '1' where wid = ".$village->wid." AND type != '25' OR type != '26'");
-					mysql_query("UPDATE ".TB_PREFIX."research set timestamp = '1' where vref = '".$village->wid."'");
-					mysql_query("UPDATE ".TB_PREFIX."users set gold = gold - 2 where `username` = '".$session->username."'");
+				$MyVilId = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."bdata WHERE `wid` = '".$village->wid."'");
+				$uuVilid = mysqli_fetch_array($MyVilId);
+				$MyVilId2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."research WHERE `vref` = '".$village->wid."'");
+				$uuVilid2 = mysqli_fetch_array($MyVilId2);
+				if (mysqli_num_rows($MyVilId) || mysqli_num_rows($MyVilId2)) {
+					mysqli_query($con,"UPDATE ".TB_PREFIX."bdata set timestamp = '1' where wid = ".$village->wid." AND type != '25' OR type != '26'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."research set timestamp = '1' where vref = '".$village->wid."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set gold = gold - 2 where `username` = '".$session->username."'");
 					header("Location: plus.php?id=3&g");
 				}
 			}
 		}elseif($id == 8){
 			if($session->gold >= 10) {
 				if($golds['plus'] == 0) {
-					mysql_query("UPDATE ".TB_PREFIX."users set plus = ".time()."+".PLUS_TIME." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set plus = ".time()."+".PLUS_TIME." where `username`='".$session->username."'");
 				} else {
-					mysql_query("UPDATE ".TB_PREFIX."users set plus = plus + ".PLUS_TIME." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set plus = plus + ".PLUS_TIME." where `username`='".$session->username."'");
 				}
-				mysql_query("UPDATE ".TB_PREFIX."users set gold = gold - 10 where `username` = '".$session->username."'");
+				mysqli_query($con,"UPDATE ".TB_PREFIX."users set gold = gold - 10 where `username` = '".$session->username."'");
 			}
 		}elseif($id == 9){
 			if($session->gold >= 5) {
 				if($golds['b1'] == 0) {
-					mysql_query("UPDATE ".TB_PREFIX."users set b1 = ".time()."+".PLUS_PRODUCTION." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set b1 = ".time()."+".PLUS_PRODUCTION." where `username`='".$session->username."'");
 				} else {
-					mysql_query("UPDATE ".TB_PREFIX."users set b1 = b1 + ".PLUS_PRODUCTION." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set b1 = b1 + ".PLUS_PRODUCTION." where `username`='".$session->username."'");
 				}
-				mysql_query("UPDATE ".TB_PREFIX."users set gold = gold - 5 where `username` = '".$session->username."'");
+				mysqli_query($con,"UPDATE ".TB_PREFIX."users set gold = gold - 5 where `username` = '".$session->username."'");
 			}
 		}elseif($id == 10){
 			if($session->gold >= 5) {
 				if($golds['b2'] == 0) {
-					mysql_query("UPDATE ".TB_PREFIX."users set b2 = ".time()."+".PLUS_PRODUCTION." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set b2 = ".time()."+".PLUS_PRODUCTION." where `username`='".$session->username."'");
 				} else {
-					mysql_query("UPDATE ".TB_PREFIX."users set b2 = b2 + ".PLUS_PRODUCTION." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set b2 = b2 + ".PLUS_PRODUCTION." where `username`='".$session->username."'");
 				}
-				mysql_query("UPDATE ".TB_PREFIX."users set gold = gold - 5 where `username` = '".$session->username."'");
+				mysqli_query($con,"UPDATE ".TB_PREFIX."users set gold = gold - 5 where `username` = '".$session->username."'");
 			}
 		}elseif($id == 11){
 			if($session->gold >= 5) {
 				if($golds['b3'] == 0) {
-					mysql_query("UPDATE ".TB_PREFIX."users set b3 = ".time()."+".PLUS_PRODUCTION." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set b3 = ".time()."+".PLUS_PRODUCTION." where `username`='".$session->username."'");
 				} else {
-					mysql_query("UPDATE ".TB_PREFIX."users set b3 = b3 + ".PLUS_PRODUCTION." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set b3 = b3 + ".PLUS_PRODUCTION." where `username`='".$session->username."'");
 				}
-				mysql_query("UPDATE ".TB_PREFIX."users set gold = gold - 5 where `username` = '".$session->username."'");
+				mysqli_query($con,"UPDATE ".TB_PREFIX."users set gold = gold - 5 where `username` = '".$session->username."'");
 			}
 		}elseif($id == 12){
 			if($session->gold >= 5) {
 				if($golds['b4'] == 0) {
-					mysql_query("UPDATE ".TB_PREFIX."users set b4 = ".time()."+".PLUS_PRODUCTION." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set b4 = ".time()."+".PLUS_PRODUCTION." where `username`='".$session->username."'");
 				} else {
-					mysql_query("UPDATE ".TB_PREFIX."users set b4 = b4 + ".PLUS_PRODUCTION." where `username`='".$session->username."'");
+					mysqli_query($con,"UPDATE ".TB_PREFIX."users set b4 = b4 + ".PLUS_PRODUCTION." where `username`='".$session->username."'");
 				}
-				mysql_query("UPDATE ".TB_PREFIX."users set gold = gold - 5 where `username` = '".$session->username."'");
+				mysqli_query($con,"UPDATE ".TB_PREFIX."users set gold = gold - 5 where `username` = '".$session->username."'");
 			}
 		}elseif($id == 13){
-			
+
 		}elseif($id == 14){
-			
+
 		}elseif($id == 15){
 			if($session->gold >= 100) {
-				mysql_query("UPDATE ".TB_PREFIX."users set goldclub = 1, gold = gold - 100 where `username`='".$session->username."'");
+				mysqli_query($con,"UPDATE ".TB_PREFIX."users set goldclub = 1, gold = gold - 100 where `username`='".$session->username."'");
 			}
 		}
 		header("Location: plus.php?id=3");
@@ -188,7 +188,7 @@ if ($id == "") {
 </div>
 <div class="contentFooter">&nbsp;</div>
 					</div>
-                    
+
 <?php
 include("Templates/sideinfo.tpl");
 include("Templates/footer.tpl");

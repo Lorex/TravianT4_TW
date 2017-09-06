@@ -10,8 +10,8 @@
 
 include_once("../../Account.php");
 
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 if ($session->access < ADMIN) die("Access Denied: You are not Admin!");
 
@@ -19,7 +19,7 @@ $did = $_POST['did'];
 $name = $_POST['villagename'];
 $sql = "UPDATE ".TB_PREFIX."vdata SET name = '$name' WHERE wref = $did";
 
-mysql_query($sql);
+mysqli_query($con,$sql);
 
 header("Location: ../../../Admin/admin.php?p=village&did=".$did."&name=".$name."");
 ?>

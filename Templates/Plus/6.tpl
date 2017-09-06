@@ -10,18 +10,18 @@ $uid = $session->uid;
 		$silvers = "+ ".$gold*100;
 		$golds = "- ".$gold;
 	}
-	if($session->gold<$gold || $session->silver<$silver){  
-		mysql_query("UPDATE " . TB_PREFIX ."users SET gold = ".$gold.", silver = ".$silver." WHERE id = '".$uid."'");
+	if($session->gold<$gold || $session->silver<$silver){
+		mysqli_query($con,"UPDATE " . TB_PREFIX ."users SET gold = ".$gold.", silver = ".$silver." WHERE id = '".$uid."'");
 	}else{
-		mysql_query("UPDATE ".TB_PREFIX."users SET gold = gold ".$golds." WHERE id = '".$uid."'");
-		mysql_query("UPDATE ".TB_PREFIX."users SET silver = silver ".$silvers." WHERE id = '".$uid."'");
+		mysqli_query($con,"UPDATE ".TB_PREFIX."users SET gold = gold ".$golds." WHERE id = '".$uid."'");
+		mysqli_query($con,"UPDATE ".TB_PREFIX."users SET silver = silver ".$silvers." WHERE id = '".$uid."'");
 	}
     header("Location: plus.php?id=6");
 }
 ?>
 
 <div id="silverExchange">
-	
+
 	<h3>Exchange Office</h3>
 	<p>Enter the amount of Gold or Silver you want to exchange.</p>
 
@@ -60,7 +60,7 @@ $uid = $session->uid;
 			<input type="hidden" name="c" value="18a">
 
 			<button type="submit" value="exchange"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">exchange</div></div></button>
-            
+
             </p>
 
 
@@ -81,7 +81,7 @@ $uid = $session->uid;
 		</table>
 			</div>
 				</div>	</form>
-                
+
 </div>
 <script type="text/javascript">
 	window.addEvent('domready', function(){

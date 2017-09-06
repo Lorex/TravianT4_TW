@@ -1,8 +1,8 @@
 <?php
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."config");
-$result = mysql_fetch_array($sql);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."config");
+$result = mysqli_fetch_array($sql);
 
 //////////////////////////////////
 /////// قیمت های سکه ی طلا ///////
@@ -134,7 +134,7 @@ define("PLUS_PRODUCTION",$result['plus_prodtime']);
 // ***** Great Workshop
 define("GREAT_WKS",%GREAT_WKS%);
 // ***** Tourn threshold
-define("TS_THRESHOLD",%TS_THRESHOLD%);  
+define("TS_THRESHOLD",%TS_THRESHOLD%);
 
 
 
@@ -244,7 +244,7 @@ define("ADMIN_NAME", "%ANAME%");
 //   ****  DO NOT EDIT SETTINGS  ****   //
 //////////////////////////////////////////
 define("TRACK_USR","%UTRACK%");
-define("USER_TIMEOUT","%UTOUT%"); 
+define("USER_TIMEOUT","%UTOUT%");
 define("ALLOW_BURST",false);
 define("BASIC_MAX",1);
 define("INNER_MAX",1);
@@ -260,8 +260,8 @@ define("AUTH",1);
 define("USER",2);
 define("MULTIHUNTER",8);
 define("ADMIN",9);
-define("COOKIE_EXPIRE", 60*60*24*7); 
-define("COOKIE_PATH", "/"); 
+define("COOKIE_EXPIRE", 60*60*24*7);
+define("COOKIE_PATH", "/");
 
 
 ////////////////////////////////////////////

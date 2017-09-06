@@ -10,14 +10,14 @@
 #################################################################################
 
 include_once("../../Account.php");
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 if ($session->access < ADMIN) die("Access Denied: You are not Admin!");
 
 
 
 $userid = $_POST['userid'];
-mysql_query("DELETE FROM ".TB_PREFIX."medal WHERE userid = ".$userid."");
+mysqli_query($con,"DELETE FROM ".TB_PREFIX."medal WHERE userid = ".$userid."");
 
 header("Location: ../../../Admin/admin.php?p=player&uid=".$userid."");
 ?>

@@ -1,6 +1,6 @@
 <?php
 class Battle {
-	
+
 	public function procSim($post) {
 		global $form;
 		// Recivimos el formulario y procesamos
@@ -52,12 +52,12 @@ class Battle {
 				}
 		}
 	}
-	
+
 	private function getBattleHero($uid) {
         global $database;
 		$q = "SELECT * FROM ".TB_PREFIX."hero WHERE uid = ".$uid."";
         $heroarray = $database->query_return($q);
-        
+
         $h_atk = $heroarray['power'];
         $h_di = $heroarray['offBonus'];
         $h_dc = $heroarray['defBonus'];
@@ -66,7 +66,7 @@ class Battle {
 
         return array('heroid'=>$heroarray['heroid'],'power'=>$h_atk,'off'=>$h_di,'def'=>$h_dc,'power'=>$h_ob,'power'=>$h_db,'health'=>$heroarray['health']);
     }
-	
+
 	private function simulate($post) {
 		// Establecemos los arrays con las unidades del atacante y defensor
 		$attacker = array('u1'=>0,'u2'=>0,'u3'=>0,'u4'=>0,'u5'=>0,'u6'=>0,'u7'=>0,'u8'=>0,'u9'=>0,'u10'=>0,'u11'=>0,'u12'=>0,'u13'=>0,'u14'=>0,'u15'=>0,'u16'=>0,'u17'=>0,'u18'=>0,'u19'=>0,'u20'=>0,'u21'=>0,'u22'=>0,'u23'=>0,'u24'=>0,'u25'=>0,'u26'=>0,'u27'=>0,'u28'=>0,'u29'=>0,'u30'=>0,'u31'=>0,'u32'=>0,'u33'=>0,'u34'=>0,'u35'=>0,'u36'=>0,'u37'=>0,'u38'=>0,'u39'=>0,'u40'=>0,'u41'=>0,'u42'=>0,'u43'=>0,'u44'=>0,'u45'=>0,'u46'=>0,'u47'=>0,'u48'=>0,'u49'=>0,'u50'=>0);
@@ -130,7 +130,7 @@ class Battle {
 
 		// check scout
 
-		$scout = 1;		
+		$scout = 1;
 		for($i=$start;$i<=($start+9);$i++) {
 			if($i == 4 || $i == 14 || $i == 23 || $i == 34 || $i == 44)
 			{}
@@ -156,7 +156,7 @@ class Battle {
 		// Definieer de array met de eenheden
 		$calvary = array(4,5,6,15,16,23,24,25,26,35,36,45,46);
 		$catapult = array(8,18,28,38,48);
-		$rams = array(7,17,27,37,47);		
+		$rams = array(7,17,27,37,47);
 		$catp = $ram = 0;
 		// Array om terug te keren met het resultaat van de berekening
 		$result = array();
@@ -164,7 +164,7 @@ class Battle {
 		$winner = false;
 		// bij 0 alle deelresultaten
 		$cap = $ap = $dp = $cdp = $rap = $rdp = 0;
-        
+
         //exit($type);
 
         if ($Attacker['hero'] != 0) $atkhero = $database->getHeroData2($Attacker['id']);
@@ -197,12 +197,12 @@ class Battle {
 				$abcount +=1;
 				$units['Att_unit'][$i] = $Attacker['u'.$i];
 			}
-			
+
 			if($Attacker['hero']){
 				$ap += (100+$atp*$atkhero['power']+$atkhero['itempower']) + $atkhero['offBonus'];
 				$units['Att_unit']['hero'] = $Attacker['hero'];
 			}
-			
+
 		}else{
 			for($i=$start;$i<=$end;$i++) {
 				global ${'u'.$i};
@@ -220,7 +220,7 @@ class Battle {
 						$ap += $Attacker['u'.$i]*${'u'.$i}['atk'];
 					}
 				}
-				
+
 				$abcount +=1;
 				// Punten van de catavult van de aanvaller
 				if(in_array($i,$catapult)) {
@@ -230,15 +230,15 @@ class Battle {
                 if(in_array($i,$rams)) {
                     $ram += $Attacker['u'.$i];
                 }
-                $involve += $Attacker['u'.$i]; 
+                $involve += $Attacker['u'.$i];
                 $units['Att_unit'][$i] = $Attacker['u'.$i];
             }
-			
+
 			if($Attacker['hero']) {
 				$cap += (100+$atp*$atkhero['power']+$atkhero['itempower']) + ((100+$atp*$atkhero['power']+$atkhero['itempower']) + 300 * 6 / 7) * (pow(1.007, $atkhero['offBonus']) - 1);
 				$ap += (100+$atp*$atkhero['power']+$atkhero['itempower']) + ((100+$atp*$atkhero['power']+$atkhero['itempower']) + 300 * 6 / 7) * (pow(1.007, $atkhero['offBonus']) - 1);
 			}
-			$involve += $Attacker['hero']; 
+			$involve += $Attacker['hero'];
             $units['Att_unit']['hero'] = $Attacker['hero'];
         }
 
@@ -283,7 +283,7 @@ class Battle {
 					$dp += $Defender['u'.$y]*${'u'.$y}['di'];
 					$cdp += $Defender['u'.$y]*${'u'.$y}['dc'];
 				}
-				$involve += $Defender['u'.$y]; 
+				$involve += $Defender['u'.$y];
 				$units['Def_unit'][$y] = $Defender['u'.$y];
 			}
 			if($Defender['hero']){
@@ -298,25 +298,25 @@ class Battle {
 				$cdp += ((100+$dtp*(100+$dtp*$defhero[$fromvillage]['power']+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower']) + ((100+$dtp*(100+$dtp*$defhero[$fromvillage]['power']+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower']) + 300 * 6 / 7) * (pow(1.007, $defhero[$fromvillage]['defBonus']) - 1));
 				}
 				}
-			$involve += $Defender['hero']; 
+			$involve += $Defender['hero'];
 			$units['Def_unit']['hero'] = $Defender['hero'];
 		}
 
 		//
 		// Formule voor de berekening van de bonus verdedigingsmuur "en" Residence ";
-		//		
+		//
 		if($def_wall > 0) {
 			// Stel de factor berekening voor de "Muur" als het type van de beschaving
 			// Factor = 1030 Romeinse muur
 			// Factor = 1020 Wall Germanen
-			// Factor = 1025 Wall Galliers						
+			// Factor = 1025 Wall Galliers
 			$factor = ($def_tribe == 1)? 1.030 : (($def_tribe == 2)? 1.020 : 1.025);
 			// Defense Infanterie = infanterie * Muur (%)
 			$dp *= pow($factor,$def_wall);
 			// Defensa Cavelerie = Cavelerie * Muur (%)
 			$cdp *= pow($factor,$def_wall);
 
-			// Berekening van de Basic defence bonus "Residence" 
+			// Berekening van de Basic defence bonus "Residence"
 			$dp += ((2*(pow($residence,2)))*(pow($factor,$def_wall)));
 			$cdp += ((2*(pow($residence,2)))*(pow($factor,$def_wall)));
 			if($def_tribe == 1){
@@ -329,9 +329,9 @@ class Battle {
 			$dp += $def_wall*$bonus;
 			$cdp += $def_wall*$bonus;
 		}
-		else 
+		else
         {
-			// Berekening van de Basic defence bonus "Residence" 			
+			// Berekening van de Basic defence bonus "Residence"
 			$dp += (2*(pow($residence,2)));
 			$cdp += (2*(pow($residence,2)));
 		}
@@ -345,7 +345,7 @@ class Battle {
 		//
 			 if ($rap==0) {
                  $rdp = ($dp) + ($cdp) + 10;
-			 }else{             
+			 }else{
                  $rdp = ($dp * ($ap/$rap)) + ($cdp * ($cap/$rap)) + 10;
 			 }
 		//
@@ -411,20 +411,20 @@ class Battle {
 			// Defender
 			$result[2] = $winner ? 1 - $holder : $holder;
 			$ram -= round($ram*$result[1]/100);
-            $catp -= round($catp*$result[1]/100);  
+            $catp -= round($catp*$result[1]/100);
 		}
 		else if($type == 3) {
 			// Attacker
 			$result[1] = ($winner)? pow((($rdp*$moralbonus)/$rap),$Mfactor) : 1;
 			$result[1] = round($result[1],8);
-            
+
 			// Defender
 			$result[2] = (!$winner)?  pow(($rap/($rdp*$moralbonus)),$Mfactor) : 1;
 			$result[2] = round($result[2],8);
 			// Als aangevallen met "Hero"
 			$ku = ($att_tribe-1)*10+9;
-            $kings = $Attacker['u'.$ku];    
-            
+            $kings = $Attacker['u'.$ku];
+
             $aviables= $kings-round($kings*$result[1]);
 			if ($aviables>0){
 				switch($aviables){
@@ -432,23 +432,23 @@ class Battle {
 				$fealthy = rand(20,30);
 				break;
 				case 2:
-				$fealthy = rand(40,60);				
+				$fealthy = rand(40,60);
 				break;
 				case 3:
-				$fealthy = rand(60,80);				
+				$fealthy = rand(60,80);
 				break;
 				case 4:
-				$fealthy = rand(80,100);				
+				$fealthy = rand(80,100);
 				break;
 				default:
 				$fealthy = 100;
-				break;														
+				break;
 				}
 				$result['health'] = $fealthy;
 			}
 			$ram -= ($winner)? round($ram*$result[1]/100) : round($ram*$result[2]/100);
             $catp -= ($winner)? round($catp*$result[1]/100) : round($catp*$result[2]/100);
-        
+
 		}
 		// Formule voor de berekening van katapulten nodig
 		 if($catp > 0 && $tblevel != 0) {
@@ -472,20 +472,20 @@ class Battle {
             $need = round((($moralbonus * (pow($walllevel,2) + $walllevel + 1)) / (8 * (round(200 * pow(1.0205,$att_ab['a7']))/200) / (1 * $bid34[$stonemason]['attri']/100))) + 0.5);
             // Aantal katapulten om het gebouw neer te halen
             $result[7] = $need;
-            
+
             // Aantal Katapulten die handeling
             $result[8] = $wctp;
         }
 
-		$result[6] = pow($rap/$rdp*$moralbonus,$Mfactor);		
+		$result[6] = pow($rap/$rdp*$moralbonus,$Mfactor);
 
 		$total_att_units = count($units['Att_unit']);
         $start = intval(($att_tribe-1)*10+1);
         $end = intval(($att_tribe*10));
-        for($i=$start;$i <= $end;$i++){    
+        for($i=$start;$i <= $end;$i++){
             $y = $i-(($att_tribe-1)*10);
-            $result['casualties_attacker'][$y] = round($result[1]*$units['Att_unit'][$i]);              
-        } 
+            $result['casualties_attacker'][$y] = round($result[1]*$units['Att_unit'][$i]);
+        }
         $result['casualties_attacker'][11] = 0;
         if ($units['Att_unit']['hero']>0){
             $hero_id=$atkhero['uid'];
@@ -493,7 +493,7 @@ class Battle {
             $damage_health=round(100*$result[1]);
             if ($hero_health<=$damage_health or $damage_health>90){
                 //hero die
-                $result['casualties_attacker']['11'] = 1; 
+                $result['casualties_attacker']['11'] = 1;
 				$database->modifyHero2('dead', 1, $hero_id, 0);
 				$database->modifyHero2('health', 0, $hero_id, 0);
 				$database->modifyHero2('experience', $result[1], $hero_id, 1);
@@ -502,7 +502,7 @@ class Battle {
 				$database->modifyHero2('experience', $result[1], $hero_id, 1);
             }
         }
-		
+
 		if ($units['Def_unit']['hero']>0){
             $hero_id=$defenderhero['uid'];
             $hero_health=$defenderhero['health'];
@@ -513,7 +513,7 @@ class Battle {
 				$database->modifyHero2('dead', 1, $hero_id, 0);
 				$database->modifyHero2('health', 0, $hero_id, 0);
 				$database->modifyHero2('experience', $result[2], $hero_id, 1);
-				mysql_query("UPDATE " . TB_PREFIX . "units SET `hero` = 0 WHERE `vref`='".$defenderhero['wref']."'");
+				mysqli_query($con,"UPDATE " . TB_PREFIX . "units SET `hero` = 0 WHERE `vref`='".$defenderhero['wref']."'");
             }else{
 				$result['deadherodef'] = 0;
 				$database->modifyHero2('health', $damage_health, $hero_id, 2);
@@ -535,7 +535,7 @@ class Battle {
 						$database->modifyHero2('dead', 1, $hero_id, 0);
 						$database->modifyHero2('health', 0, $hero_id, 0);
 						$database->modifyHero2('experience', $result[2], $hero_id, 1);
-						mysql_query("UPDATE " . TB_PREFIX . "units SET `hero` = 0 WHERE `vref`='".$defhero[$fromvillage]['wref']."'");
+						mysqli_query($con,"UPDATE " . TB_PREFIX . "units SET `hero` = 0 WHERE `vref`='".$defhero[$fromvillage]['wref']."'");
 					}else{
 						$result['deadheroref'][$defenders['id']] = 0;
 						$database->modifyHero2('health', $damage_health, $hero_id, 2);
@@ -545,7 +545,7 @@ class Battle {
 			}
 		}
         //exit($result['casualties_attacker']['11']);
-        
+
 
 		// Work out bounty
         $start = ($att_tribe-1)*10+1;
@@ -553,14 +553,14 @@ class Battle {
         $max_bounty = 0;
 
 		for($i=$start;$i<=$end;$i++) {
-            $y = $i-(($att_tribe-1)*10);  
+            $y = $i-(($att_tribe-1)*10);
 			$max_bounty += ($Attacker['u'.$i]-$result['casualties_attacker'][$y])*${'u'.$i}['cap'];
 		}
 
 		$result['bounty'] = $max_bounty;
 		return $result;
 	}
-	
+
 	public function resolveConflict($data) {
 		global $database,$units,$unitsbytype;
 		$UnitChief = $UnitRam = $UnitCatapult = 0;
@@ -717,7 +717,7 @@ class Battle {
 				$defense_casualties = pow(($attack_total / $defense_total),$DiffModifier);
 				if($data['type'] == 4) {
 					$defense_casualties = $defense_casualties / (1 + $defense_casualties);
-					$attack_casualties = 1 - $defense_casualties; 
+					$attack_casualties = 1 - $defense_casualties;
 				}
 			}
 
@@ -785,7 +785,7 @@ class Battle {
 				$attack_casualties_array[$i] = round($data['t'.$i] * $attack_casualties);
 				if(!empty($unitdata)) { reset($unitdata); }
 				$unitdata = $GLOBALS['u'.(($AttackerData['tribe']-1)*10+$i)];
-				$ExperienceDefender += $attack_casualties_array[$i] * $unitdata['pop']; 
+				$ExperienceDefender += $attack_casualties_array[$i] * $unitdata['pop'];
 			}
 			if($data['t11'] == 1) {
 				if($attack_casualties < 0.9) {
@@ -819,7 +819,7 @@ class Battle {
 		}
 	}
 
-	
+
 };
 
 $battle = new Battle;

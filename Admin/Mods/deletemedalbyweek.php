@@ -10,14 +10,14 @@
 #################################################################################
 
 include_once("../../Account.php");
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 if ($session->access < ADMIN) die("Access Denied: You are not Admin!");
 
 
 
 $deleteweek = $_POST['medalweek'];
-mysql_query("DELETE FROM ".TB_PREFIX."medal WHERE week = ".$deleteweek."");
+mysqli_query($con,"DELETE FROM ".TB_PREFIX."medal WHERE week = ".$deleteweek."");
 
 header("Location: ../../../Admin/admin.php?p=delmedal");
 ?>

@@ -1,9 +1,9 @@
 <?php
-    
+
 if(isset($_POST['action']) == 'addSlot' && $_POST['lid']) {
 
 $troops = $_POST['t1']+$_POST['t2']+$_POST['t3']+$_POST['t4']+$_POST['t5']+$_POST['t6']+$_POST['t7']+$_POST['t8']+$_POST['t9']+$_POST['t10']."";
-    
+
     if($_POST['x'] && $_POST['y']){
         $Wref = $database->getVilWref($_POST['x'], $_POST['y']);
         $type = $database->getVillageType2($Wref);
@@ -19,10 +19,10 @@ $troops = $_POST['t1']+$_POST['t2']+$_POST['t3']+$_POST['t4']+$_POST['t5']+$_POS
     }elseif($troops == 0){
      	$errormsg .= "No troops has been selected.";
     }else{
-    
+
         $Wref = $database->getVilWref($_POST['x'], $_POST['y']);
         $coor = $database->getCoor($village->wid);
-            
+
             function getDistance($coorx1, $coory1, $coorx2, $coory2) {
                    $max = 2 * WORLD_MAX + 1;
                    $x1 = intval($coorx1);
@@ -34,11 +34,11 @@ $troops = $_POST['t1']+$_POST['t2']+$_POST['t3']+$_POST['t4']+$_POST['t5']+$_POS
                    $dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
                    return round($dist, 1);
                }
-            
+
         $distance = getDistance($coor['x'], $coor['y'], $_POST['x'], $_POST['y']);
-            
+
         $database->addSlotFarm($_POST['lid'], $Wref, $_POST['x'], $_POST['y'], $distance, $_POST['t1'], $_POST['t2'], $_POST['t3'], $_POST['t4'], $_POST['t5'], $_POST['t6'], $_POST['t7'], $_POST['t8'], $_POST['t9'], $_POST['t10']);
-        
+
         header("Location: build.php?id=39&t=99");
 }
 }
@@ -132,17 +132,17 @@ $troops = $_POST['t1']+$_POST['t2']+$_POST['t3']+$_POST['t4']+$_POST['t5']+$_POS
 
 <div id="raidListSlot">
     <h4>Add Slot</h4>
-<font color="#FF0000"><b>    
+<font color="#FF0000"><b>
 <?php echo $errormsg; ?>
 </b></font>
-    
+
     <form action="build.php?id=39&t=99&action=showSlot&lid=<?php echo $_GET['lid']; ?>" method="post">
         <div class="boxes boxesColor gray"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents cf">
-        
+
         <input type="hidden" name="action" value="addSlot">
         <input type="hidden" name="lid" value="<?php echo $_GET['lid']; ?>">
-        
-            
+
+
             <table cellpadding="1" cellspacing="1" class="transparent">
                 <tbody><tr>
                     <th>Farm Name:</th>
@@ -150,8 +150,8 @@ $troops = $_POST['t1']+$_POST['t2']+$_POST['t3']+$_POST['t4']+$_POST['t5']+$_POS
                         <select onchange="getTargetsByLid();" id="lid" name="lid">
 <?php
 
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."farmlist WHERE owner = $session->uid ORDER BY name ASC");
-while($row = mysql_fetch_array($sql)){ 
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."farmlist WHERE owner = $session->uid ORDER BY name ASC");
+while($row = mysqli_fetch_array($sql)){
 $lid = $row["id"];
 $lname = $row["name"];
 $lowner = $row["owner"];
@@ -162,14 +162,14 @@ $lvname = $database->getVillageField($row["wref"], 'name');
         }else{ $selected = ''; }
     echo '<option value="'.$lid.'" '.$selected.'>'.$lvname.' - '.$lname.'</option>';
 }
-?>    
+?>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th>Select target:</th>
                     <td class="target">
-                        
+
             <div class="coordinatesInput">
                 <div class="xCoord">
                     <label for="xCoordInput">X:</label>
@@ -188,7 +188,7 @@ $lvname = $database->getVillageField($row["wref"], 'name');
 $getwref = "SELECT * FROM ".TB_PREFIX."raidlist WHERE lid = ".$_GET['lid']."";
 $arraywref = $database->query_return($getwref);
 	echo '<option value="">Select village</option>';
-if(mysql_num_rows(mysql_query($getwref)) != 0){
+if(mysqli_num_rows(mysqli_query($con,$getwref)) != 0){
 foreach($arraywref as $row){
 $towref = $row["towref"];
 $tocoor = $database->getCoor($towref);
@@ -215,8 +215,8 @@ $vill[$towref] = 1;
                 </div>
         <?php include "Templates/goldClub/trooplist2.tpl"; ?>
 
-        
+
 <button type="submit" value="save" name="save" id="save"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">save</div></div></button>
-        
+
 </form>
 </div>

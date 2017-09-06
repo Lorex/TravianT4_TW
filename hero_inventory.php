@@ -10,12 +10,12 @@ if(isset($_GET['inventory'])){
 		$database->setHeroInventory($uid, "helmet", 0);
 		$database->editProcItem($_GET['helmet'], 0);
 		$database->modifyHeroFace($uid, "helmet", 0);
-		
+
 	}elseif(isset($_GET['leftHand'])){
 		$database->setHeroInventory($uid, "leftHand", 0);
 		$database->editProcItem($_GET['leftHand'], 0);
 		$database->modifyHeroFace($uid, "leftHand", 0);
-		
+
 	}elseif(isset($_GET['rightHand'])){
 		$itemData = $database->getHeroInventory($uid);
 		$itemData2 = $database->getItemData($itemData['rightHand']);
@@ -157,12 +157,12 @@ if(isset($_GET['inventory'])){
 		$database->setHeroInventory($uid, "rightHand", 0);
 		$database->editProcItem($_GET['rightHand'], 0);
 		$database->modifyHeroFace($uid, "rightHand", 0);
-		
+
 	}elseif(isset($_GET['body'])){
 		$database->setHeroInventory($uid, "body", 0);
 		$database->editProcItem($_GET['body'], 0);
 		$database->modifyHeroFace($uid, "body", 0);
-		
+
 	}elseif(isset($_GET['horse'])){
 		$itemData = $database->getHeroInventory($uid);
 		$itemData2 = $database->getItemData($itemData['horse']);
@@ -178,7 +178,7 @@ if(isset($_GET['inventory'])){
 		$database->setHeroInventory($uid, "horse", 0);
 		$database->editProcItem($_GET['horse'], 0);
 		$database->modifyHeroFace($uid, "horse", 0);
-		
+
 	}elseif(isset($_GET['bag'])){
 		$database->setHeroInventory($uid, "bag", 0);
 		$database->editProcItem($_GET['bag'], 0);
@@ -196,13 +196,13 @@ $database->modifyHero2('hide', 1, $session->uid, 0);
 }
 ?>
 <body class="v35 webkit chrome hero_inventory">
-	<div id="wrapper"> 
-		<img id="staticElements" src="img/x.gif" alt="" /> 
-		<div id="logoutContainer"> 
-			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a> 
-		</div> 
-		<div class="bodyWrapper"> 
-			<div id="header"> 
+	<div id="wrapper">
+		<img id="staticElements" src="img/x.gif" alt="" />
+		<div id="logoutContainer">
+			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a>
+		</div>
+		<div class="bodyWrapper">
+			<div id="header">
 				<div id="mtop">
 					<a id="logo" href="<?php echo HOMEPAGE; ?>" target="_blank" title="<?php echo SERVER_NAME ?>"></a>
 					<ul id="navigation">
@@ -222,12 +222,12 @@ $database->modifyHero2('hide', 1, $session->uid, 0);
     	if(count($database->getMessage($session->uid,9)) >= 1000) {
 			$unmsg = "+1000";
 		} else { $unmsg = count($database->getMessage($session->uid,9)); }
-		
+
     	if(count($database->getNotice5($session->uid)) >= 1000) {
 			$unnotice = "+1000";
 		} else { $unnotice = count($database->getNotice5($session->uid)); }
 ?>
-<li id="n5" class="reports"> 
+<li id="n5" class="reports">
 <a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getNotice5($session->uid)).')'; } ?>"></a>
 <?php
 if($message->nunread){
@@ -238,8 +238,8 @@ if($message->nunread){
 }
 ?>
 </li>
-<li id="n6" class="messages"> 
-<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a> 
+<li id="n6" class="messages">
+<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a>
 <?php
 if($message->unread) {
 	echo "<div class=\"ltr bubble\" title=\"".$unmsg." ".HEADER_MESSAGES_NEW."\" style=\"display:block\">
@@ -251,14 +251,14 @@ if($message->unread) {
 </li>
 
 </ul>
-<div class="clear"></div> 
-</div> 
+<div class="clear"></div>
+</div>
 </div>
 					<div id="mid">
 <a id="ingameManual" href="help.php"><img class="question" alt="Help" src="img/x.gif"></a>
-												<div class="clear"></div> 
-						<div id="contentOuterContainer"> 
-							<div class="contentTitle">&nbsp;</div> 
+												<div class="clear"></div>
+						<div id="contentOuterContainer">
+							<div class="contentTitle">&nbsp;</div>
 
 <div class="contentContainer">
 								<div id="content" class="hero_inventory"><h1 class="titleInHeader">Hero</h1>
@@ -375,7 +375,7 @@ if($gi['bag']!=0){
 	if($hero['hide'] == 1){
 	?>
 		<input type="checkbox" class="check" name="hideShow" onclick="window.location.href = '?showhero=<?php echo $hero['heroid'];?>';" checked="checked"> When checked hero will hide when village attacked.
-	<?php 
+	<?php
 	}else{
 	?>
 		<input type="checkbox" class="check" name="hideShow" onclick="window.location.href = '?hidehero=<?php echo $hero['heroid'];?>';"> When checked hero will hide when village attacked.
@@ -387,13 +387,13 @@ if($gi['bag']!=0){
     <div id="itemsToSale"><?php
 $prefix = "".TB_PREFIX."heroitems";
 
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."heroitems WHERE (proc = 0 OR ((btype = 7 OR btype = 8 OR btype = 9) && num - type != 0)) AND uid = $session->uid");
-$query = mysql_num_rows($sql);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."heroitems WHERE (proc = 0 OR ((btype = 7 OR btype = 8 OR btype = 9) && num - type != 0)) AND uid = $session->uid");
+$query = mysqli_num_rows($sql);
 
 $outputList = '';
 
 $inv = 1;
-while($row = mysql_fetch_array($sql)){ 
+while($row = mysqli_fetch_array($sql)){
 $id = $row["id"];$uid = $row["uid"];$btype = $row["btype"];$type = $row["type"];$num = $row["num"];$proc = $row["proc"];
 include "Templates/Auction/alt.tpl";
 	if($btype<=10 or $btype==11 or $btype==13){
@@ -423,11 +423,11 @@ include "Templates/Auction/alt.tpl";
 	$outputList .= "<div class=\"amount\">".$num."</div>";
 	$outputList .= "</div>";
 	$outputList .= '</div>';
-	$inv++;	
+	$inv++;
 	}
 }
 	echo $outputList;
-	
+
 if($inv <= 12){
 	for($i=$inv;$i<=((12+$inv)-$inv);$i++){
 		echo '<div id="inventory_'.$i.'" class="inventory draggable"></div>';
@@ -459,25 +459,25 @@ if($inv <= 12){
 	Travian.Game.Hero.Inventory = new (new Class(
 	{
 		b10: '<p><div style="color:#F90">Experience: <?php echo $hero['experience']; ?><br>افزایش تجربه: 10<br>تجربه بعد از استفاده: <?php echo ($hero['experience']+10); ?><br></div>',
-		
-		b15: '<table id="heroInventoryDataDialog" class="transparent" cellspacing="0" cellpadding="0"><tbody><tr class="rowBeforeUse"><th>Jelenlegi kultúrpont arány</th><td><?php echo $database->getUserField($session->uid, 'cp',0); ?></td></tr><tr class="rowUseValue"><th>امتیاز فرهنگی بدست آمده بعد مصرف اثر هنری:</th><td class="displayUseValue"><?php echo $database->getVSumField($session->uid, 'cp'); ?></td></tr><tr class="rowAfterUse"><th>امتیاز فرهنگی بعد از مصرف اثر هنری:</th><td class="displayAfterUse"><?php echo ($database->getUserField($session->uid, 'cp',0)+$database->getVSumField($session->uid, 'cp')); ?></td></tr></tbody></table>',		
-		
+
+		b15: '<table id="heroInventoryDataDialog" class="transparent" cellspacing="0" cellpadding="0"><tbody><tr class="rowBeforeUse"><th>Jelenlegi kultúrpont arány</th><td><?php echo $database->getUserField($session->uid, 'cp',0); ?></td></tr><tr class="rowUseValue"><th>امتیاز فرهنگی بدست آمده بعد مصرف اثر هنری:</th><td class="displayUseValue"><?php echo $database->getVSumField($session->uid, 'cp'); ?></td></tr><tr class="rowAfterUse"><th>امتیاز فرهنگی بعد از مصرف اثر هنری:</th><td class="displayAfterUse"><?php echo ($database->getUserField($session->uid, 'cp',0)+$database->getVSumField($session->uid, 'cp')); ?></td></tr></tbody></table>',
+
 		alreadyOpen: false,
 		textSingle: 'Do you really want to wear this item?',
 		textMulti: 'Total item used: &lt;input class=\"text\" id=\"amount\" type=\"text\" value=\"\" /&gt;'.unescapeHtml(),
 		initialize: function() {
 			var $this = this;
-			
-<?php
-$sql2 = mysql_query("SELECT * FROM ".TB_PREFIX."heroitems WHERE proc = 0 AND uid = $session->uid");
 
-while($row2 = mysql_fetch_array($sql2)){ 
+<?php
+$sql2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."heroitems WHERE proc = 0 AND uid = $session->uid");
+
+while($row2 = mysqli_fetch_array($sql2)){
 $id = $row2["id"];$num = $row2["num"];$btype = $row2["btype"];$type = $row2["type"];
 	if($btype<=10 or $btype==11 or $btype==13){
 		if($hero['dead']==0){
 			if($num==1){
 ?>
-$('item_<?php echo $id; ?>').addEvent('click', function() { $this.showItem(<?php echo $id; ?>,<?php echo $num; ?>,<?php echo $btype; ?>,<?php echo $type; ?>);});															   
+$('item_<?php echo $id; ?>').addEvent('click', function() { $this.showItem(<?php echo $id; ?>,<?php echo $num; ?>,<?php echo $btype; ?>,<?php echo $type; ?>);});
 <?php		}else{ ?>
 $('item_<?php echo $id; ?>').addEvent('click', function() { $this.sellItem(<?php echo $id; ?>,<?php echo $num; ?>,<?php echo $btype; ?>,<?php echo $type; ?>);});
 <?php
@@ -536,7 +536,7 @@ $('item_<?php echo $id; ?>').addEvent('click', function() { $this.sellItem(<?php
 					cp_total = <?php echo $database->getUserField($session->uid, 'cp',0); ?>+cp_b;
 					html = $this.textMulti;
 					html += '<table id="heroInventoryDataDialog" class="transparent" cellspacing="0" cellpadding="0"><tbody><tr class="rowBeforeUse"><th>امتیاز فرهنگی فعلی شما:</th><td>'+cp+'</td></tr><tr class="rowUseValue"><th>امتیاز فرهنگی بدست آمده از طریق مصرف اثر هنری:</th><td class="displayUseValue">'+cp_b+'</td></tr><tr class="rowAfterUse"><th>امتیاز فرهنگی بعد از مصرف اثر هنری:</th><td class="displayAfterUse">'+cp_total+'</td></tr></tbody></table>';
-					
+
 				}else{
 					html = $this.textMulti;
 				}
@@ -577,7 +577,7 @@ $('item_<?php echo $id; ?>').addEvent('click', function() { $this.sellItem(<?php
 
 					</div>
 <?php
-include("Templates/sideinfo.tpl"); 
+include("Templates/sideinfo.tpl");
 include("Templates/footer.tpl");
 include("Templates/header.tpl");
 include("Templates/res.tpl");

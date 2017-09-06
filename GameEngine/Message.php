@@ -195,8 +195,8 @@
 				global $database,$session;
 				for($i = 1; $i <= 10; $i++) {
 					if(isset($post['n' . $i])) {
-					$message1 = mysql_query("SELECT * FROM " . TB_PREFIX . "mdata where id = ".$post['n' . $i]."");
-					$message = mysql_fetch_array($message1);
+					$message1 = mysqli_query($con,"SELECT * FROM " . TB_PREFIX . "mdata where id = ".$post['n' . $i]."");
+					$message = mysqli_fetch_array($message1);
 					if($message['target'] == $session->uid && $message['owner'] == $session->uid){
 						$database->getMessage($post['n' . $i], 8);
 					}else if($message['target'] == $session->uid){
@@ -241,7 +241,7 @@
 				}else{
 					header("Location: berichte.php");
 				}
-				
+
         	}
 
         	private function archiveNotice($post) {
@@ -304,12 +304,12 @@
 				}
 				$this->totalMessage = count($this->inbox) + count($this->sent);
 			}
-            
+
 			private function sendAMessage($topic,$text) {
 				global $session,$database;
-				$allmembersQ = mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE alliance='".$session->alliance."'");
+				$allmembersQ = mysqli_query($con,"SELECT id FROM ".TB_PREFIX."users WHERE alliance='".$session->alliance."'");
 				$userally = $database->getUserField($session->uid,"alliance",0);
-				$permission=mysql_fetch_array(mysql_query("SELECT opt7 FROM ".TB_PREFIX."ali_permission WHERE uid='".$session->uid."'"));
+				$permission=mysqli_fetch_array(mysqli_query($con,"SELECT opt7 FROM ".TB_PREFIX."ali_permission WHERE uid='".$session->uid."'"));
 
 				if(WORD_CENSOR) {
 				$topic = $this->wordCensor($topic);
@@ -375,14 +375,14 @@
 				}
 				if($permission[opt7]==1){
 				if ($userally != 0) {
-				while ($allmembers = mysql_fetch_array($allmembersQ)) {
+				while ($allmembers = mysqli_fetch_array($allmembersQ)) {
 				$database->sendMessage($allmembers[id],$session->uid,$topic,$text,0,$alliance,$player,$coor,$report);
 				}
 					}
 					}
 				}
 			}
-					
+
 			private function sendMessage($recieve, $topic, $text) {
 				global $session, $database;
 				$user = $database->getUserField($recieve, "id", 1);

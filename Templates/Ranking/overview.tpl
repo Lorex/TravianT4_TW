@@ -46,13 +46,13 @@ if(!isset($_GET['page'])){
     }
 }
 $sql = $ranking->procUsersRanking();
-$query = mysql_num_rows($sql);
+$query = mysqli_num_rows($sql);
 
 if (isset($_GET['page'])) {
     $page = preg_replace('#[^0-9]#i', '', $_GET['page']);
 } else {
     $page = 1;
-} 
+}
 
 $itemsPerPage = 20;
 $lastPage = ceil($query / $itemsPerPage);
@@ -61,7 +61,7 @@ if ($page < 1) {
     $page = 1;
 } else if ($page > $lastPage) {
     $page = $lastPage;
-} 
+}
 
 $centerPages = "";
 $sub1 = $page - 1;
@@ -73,37 +73,37 @@ $add3 = $page + 3;
 
 if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<span class="number currentPage">1</span>';
-	
+
 }elseif ($page == 1 && $lastPage == 2) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?page=2">2</a>';
-	
+
 }elseif ($page == 1 && $lastPage == 3) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?page=2">2</a> ';
     $centerPages .= '<a class="number" href="?page=3">3</a>';
-	
+
 }elseif ($page == 1) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?page=' . $add1 . '">' . $add1 . '</a> ';
 	$centerPages .= '<a class="number" href="?page=' . $add2 . '">' . $add2 . '</a> ... ';
 	$centerPages .= '<a class="number" href="?page=' . $lastPage . '">' . $lastPage . '</a>';
-	
+
 } else if ($page == $lastPage && $lastPage == 2) {
 	$centerPages .= '<a class="number" href="?page=1">1</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == $lastPage && $lastPage == 3) {
 	$centerPages .= '<a class="number" href="?page=1">1</a> ';
     $centerPages .= '<a class="number" href="?page=2">2</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == $lastPage) {
 	$centerPages .= '<a class="number" href="?page=1">1</a> ... ';
     $centerPages .= '<a class="number" href="?page=' . $sub2 . '">' . $sub2 . '</a> ';
 	$centerPages .= '<a class="number" href="?page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == ($lastPage - 1) && $lastPage == 3) {
     $centerPages .= '<a class="number" href="?page=1">1</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
@@ -115,7 +115,7 @@ if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?page=' . $add1 . '">' . $add1 . '</a> ... ';
 	$centerPages .= '<a class="number" href="?page=' . $lastPage . '">' . $lastPage . '</a>';
-	
+
 }else if ($page == ($lastPage - 1)) {
     $centerPages .= '<a class="number" href="?page=1">1</a> ... ';
     $centerPages .= '<a class="number" href="?page=' . $sub1 . '">' . $sub1 . '</a> ';
@@ -126,7 +126,7 @@ if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<a class="number" href="?page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?page=' . $add1 . '">' . $add1 . '</a>';
-    
+
 } else if ($page > 1 && $page < $lastPage) {
     $centerPages .= '<a class="number" href="?page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
@@ -176,20 +176,20 @@ $paginationDisplay .=  '<img alt="Következő oldal" src="img/x.gif" class="next
 $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last disabled">';
 }
 
-	$limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage; 
+	$limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage;
 	$sql2 = $ranking->procUsersRanking($limit);
     if(isset($_GET['page']) && $_GET['page'] > 1){
 		$rank = ($_GET['page']-1)*20+1;
     }else{
     	$rank = 1;
     }
-	while($row = mysql_fetch_array($sql2)){ 
+	while($row = mysqli_fetch_array($sql2)){
 		if($myrank == $rank) {
 			echo "<tr class=\"hl\"><td class=\"ra fc\" >".$rank.".</td>";
 		}else {
 			echo "<tr class=\"hover\"><td class=\"ra \" >".$rank.".</td>";
 		}
-		echo "<td class=\"pla \" ><a href=\"spieler.php?uid=".$row['userid']."\">".$row['username']."</a></td>"; 
+		echo "<td class=\"pla \" ><a href=\"spieler.php?uid=".$row['userid']."\">".$row['username']."</a></td>";
 		if($row['alliance']) {
 			echo "<td class=\"al\" ><a href=\"allianz.php?aid=".$row['alliance']."\">".$database->getAllianceName($row['alliance'])."</a></td>";
 		}else {
@@ -197,7 +197,7 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
 		}
 		echo "<td class=\"pop\" >".$row['totalpop']."</td>";
         echo "<td class=\"vil\">".$row['totalvillages']."</td></tr>";
-    
+
 		$rank++;
 	}
 

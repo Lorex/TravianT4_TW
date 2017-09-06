@@ -38,8 +38,8 @@ $q = "
 	WHERE " . TB_PREFIX . "users.access < " . (INCLUDE_ADMIN ? "10" : "8") . "
 	ORDER BY totalpop DESC, totalvillages DESC, username ASC";
 
-	$result = (mysql_query($q));
-	while($row = mysql_fetch_assoc($result))
+	$result = (mysqli_query($con,$q));
+	while($row = mysqli_fetch_assoc($result))
 	{
 		$datas[] = $row;
 	}
@@ -67,8 +67,8 @@ $q = "
 	WHERE " . TB_PREFIX . "users.apall >=0 AND " . TB_PREFIX . "users.access < " . (INCLUDE_ADMIN ? "10" : "8") . " AND " . TB_PREFIX . "users.tribe <= 3
 	ORDER BY " . TB_PREFIX . "users.apall DESC, pop DESC, username ASC";
 
-	$result = mysql_query($q) or die(mysql_error());
-	while($row = mysql_fetch_assoc($result))
+	$result = mysqli_query($con,$q) or die(mysqli_error());
+	while($row = mysqli_fetch_assoc($result))
 	{
 		$attacker[] = $row;
 	}
@@ -94,8 +94,8 @@ $q = "
 	FROM " . TB_PREFIX . "users
 	WHERE " . TB_PREFIX . "users.dpall >=0 AND " . TB_PREFIX . "users.access < " . (INCLUDE_ADMIN ? "10" : "8") . "
 	ORDER BY " . TB_PREFIX . "users.dpall DESC, pop DESC, username ASC";
-	$result = mysql_query($q) or die(mysql_error());
-	while($row = mysql_fetch_assoc($result))
+	$result = mysqli_query($con,$q) or die(mysqli_error());
+	while($row = mysqli_fetch_assoc($result))
 	{
 		$defender[] = $row;
 	}
@@ -109,42 +109,42 @@ $q = "
 	}
 
 	## Get WW Winner Details
-	$sql = mysql_query("SELECT vref FROM ".TB_PREFIX."fdata WHERE f99 = '100' and f99t = '40'");
-	$vref = mysql_result($sql, 0);
+	$sql = mysqli_query($con,"SELECT vref FROM ".TB_PREFIX."fdata WHERE f99 = '100' and f99t = '40'");
+	$vref = mysqli_result($sql, 0);
 
-	$sql = mysql_query("SELECT name FROM ".TB_PREFIX."vdata WHERE wref = '$vref'")or die(mysql_error());
-	$winningvillagename = mysql_result($sql, 0);
+	$sql = mysqli_query($con,"SELECT name FROM ".TB_PREFIX."vdata WHERE wref = '$vref'")or die(mysqli_error());
+	$winningvillagename = mysqli_result($sql, 0);
 
-	$sql = mysql_query("SELECT owner FROM ".TB_PREFIX."vdata WHERE wref = '$vref'")or die(mysql_error());
-	$owner = mysql_result($sql, 0);
+	$sql = mysqli_query($con,"SELECT owner FROM ".TB_PREFIX."vdata WHERE wref = '$vref'")or die(mysqli_error());
+	$owner = mysqli_result($sql, 0);
 
-	$sql = mysql_query("SELECT username FROM ".TB_PREFIX."users WHERE id = '$owner'")or die(mysql_error());
-	$username = mysql_result($sql, 0);
+	$sql = mysqli_query($con,"SELECT username FROM ".TB_PREFIX."users WHERE id = '$owner'")or die(mysqli_error());
+	$username = mysqli_result($sql, 0);
 
-	$sql = mysql_query("SELECT alliance FROM ".TB_PREFIX."users WHERE id = '$owner'")or die(mysql_error());
-	$allianceid = mysql_result($sql, 0);
+	$sql = mysqli_query($con,"SELECT alliance FROM ".TB_PREFIX."users WHERE id = '$owner'")or die(mysqli_error());
+	$allianceid = mysqli_result($sql, 0);
 
-	$sql = mysql_query("SELECT name, tag FROM ".TB_PREFIX."alidata WHERE id = '$allianceid'")or die(mysql_error());
-	$winningalliance = mysql_result($sql, 0);
+	$sql = mysqli_query($con,"SELECT name, tag FROM ".TB_PREFIX."alidata WHERE id = '$allianceid'")or die(mysqli_error());
+	$winningalliance = mysqli_result($sql, 0);
 
-	$sql = mysql_query("SELECT tag FROM ".TB_PREFIX."alidata WHERE id = '$allianceid'")or die(mysql_error());
-	$winningalliancetag = mysql_result($sql, 0);
+	$sql = mysqli_query($con,"SELECT tag FROM ".TB_PREFIX."alidata WHERE id = '$allianceid'")or die(mysqli_error());
+	$winningalliancetag = mysqli_result($sql, 0);
 
-	$sql = mysql_query("SELECT vref FROM ".TB_PREFIX."fdata WHERE f99 = '100' and f99t = '40'");
-	$winner = mysql_num_rows($sql);
+	$sql = mysqli_query($con,"SELECT vref FROM ".TB_PREFIX."fdata WHERE f99 = '100' and f99t = '40'");
+	$winner = mysqli_num_rows($sql);
 
 	if($winner!=0){
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome winner">
-	<div id="wrapper"> 
-		<img id="staticElements" src="img/x.gif" alt="" /> 
-		<div id="logoutContainer"> 
-			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a> 
-		</div> 
-		<div class="bodyWrapper"> 
-			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" /> 
-			<div id="header"> 
+	<div id="wrapper">
+		<img id="staticElements" src="img/x.gif" alt="" />
+		<div id="logoutContainer">
+			<a id="logout" href="logout.php" title="<?php echo LOGOUT; ?>">&nbsp;</a>
+		</div>
+		<div class="bodyWrapper">
+			<img style="filter:chroma();" src="img/x.gif" id="msfilter" alt="" />
+			<div id="header">
 				<div id="mtop">
 					<a id="logo" href="<?php echo HOMEPAGE; ?>" target="_blank" title="<?php echo SERVER_NAME ?>"></a>
 					<ul id="navigation">
@@ -164,12 +164,12 @@ include "Templates/html.tpl";
     	if(count($database->getMessage($session->uid,9)) >= 1000) {
 			$unmsg = "+1000";
 		} else { $unmsg = count($database->getMessage($session->uid,9)); }
-		
+
     	if(count($database->getNotice5($session->uid)) >= 1000) {
 			$unnotice = "+1000";
 		} else { $unnotice = count($database->getNotice5($session->uid)); }
 ?>
-<li id="n5" class="reports"> 
+<li id="n5" class="reports">
 <a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getNotice5($session->uid)).')'; } ?>"></a>
 <?php
 if($message->nunread){
@@ -180,8 +180,8 @@ if($message->nunread){
 }
 ?>
 </li>
-<li id="n6" class="messages"> 
-<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a> 
+<li id="n6" class="messages">
+<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a>
 <?php
 if($message->unread) {
 	echo "<div class=\"ltr bubble\" title=\"".$unmsg." ".HEADER_MESSAGES_NEW."\" style=\"display:block\">
@@ -193,13 +193,13 @@ if($message->unread) {
 </li>
 
 </ul>
-<div class="clear"></div> 
-</div> 
+<div class="clear"></div>
+</div>
 </div>
 			<div id="mid">
-<a id="ingameManual" href="help.php"><img class="question" alt="Help" src="img/x.gif"></a>			
+<a id="ingameManual" href="help.php"><img class="question" alt="Help" src="img/x.gif"></a>
 <div class="clear"></div>
-			<div id="contentOuterContainer"> 
+			<div id="contentOuterContainer">
 							<div class="contentTitle">&nbsp;</div>
 <div class="contentContainer">
 				<div id="content" class="winner">

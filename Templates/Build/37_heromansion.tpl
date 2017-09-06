@@ -1,7 +1,7 @@
 ﻿<?php
 if($_GET['gid']==37 && isset($_GET['del'])){
 	$database->removeOases($_GET['del']);
-    mysql_query("UPDATE ".TB_PREFIX."wdata SET occupied = 0 WHERE id = ".$_GET['del']."");
+    mysqli_query($con,"UPDATE ".TB_PREFIX."wdata SET occupied = 0 WHERE id = ".$_GET['del']."");
 }
 
 ?>
@@ -13,10 +13,10 @@ if($_GET['gid']==37 && isset($_GET['del'])){
 	<tbody>
 <?php
 $prefix = "".TB_PREFIX."odata";
-$sql = mysql_query("SELECT * FROM $prefix WHERE owner = $session->uid AND conqured = $village->wid ORDER BY lastupdated ASC");
-$query = mysql_num_rows($sql);
+$sql = mysqli_query($con,"SELECT * FROM $prefix WHERE owner = $session->uid AND conqured = $village->wid ORDER BY lastupdated ASC");
+$query = mysqli_num_rows($sql);
 if($query>0){
-while($row = mysql_fetch_array($sql)){ 
+while($row = mysqli_fetch_array($sql)){
     $wref = $row["wref"];
     $type = $row["type"];
     $conqured = $row["conqured"];
@@ -139,7 +139,7 @@ break;
 	<thead><tr><td>Type</td><td>Owner</td><td>Village</td><td>Coordinates</td><td>Resource</td></tr></thead>
     <tbody>
 <?php
-    $getoasis = mysql_query("SELECT * FROM ".TB_PREFIX."wdata WHERE oasistype > 0");
+    $getoasis = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."wdata WHERE oasistype > 0");
     $coor2 = $database->getCoor($village->wid);
 
 	function getDistance($coorx1, $coory1, $coorx2, $coory2) {
@@ -153,15 +153,15 @@ break;
 		$dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
 		return round($dist, 1);
 	}
-        
-        
-		while($row2 = mysql_fetch_array($getoasis)) {
+
+
+		while($row2 = mysqli_fetch_array($getoasis)) {
 			$dist = getDistance($coor2['x'], $coor2['y'], $row2['x'], $row2['y']);
 			$rows[$dist] = $row2;
         }
-        
-        ksort($rows);  
-        
+
+        ksort($rows);
+
         $limit = 1;
         foreach($rows as $dist => $row2) {
         	if($limit <= 10){
@@ -190,7 +190,7 @@ break;
                 break;
             }
             echo "<a href=\"karte.php?d=".$row2['id']."&c=".$generator->getMapCheck($row2['id'])."\">".$tname."</a></td>";
-            
+
             if($basearray['owner']==3){
                 $oOwner = "-";
             }else{

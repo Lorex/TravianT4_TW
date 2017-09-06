@@ -1,4 +1,4 @@
-<?php 
+<?php
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
@@ -10,13 +10,13 @@
 #################################################################################
 ?>
 <style>
-.del {width:12px; height:12px; background-image: url(img/admin/icon/del.gif);} 
-</style>  
+.del {width:12px; height:12px; background-image: url(img/admin/icon/del.gif);}
+</style>
 
 <?php
 if($_GET['uid']){
-$user = $database->getUserArray($_GET['uid'],1);  
-$varray = $database->getProfileVillages($_GET['uid']);                
+$user = $database->getUserArray($_GET['uid'],1);
+$varray = $database->getProfileVillages($_GET['uid']);
 if($user){
 $totalpop = 0;
 foreach($varray as $vil) {
@@ -28,12 +28,12 @@ foreach($varray as $vil) {
 <input type="hidden" name="action" value="DelPlayer">
 <input type="hidden" name="uid" value="<?php echo $user['id'];?>">
 <input type="hidden" name="admid" id="admid" value="<?php echo $_SESSION['id']; ?>">
-<table id="member">    
+<table id="member">
   <thead>
     <tr>
         <th colspan="4">刪除玩家帳號</th>
     </tr>
-  </thead> 
+  </thead>
     <tr>
         <td>名稱</td>
         <td><a href="?p=player&uid=<?php echo $user['id'];?>"><?php echo $user['username'];?></a></td>
@@ -50,17 +50,17 @@ foreach($varray as $vil) {
         <td>村莊</td>
         <td><?php
 
-    $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."vdata WHERE owner = ".$user['id']."");
-    $num_rows = mysql_num_rows($result);
+    $result = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."vdata WHERE owner = ".$user['id']."");
+    $num_rows = mysqli_num_rows($result);
 
     echo $num_rows;
 
     ?></td>
         <td><b><font color='#71D000'>P</font><font color='#FF6F0F'>l</font><font color='#71D000'>u</font><font color='#FF6F0F'>s</font></b>:</td>
-        <td><?php 
+        <td><?php
 		$plus = date('d.m.Y H:i',$user['plus']);
 		echo $plus;?></td>
-    </tr> 
+    </tr>
     <tr>
         <td>聯盟</td>
         <td><?php echo $database->getAllianceName($user['alliance']);?></td>
@@ -74,17 +74,17 @@ foreach($varray as $vil) {
         <td>密碼</td>
         <td><input type="text" name="pass"></td>
         <td colspan="2"><input type="submit" class="c5" value="刪除玩家帳號"></td>
-    </tr>  
+    </tr>
 </table>
 <br /><br /><font color="Red"><b>刪除玩家帳號以前，請先刪除以下村莊！</font></b><br /><br />
-<table id="profile">    
+<table id="profile">
     <tr>
         <td>名稱</td>
         <td>人口數</td>
         <td>座標</td>
 		<td></td>
     </tr>
-<?php         
+<?php
 for ($i = 0; $i <= count($varray)-1; $i++) {
 $coorproc = $database->getCoor($varray[$i]['wref']);
 if($varray[$i]['capital']){
@@ -93,7 +93,7 @@ $delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return
 }else{
 $capital = '';
 $delLink = '<a href="?action=delVil&did='.$varray[$i]['wref'].'" onClick="return del(\'did\','.$varray[$i]['wref'].');"><img src="../img/admin/del.gif" class="del"></a>';
-  
+
 }
 
 echo '
@@ -102,13 +102,13 @@ echo '
         <td>'.$varray[$i]['pop'].'</td>
         <td>('.$coorproc['x'].'|'.$coorproc['y'].')</td>
 		<td>'.$delLink.' </td>
-    </tr>  
-'; 
-}  
+    </tr>
+';
+}
 
-?>    
+?>
 </form>
 <?php
 }
-}  
+}
 ?>

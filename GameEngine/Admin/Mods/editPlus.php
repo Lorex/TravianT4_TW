@@ -11,14 +11,14 @@
 
 include_once("../../config.php");
 
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 $session = $_POST['admid'];
 $id = $_POST['id'];
 
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id = ".$session."");
-$access = mysql_fetch_array($sql);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE id = ".$session."");
+$access = mysqli_fetch_array($sql);
 $sessionaccess = $access['access'];
 
 if($sessionaccess != 9) die("<h1><font color=\"red\">Access Denied: You are not Admin!</font></h1>");
@@ -36,14 +36,14 @@ if($b2dur > 1){ $clay = (time() + $b2dur); } else { $clay = 'b2'; }
 if($b3dur > 1){ $iron = (time() + $b3dur); } else { $iron = 'b3'; }
 if($b4dur > 1){ $crop = (time() + $b4dur); } else { $crop = 'b4'; }
 
-mysql_query("UPDATE ".TB_PREFIX."users SET 
+mysqli_query($con,"UPDATE ".TB_PREFIX."users SET
 	plus = '".$plus."',
-	b1 = '".$wood."', 
+	b1 = '".$wood."',
 	b2 = '".$clay."',
 	b3 = '".$iron."',
-	b4 = '".$crop."', 
-	quest = '".$quest."' 
-	WHERE id = $id") or die(mysql_error());
+	b4 = '".$crop."',
+	quest = '".$quest."'
+	WHERE id = $id") or die(mysqli_error());
 
 header("Location: ../../../Admin/admin.php?p=player&uid=".$id."");
 ?>

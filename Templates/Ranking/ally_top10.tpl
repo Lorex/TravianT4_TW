@@ -2,13 +2,13 @@
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
     }
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata ORDER BY ap DESC, id ASC Limit 10");
-    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' ORDER BY ap DESC, id ASC Limit 1");
+    $result = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata ORDER BY ap DESC, id ASC Limit 10");
+    $result2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' ORDER BY ap DESC, id ASC Limit 1");
     $attRank = $ranking->getATop10AttRank($session->alliance);
     $defRank = $ranking->getATop10DefRank($session->alliance);
     $clpRank = $ranking->getATop10ClpRank($session->alliance);
     $rrRank = $ranking->getATop10RobbersRank($session->alliance);
-    
+
 ?>
 <div class="contentNavi tabNavi">
 				<div class="container normal">
@@ -41,7 +41,7 @@
 	</thead>
 <tbody>
 <?php
-	while($row = mysql_fetch_array($result)){
+	while($row = mysqli_fetch_array($result)){
 		if($row['id']==$session->alliance) {
 			echo "<tr class=\"own hl hover\">";
         } else {
@@ -57,13 +57,13 @@
 			<td colspan="3" class="empty"></td>
 		</tr>
 <?php
-	while($row = mysql_fetch_array($result2)){
+	while($row = mysqli_fetch_array($result2)){
 		if($attRank > 10) {
 			echo "<tr class=\"none\"><td class=\"ra fc\">?&nbsp;</td>";
         } else {
         	echo "<tr class=\"own hl select\"><td class=\"ra fc\">".$attRank.".&nbsp;</td>";
         }
-        
+
 	  	if($attRank > 10) {
 			echo "<td class=\"pla\">".$row['name']."</td>";
         } else {
@@ -82,8 +82,8 @@
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
     }
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata ORDER BY dp DESC, id ASC Limit 10");
-    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' ORDER BY dp DESC, id ASC Limit 1");
+    $result = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata ORDER BY dp DESC, id ASC Limit 10");
+    $result2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' ORDER BY dp DESC, id ASC Limit 1");
 ?>
 <h4 class="round small spacer top10_defs">Top Defenders</h4>
 <table cellpadding="1" cellspacing="1" id="top10_defs" class="top10 row_table_data">
@@ -92,7 +92,7 @@
 	</thead>
 <tbody>
 <?php
-	while($row = mysql_fetch_array($result)){
+	while($row = mysqli_fetch_array($result)){
 		if($row['id']==$session->alliance) {
 			echo "<tr class=\"own hl hover\">";
         } else {
@@ -104,18 +104,18 @@
 		echo "</tr>";
 	}
 ?>
-	
+
 		 <tr>
 			<td colspan="3" class="empty"></td>
 		</tr>
 <?php
-	while($row = mysql_fetch_array($result2)){
+	while($row = mysqli_fetch_array($result2)){
 		if($defRank > 10) {
 			echo "<tr class=\"none\"><td class=\"ra fc\">?&nbsp;</td>";
         } else {
         	echo "<tr class=\"own hl select\"><td class=\"ra fc\">".$defRank.".&nbsp;</td>";
         }
-        
+
 	  	if($defRank > 10) {
 			echo "<td class=\"pla\">".$row['name']."</td>";
         } else {
@@ -138,8 +138,8 @@
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
     }
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata ORDER BY clp DESC, id ASC Limit 10");
-    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' ORDER BY clp DESC, id ASC Limit 1");
+    $result = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata ORDER BY clp DESC, id ASC Limit 10");
+    $result2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' ORDER BY clp DESC, id ASC Limit 1");
 ?>
 <h4 class="round small  top10_climbers">Top Climbers</h4>
 <table cellpadding="1" cellspacing="1" id="top10_climbers" class="top10 row_table_data">
@@ -148,7 +148,7 @@
 	</thead>
 <tbody>
 <?php
-	while($row = mysql_fetch_array($result)){
+	while($row = mysqli_fetch_array($result)){
 		if($row['id']==$session->alliance) {
 			echo "<tr class=\"own hl hover\">";
         } else {
@@ -164,13 +164,13 @@
 			<td colspan="3" class="empty"></td>
 		</tr>
 <?php
-	while($row = mysql_fetch_array($result2)){
+	while($row = mysqli_fetch_array($result2)){
 		if($clpRank > 10) {
 			echo "<tr class=\"none\"><td class=\"ra fc\">?&nbsp;</td>";
         } else {
         	echo "<tr class=\"own hl select\"><td class=\"ra fc\">".$clpRank.".&nbsp;</td>";
         }
-        
+
 	  	if($clpRank > 10) {
 			echo "<td class=\"pla\">".$row['name']."</td>";
         } else {
@@ -189,8 +189,8 @@
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
     }
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE RR >= 0 ORDER BY RR DESC, id ASC Limit 10");
-    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' AND RR >= 0 ORDER BY RR DESC, id ASC Limit 1");
+    $result = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata WHERE RR >= 0 ORDER BY RR DESC, id ASC Limit 10");
+    $result2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' AND RR >= 0 ORDER BY RR DESC, id ASC Limit 1");
 ?>
 <h4 class="round small spacer top10_raiders">Top Raiders</h4>
 
@@ -200,7 +200,7 @@
 	</thead>
 <tbody>
 <?php
-	while($row = mysql_fetch_array($result)){
+	while($row = mysqli_fetch_array($result)){
 		if($row['id']==$session->alliance) {
 			echo "<tr class=\"own hl hover\">";
         } else {
@@ -216,13 +216,13 @@
 			<td colspan="3" class="empty"></td>
 		</tr>
 <?php
-	while($row = mysql_fetch_array($result2)){
+	while($row = mysqli_fetch_array($result2)){
 		if($rrRank > 10) {
 			echo "<tr class=\"none\"><td class=\"ra fc\">?&nbsp;</td>";
         } else {
         	echo "<tr class=\"own hl select\"><td class=\"ra fc\">".$rrRank.".&nbsp;</td>";
         }
-        
+
 	  	if($rrRank > 10) {
 			echo "<td class=\"pla\">".$row['name']."</td>";
         } else {

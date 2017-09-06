@@ -1,5 +1,5 @@
 ﻿<?php
-$normalA = $database->getOwnArtefactInfoByType($village->wid,6);  
+$normalA = $database->getOwnArtefactInfoByType($village->wid,6);
 $largeA = $database->getOwnUniqueArtefactInfo($session->uid,6,2);
 
 
@@ -40,7 +40,7 @@ $brewery = $building->getTypeLevel(35);
 $horsedrinkingtrough = $building->getTypeLevel(41);
 $herosmansion = $building->getTypeLevel(37);
 $greatwarehouse = $building->getTypeLevel(38);
-$greatgranary = $building->getTypeLevel(39);  
+$greatgranary = $building->getTypeLevel(39);
 $greatworkshop = $building->getTypeLevel(42);
 
 foreach ($database->getJobs($_SESSION['wid']) as $bdata) {
@@ -85,7 +85,7 @@ if($mainbuilding >= 10 && !$database->getBuildList(38) && $village->capital == 0
 }
 if($mainbuilding >= 10 && !$database->getBuildList(39) && $village->capital == 0 && $largeA['owner'] == $session->uid || $normalA['vref'] == $village->wid ) {
     include("avaliable/greatgranary.tpl");
-}  
+}
 if(($trapper ==0 || $trapper == 20) && !$database->getBuildList(36) && $rallypoint >= 1 && $session->tribe == 3 && $id != 39 && $id != 40) {
 include("avaliable/trapper.tpl");
 }
@@ -120,20 +120,20 @@ if($palace == 0 && !$database->getBuildList(26) && !$database->getBuildList(25) 
 $user = $session->uid;
 
 //connect to DB
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 //loop search village user
-$query = mysql_query("SELECT * FROM ".TB_PREFIX."vdata WHERE owner = ".$user."");
-while($villaggi_array = mysql_fetch_array($query)){
+$query = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."vdata WHERE owner = ".$user."");
+while($villaggi_array = mysqli_fetch_array($query)){
 
 	//loop structure village
-	$query1 = mysql_query("SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
-	$strutture= mysql_fetch_array($query1);
+	$query1 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
+	$strutture= mysqli_fetch_array($query1);
 
-//search Castle in array structure village 
+//search Castle in array structure village
 $test =	in_array(26,$strutture);
-if ($test){	
+if ($test){
 	break;
 	}
 
@@ -231,20 +231,20 @@ if($embassy == 0 || $mainbuilding >= 2 && $mainbuilding <= 4) {
 $user = $session->uid;
 
 //connect to DB
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 //loop search village user
-$query = mysql_query("SELECT * FROM ".TB_PREFIX."vdata WHERE owner = ".$user."");
-while($villaggi_array = mysql_fetch_array($query)){
+$query = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."vdata WHERE owner = ".$user."");
+while($villaggi_array = mysqli_fetch_array($query)){
 
 	//loop structure village
-	$query1 = mysql_query("SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
-	$strutture= mysql_fetch_array($query1);
+	$query1 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
+	$strutture= mysqli_fetch_array($query1);
 
-//search Castle in array structure village 
+//search Castle in array structure village
 $test =	in_array(26,$strutture);
-if ($test){	
+if ($test){
 	break;
 	}
 
@@ -305,7 +305,7 @@ if($village->capital == 0) {
 }
 if($village->capital == 0) {
     include("soon/greatgranary.tpl");
-} 
+}
 if($greatbarracks == 0 && $barrack >= 15 && $village->capital == 0) {
     include("soon/greatbarracks.tpl");
 }
@@ -318,7 +318,7 @@ if($greatworkshop == 0 && $workshop >= 15 && $village->capital == 0 && GREAT_WKS
    ?>
     </div>
 <div class="switch"><a id="all_link" class="openedClosedSwitch switchClosed hide" href="#">More</a></div>
-    
+
     <div id="build_list_all" class="hide">
     <?php
     if($academy == 0 && ($mainbuilding == 1 || $barrack == 0)) {
@@ -330,20 +330,20 @@ if($greatworkshop == 0 && $workshop >= 15 && $village->capital == 0 && GREAT_WKS
 	$user = $session->uid;
 
 	//connect to DB
-	mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-	mysql_select_db(SQL_DB);
+	$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+	mysqli_select_db($con,SQL_DB);
 
 	//loop search village user
-	$query = mysql_query("SELECT * FROM ".TB_PREFIX."vdata WHERE owner = ".$user."");
-	while($villaggi_array = mysql_fetch_array($query)){
+	$query = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."vdata WHERE owner = ".$user."");
+	while($villaggi_array = mysqli_fetch_array($query)){
 
 		//loop structure village
-		$query1 = mysql_query("SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
-		$strutture= mysql_fetch_array($query1);
+		$query1 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."fdata WHERE vref = ".$villaggi_array['wref']."");
+		$strutture= mysqli_fetch_array($query1);
 
-	//search Castle in array structure village 
+	//search Castle in array structure village
 	$test =	in_array(26,$strutture);
-	if ($test){	
+	if ($test){
 		break;
 		}
 
@@ -472,7 +472,7 @@ window.addEvent('domready', function()
 	});
 });
 </script>
-<?php 
+<?php
 }
 ?>
 </div>

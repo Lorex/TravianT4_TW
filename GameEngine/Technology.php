@@ -1,9 +1,9 @@
 <?php
 
 class Technology {
-	
+
 	public $unarray = array(1=>U1,U2,U3,U4,U5,U6,U7,U8,U9,U10,U11,U12,U13,U14,U15,U16,U17,U18,U19,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U32,U33,U34,U35,U36,U37,U38,U39,U40,U41,U42,U43,U44,U45,U46,U47,U48,U49,U50,U99,U0);
-	
+
 	public function grabAcademyRes() {
 		global $village;
 		$holder = array();
@@ -14,7 +14,7 @@ class Technology {
 		}
 		return $holder;
 	}
-	
+
 	public function getABUpgrades($type='a') {
 		global $village;
 		$holder = array();
@@ -25,7 +25,7 @@ class Technology {
 		}
 		return $holder;
 	}
-	
+
 	public function isResearch($tech,$type) {
 		global $village;
 		if(count($village->researching) == 0) {
@@ -45,7 +45,7 @@ class Technology {
 		return false;
 		}
 	}
-	
+
 	public function procTech($post) {
 		if(isset($post['ft'])) {
 			switch($post['ft']) {
@@ -58,7 +58,7 @@ class Technology {
 			}
 		}
 	}
-	
+
 	public function procTechno($get) {
 		global $village;
 		if(isset($get['a'])) {
@@ -75,7 +75,7 @@ class Technology {
 			}
 		}
 	}
-	
+
 	public function getTrainingList($type) {
 		global $database,$village;
 		$trainingarray = $database->getTraining($village->wid);
@@ -129,13 +129,13 @@ class Technology {
 		}
 		return $listarray;
 	}
-	
+
 	public function getUnitList() {
 		global $database,$village;
 		$unitcheck = $database->getUnit($village->wid);
 		for($i=1;$i<=50;$i++) {
 			if($unitcheck['u'.$i] >= "40000000000" && LIMIT_TROOPS) {
-				mysql_query("UPDATE ".TB_PREFIX."units set u".$i." = '0' where vref = $village->wid");
+				mysqli_query($con,"UPDATE ".TB_PREFIX."units set u".$i." = '0' where vref = $village->wid");
 			}
 		}
 		$unitarray = func_num_args() == 1? $database->getUnit(func_get_arg(0)) : $village->unitarray;
@@ -146,7 +146,7 @@ class Technology {
                 $holder['amt'] = $unitarray['hero'];
                 array_push($listArray,$holder);
         }
-		
+
 		for($i=1;$i<count($this->unarray);$i++) {
 			$holder = array();
 			if($unitarray['u'.$i] != 0 && $unitarray['u'.$i] != "") {
@@ -158,13 +158,13 @@ class Technology {
 		}
 		return $listArray;
 	}
-	
+
 	public function maxUnit($unit,$great=false) {
 		$unit = "u".$unit;
 		global $village,$$unit;
 		$unitarray = $$unit;
 		$res = array();
-		$res = mysql_fetch_assoc(mysql_query("SELECT maxstore, maxcrop, wood, clay, iron, crop FROM ".TB_PREFIX."vdata WHERE wref = ".$village->wid)) or die(mysql_error());
+		$res = mysqli_fetch_assoc(mysqli_query($con,"SELECT maxstore, maxcrop, wood, clay, iron, crop FROM ".TB_PREFIX."vdata WHERE wref = ".$village->wid)) or die(mysqli_error());
 		if ($res['wood'] > $res['maxstore']){$res['wood'] = $res['maxstore'];}
 		if ($res['clay'] > $res['maxstore']){$res['clay'] = $res['maxstore'];}
 		if ($res['iron'] > $res['maxstore']){$res['iron'] = $res['maxstore'];}
@@ -184,19 +184,19 @@ class Technology {
 		}
 		return min($woodcalc,$claycalc,$ironcalc,$cropcalc);
 	}
-	
+
     public function maxUnitPlus($unit,$great=false) {
         $unit = "u".$unit;
         global $village,$$unit;
         $unitarray = $$unit;
         $res = array();
-        $res = mysql_fetch_assoc(mysql_query("SELECT maxstore, maxcrop, wood, clay, iron, crop FROM ".TB_PREFIX."vdata WHERE wref = ".$village->wid)) or die(mysql_error());
+        $res = mysqli_fetch_assoc(mysqli_query($con,"SELECT maxstore, maxcrop, wood, clay, iron, crop FROM ".TB_PREFIX."vdata WHERE wref = ".$village->wid)) or die(mysqli_error());
         $totalres = $res['wood']+$res['clay']+$res['iron']+$res['crop'];
         $totalresunit = ($unitarray['wood'] * ($great?3:1))+($unitarray['clay'] * ($great?3:1))+($unitarray['iron'] * ($great?3:1))+($unitarray['crop'] * ($great?3:1));
         $max =round($totalres/$totalresunit);
         return $max;
     }
-    
+
 	public function getUnits() {
 		global $database,$village;
 		if(func_num_args() == 1) {
@@ -213,7 +213,7 @@ class Technology {
 		}
 		return $ownunit;
 	}
-	
+
 	function getAllUnits($base) {
 		global $database;
 		$ownunit = $database->getUnit($base);
@@ -234,8 +234,8 @@ class Technology {
 			}
 		}
 		return $ownunit;
-	}	
-	
+	}
+
 	public function meetTRequirement($unit) {
 		global $session;
 		switch($unit) {
@@ -272,7 +272,7 @@ class Technology {
 			case 21:
 			if($session->tribe == 3) { return true; } else { return false; }
 			break;
-			case 22: 
+			case 22:
 			case 23:
 			case 24:
 			case 25:
@@ -287,7 +287,7 @@ class Technology {
             case 31:
             if($session->tribe == 4) { return true; } else { return false; }
             break;
-            case 32: 
+            case 32:
             case 33:
             case 34:
             case 35:
@@ -302,7 +302,7 @@ class Technology {
             case 41:
             if($session->tribe == 5) { return true; } else { return false; }
             break;
-            case 42: 
+            case 42:
             case 43:
             case 44:
             case 45:
@@ -316,12 +316,12 @@ class Technology {
             break;
 		}
 	}
-	
+
 	public function getTech($tech) {
 		global $village;
 		return ($village->techarray['t'.$tech] == 1);
 	}
-	
+
 	private function procTrain($post,$great=false) {
 		global $session;
 		if($session->access != BANNED){
@@ -348,7 +348,7 @@ class Technology {
 			header("Location: banned.php");
 		}
 	}
-	
+
 	public function getUpkeep($array,$type) {
 		global $building,$session;
 		$upkeep = 0;
@@ -379,7 +379,7 @@ class Technology {
             $start = 41;
             $end = 50;
             break;
-		}	
+		}
 		if($nocrop == 0){
 		for($i=$start;$i<=$end;$i++) {
 			$hdt = 0;
@@ -399,8 +399,8 @@ class Technology {
 	}
 
 private function trainUnit($unit,$amt,$great=false) {
-        global $session,$database,${'u'.$unit},$building,$village,$bid19,$bid20,$bid21,$bid25,$bid26,$bid29,$bid30,$bid36,$bid41,$bid42;        
-        
+        global $session,$database,${'u'.$unit},$building,$village,$bid19,$bid20,$bid21,$bid25,$bid26,$bid29,$bid30,$bid36,$bid41,$bid42;
+
         if($this->getTech($unit) || $unit%10 <= 1 || $unit == 99) {
             $footies = array(1,2,3,11,12,13,14,21,22,31,32,33,34,41,42,43,44);
             $calvary = array(4,5,6,15,16,23,24,25,26,35,36,45,46);
@@ -474,8 +474,8 @@ private function trainUnit($unit,$amt,$great=false) {
                 $database->trainUnit($village->wid,$unit+($great?60:0),$amt,${'u'.$unit}['pop'],$each,time()+$time,0);
             }
         }
-    } 	
-	
+    }
+
 	public function meetRRequirement($tech) {
 		global $session,$building;
 		switch($tech) {
@@ -495,7 +495,7 @@ private function trainUnit($unit,$amt,$great=false) {
 			break;
 			case 6:
 			if($building->getTypeLevel(22) >= 5 && $building->getTypeLevel(20) >= 10) { return true; } else { return false; }
-			break;	
+			break;
 			case 9:
 			case 29:
 			if($building->getTypeLevel(22) >= 20 && $building->getTypeLevel(16) >= 10) { return true; } else { return false; }
@@ -553,7 +553,7 @@ private function trainUnit($unit,$amt,$great=false) {
 			break;
 		}
 	}
-	
+
 	private function researchTech($get) {
 		//global $database,$session,${'r'.$get['a']},$village,$logging;
 		global $database,$session,${'r'.$get['a']},$bid22,$building,$village,$logging;
@@ -568,7 +568,7 @@ private function trainUnit($unit,$amt,$great=false) {
 		$session->changeChecker();
 		header("Location: build.php?id=".$get['id']);
 	}
-	
+
 	private function upgradeSword($get) {
 		global $database,$session,$bid12,$building,$village,$logging;
 		$ABTech = $database->getABTech($village->wid);
@@ -586,7 +586,7 @@ private function trainUnit($unit,$amt,$great=false) {
 		$session->changeChecker();
 		header("Location: build.php?id=".$get['id']);
 	}
-	
+
 	private function upgradeArmour($get) {
 		global $database,$session,$bid13,$building,$village,$logging;
 		$ABTech = $database->getABTech($village->wid);
@@ -604,17 +604,17 @@ private function trainUnit($unit,$amt,$great=false) {
 		$session->changeChecker();
 		header("Location: build.php?id=".$get['id']);
 	}
-	
+
 	public function getUnitName($i) {
 		return $this->unarray[$i];
 	}
-	
+
     public function finishTech() {
 		global $database,$village;
 		$q = "UPDATE ".TB_PREFIX."research SET timestamp=".(time()-1)." WHERE vref = ".$village->wid;
 		$database->query($q);
     }
-	
+
 	public function calculateAvaliable($id,$resarray=array()) {
 		global $village,$generator,${'r'.$id};
 		if(count($resarray)==0) {
@@ -641,12 +641,12 @@ private function trainUnit($unit,$amt,$great=false) {
 						$fail='1';
 						}
 					}
-			if($fail==0){ 
+			if($fail==0){
 			$database->deleteReinf($id);
 			}
 
 	}
-	
+
 }
 $technology = new Technology;
 ?>

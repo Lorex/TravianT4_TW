@@ -4,8 +4,8 @@ session_start();
 error_reporting(0);
 include ("../GameEngine/Database/connection.php");
 include ("../GameEngine/config.php");
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 $serverUrlAndPath = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["REQUEST_URI"]);
 $serverUrlAndPath = str_replace("\\", "/", $serverUrlAndPath);

@@ -18,16 +18,16 @@
 #################################################################################
 
 include_once("../../Account.php");
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 if ($session->access < ADMIN) die("Access Denied: You aren't Admin!");
 
 $id = $_POST['id'];
 $admid = $_POST['admid'];
-mysql_query("UPDATE ".TB_PREFIX."users SET cp = cp + ".$_POST['cp']." WHERE id = ".$id."");
+mysqli_query($con,"UPDATE ".TB_PREFIX."users SET cp = cp + ".$_POST['cp']." WHERE id = ".$id."");
 
 $name = $database->getUserField($id,"username",0);
-mysql_query("Insert into ".TB_PREFIX."admin_log values (0,$admid,'Added ".$_POST['cp']." Culture Points to user <a href=\'index.php?p=player&uid=$id\'>$name</a> ',".time().")");
+mysqli_query($con,"Insert into ".TB_PREFIX."admin_log values (0,$admid,'Added ".$_POST['cp']." Culture Points to user <a href=\'index.php?p=player&uid=$id\'>$name</a> ',".time().")");
 
 header("Location: ../../../Admin/index.php?p=player&uid=".$id."&cp=ok");
 ?>

@@ -2,12 +2,12 @@
 
    if(is_numeric($_GET['x']) AND is_numeric($_GET['y'])) {
        $coor2['x'] = $_GET['x'];
-       $coor2['y'] = $_GET['y'];       
+       $coor2['y'] = $_GET['y'];
    } else {
        $wref2 = $village->wid;
-       $coor2 = $database->getCoor($wref2);      
+       $coor2 = $database->getCoor($wref2);
    }
-   
+
 ?>
 <h1 class="titleInHeader">15-9 Crop Finder</h1>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?s" id="cropfinder_form">
@@ -17,7 +17,7 @@
 			<tr>
 				<td>
 					<span class="coordInputLabel">Coordinates</span>
-					
+
 			<div class="coordinatesInput">
 				<div class="xCoord">
 					<label for="xCoordInput">X:</label>
@@ -50,10 +50,10 @@
 	</form>
     <?php
 
-   $type15 = mysql_query("SELECT id,x,y,occupied FROM ".TB_PREFIX."wdata WHERE fieldtype = 6 LIMIT 100");
-   $type9 = mysql_query("SELECT id,x,y,occupied FROM ".TB_PREFIX."wdata WHERE fieldtype = 1 LIMIT 100");
-   $type_both = mysql_query("SELECT id,x,y,occupied,fieldtype FROM ".TB_PREFIX."wdata WHERE fieldtype = 1 OR fieldtype = 6 LIMIT 100");
-   
+   $type15 = mysqli_query($con,"SELECT id,x,y,occupied FROM ".TB_PREFIX."wdata WHERE fieldtype = 6 LIMIT 100");
+   $type9 = mysqli_query($con,"SELECT id,x,y,occupied FROM ".TB_PREFIX."wdata WHERE fieldtype = 1 LIMIT 100");
+   $type_both = mysqli_query($con,"SELECT id,x,y,occupied,fieldtype FROM ".TB_PREFIX."wdata WHERE fieldtype = 1 OR fieldtype = 6 LIMIT 100");
+
    if(is_numeric($_GET['x']) AND is_numeric($_GET['y'])) {
        $coor['x'] = $_GET['x'];
        $coor['y'] = $_GET['y'];
@@ -91,7 +91,7 @@
 
 <?php
 
-   while($row = mysql_fetch_array($type15)) {
+   while($row = mysqli_fetch_array($type15)) {
        $dist = getDistance($coor['x'], $coor['y'], $row['x'], $row['y']);
 
        $rows[$dist] = $row;
@@ -140,7 +140,7 @@ echo "</tr>";
 <?php
 
    unset($rows);
-   while($row = mysql_fetch_array($type9)) {
+   while($row = mysqli_fetch_array($type9)) {
        $dist = getDistance($coor['x'], $coor['y'], $row['x'], $row['y']);
 
        $rows[$dist] = $row;
@@ -190,7 +190,7 @@ echo "</tr>";
 <?php
 
    unset($rows);
-   while($row = mysql_fetch_array($type_both)) {
+   while($row = mysqli_fetch_array($type_both)) {
        $dist = getDistance($coor['x'], $coor['y'], $row['x'], $row['y']);
 
        $rows[$dist] = $row;
@@ -204,7 +204,7 @@ echo "</tr>";
        } elseif($row['fieldtype'] == 6) {
            $field = '15 Cropper';
        }
-   
+
 echo "<tr>";
 echo "<td class=\"dist\">".getDistance($coor['x'], $coor['y'], $row['x'], $row['y'])."</td>";
 echo "<td class=\"coords\"><a href=\"karte.php?x=".$row['x']."&y=".$row['y']."\">(".$row['x']."|".$row['y'].")</a></td>";

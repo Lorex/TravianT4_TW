@@ -1,32 +1,32 @@
 <?php
 
-set_time_limit(0); 
+set_time_limit(0);
 include("connection.php");
 include("constant.php");
 
 class MYSQLi_DB {
-	
+
 	var $connection;
-	
+
 	function MYSQLi_DB() {
 		$this->connection = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS, SQL_DB) or die(mysqli_error());
 	}
 		function query($query) {
 		return $this->connection->query($query);
 		}
-		
+
 };
 
-class MYSQL_DB {
-	
+class mysqli_DB {
+
 	var $connection;
-	
-	function MYSQL_DB() {
-		$this->connection = mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS) or die(mysql_error());
-		mysql_select_db(SQL_DB, $this->connection) or die(mysql_error());
+
+	function mysqli_DB() {
+		$this->connection = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS) or die(mysqli_error());
+		mysqli_select_db($this->connection,SQL_DB) or die(mysqli_error());
 	}
-	
-	function mysql_exec_batch ($p_query, $p_transaction_safe = true) {
+
+	function mysqli_exec_batch ($p_query, $p_transaction_safe = true) {
   if ($p_transaction_safe) {
       $p_query = 'START TRANSACTION;' . $p_query . '; COMMIT;';
     };
@@ -34,17 +34,17 @@ class MYSQL_DB {
   foreach ($query_split as $command_line) {
     $command_line = trim($command_line);
     if ($command_line != '') {
-      $query_result = mysql_query($command_line);
+      $query_result = mysqli_query($this->connection,$command_line);
       if ($query_result == 0) {
         break;
       };
     };
   };
   return $query_result;
-} 
+}
 
 	function query($query) {
-		return mysql_query($query, $this->connection);
+		return mysqli_query($this->connection,$query);
 	}
 };
 
@@ -52,6 +52,6 @@ if(DB_TYPE) {
 	$database = new MYSQLi_DB;
 }
 else {
-	$database = new MYSQL_DB;
+	$database = new mysqli_DB;
 }
 ?>

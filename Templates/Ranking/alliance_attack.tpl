@@ -47,7 +47,7 @@ if (isset($_GET['page'])) {
     $page = preg_replace('#[^0-9]#i', '', $_GET['page']);
 } else {
     $page = 1;
-} 
+}
 
 $itemsPerPage = 20;
 $lastPage = ceil($query / $itemsPerPage);
@@ -56,7 +56,7 @@ if ($page < 1) {
     $page = 1;
 } else if ($page > $lastPage) {
     $page = $lastPage;
-} 
+}
 
 $centerPages = "";
 $sub1 = $page - 1;
@@ -68,37 +68,37 @@ $add3 = $page + 3;
 
 if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<span class="number currentPage">1</span>';
-	
+
 }elseif ($page == 1 && $lastPage == 2) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?tid=41&page=2">2</a>';
-	
+
 }elseif ($page == 1 && $lastPage == 3) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?tid=41&page=2">2</a> ';
     $centerPages .= '<a class="number" href="?tid=41&page=3">3</a>';
-	
+
 }elseif ($page == 1) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?tid=41&page=' . $add1 . '">' . $add1 . '</a> ';
 	$centerPages .= '<a class="number" href="?tid=41&page=' . $add2 . '">' . $add2 . '</a> ... ';
 	$centerPages .= '<a class="number" href="?tid=41&page=' . $lastPage . '">' . $lastPage . '</a>';
-	
+
 } else if ($page == $lastPage && $lastPage == 2) {
 	$centerPages .= '<a class="number" href="?tid=41&page=1">1</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == $lastPage && $lastPage == 3) {
 	$centerPages .= '<a class="number" href="?tid=41&page=1">1</a> ';
     $centerPages .= '<a class="number" href="?tid=41&page=2">2</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == $lastPage) {
 	$centerPages .= '<a class="number" href="?tid=41&page=1">1</a> ... ';
     $centerPages .= '<a class="number" href="?tid=41&page=' . $sub2 . '">' . $sub2 . '</a> ';
 	$centerPages .= '<a class="number" href="?tid=41&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == ($lastPage - 1) && $lastPage == 3) {
     $centerPages .= '<a class="number" href="?tid=41&page=1">1</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
@@ -110,7 +110,7 @@ if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?tid=41&page=' . $add1 . '">' . $add1 . '</a> ... ';
 	$centerPages .= '<a class="number" href="?tid=41&page=' . $lastPage . '">' . $lastPage . '</a>';
-	
+
 }else if ($page == ($lastPage - 1)) {
     $centerPages .= '<a class="number" href="?tid=41&page=1">1</a> ... ';
     $centerPages .= '<a class="number" href="?tid=41&page=' . $sub1 . '">' . $sub1 . '</a> ';
@@ -121,7 +121,7 @@ if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<a class="number" href="?tid=41&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="?tid=41&page=' . $add1 . '">' . $add1 . '</a>';
-    
+
 } else if ($page > 1 && $page < $lastPage) {
     $centerPages .= '<a class="number" href="?tid=41&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
@@ -171,19 +171,19 @@ $paginationDisplay .=  '<img alt="Következő oldal" src="img/x.gif" class="next
 $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last disabled">';
 }
 
-	$limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage; 
-	
+	$limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage;
+
 	if ($page - 1 < 0) {
 		$limit = "LIMIT 0,20";
 	}
-	
-	$sql2 = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE id != '' order by Aap Desc $limit");
+
+	$sql2 = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."alidata WHERE id != '' order by Aap Desc $limit");
     if(isset($_GET['page']) && $_GET['page'] > 1){
 		$rank = ($_GET['page']-1)*20+1;
     }else{
     	$rank = 1;
     }
-	while($row = mysql_fetch_array($sql2)){ 
+	while($row = mysqli_fetch_array($sql2)){
 		$memberlist = $database->getAllMember($row['id']);
 		$totalusers = 0;
 		$totalpoints = $row['Aap'];
@@ -196,7 +196,7 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
 			echo "<tr class=\"hover\"><td class=\"ra \" >".$rank.".</td>";
 		}
 		echo "<td class=\"al \" ><a href=\"allianz.php?aid=".$row['id']."\">".$database->getAllianceName($row['id'])."</a></td>";
-       
+
 		echo "<td class=\"pla \" >".$totalusers."</td>";
         echo "<td class=\"av \">".round($totalpoints/$totalusers)."</td>";
     	echo "<td class=\"po lc\">".$totalpoints."</td></tr>";

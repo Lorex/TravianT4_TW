@@ -11,19 +11,19 @@
 
 include_once("../../config.php");
 
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 
 $userid = $_POST['userid'];
 $session = $_POST['admid'];
 
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id = ".$session."");
-$access = mysql_fetch_array($sql);
+$sql = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE id = ".$session."");
+$access = mysqli_fetch_array($sql);
 $sessionaccess = $access['access'];
 
 if($sessionaccess != 9) die("<h1><font color=\"red\">Access Denied: You are not Admin!</font></h1>");
 
-mysql_query("DELETE FROM ".TB_PREFIX."medal WHERE userid = ".$userid."");
+mysqli_query($con,"DELETE FROM ".TB_PREFIX."medal WHERE userid = ".$userid."");
 
 header("Location: ../../../Admin/admin.php?p=player&uid=".$userid."");
 ?>

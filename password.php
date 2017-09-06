@@ -2,15 +2,15 @@
 include('GameEngine/config.php');
 include('GameEngine/database.php');
 include('GameEngine/lang/'.LANG.'.php');
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome activate">
 <div id="wrapper">
 <img id="staticElements" src="img\x.gif" alt="" />
 <div class="bodyWrapper">
-					
+
 <img style="filter:chroma();" src="img\x.gif" id="msfilter" alt="" />
 <div id="header">
 <div id="mtop">
@@ -37,7 +37,7 @@ include "Templates/html.tpl";
 				<li>
 			<a href="#" target="_blank" title="<?php echo FORUM; ?>"><?php echo FORUM; ?></a>
 		</li>
-		
+
 		<li class='support' >
 			<a href="contact.php" title="<?php echo SUPPORT; ?>"><?php echo SUPPORT; ?></a>
 		</li>
@@ -83,7 +83,7 @@ if($database->checkExist($user, 0)){
 <div class="clear"></div></div>
 <div class="contentFooter">&nbsp;</div></div>
 		<div id="side_info">
-        
+
 	<?php if(NEWSBOX1) { ?>
                 <div class="news news1">
                 <?php include("Templates/News/newsbox1.tpl"); ?>
@@ -94,9 +94,9 @@ if($database->checkExist($user, 0)){
                 <?php include("Templates/News/newsbox2.tpl"); ?>
                 </div>
                <?php } ?>
-            
+
 		</div>
-        
+
 				<?php
 				include("Templates/footer.tpl");
 				?>

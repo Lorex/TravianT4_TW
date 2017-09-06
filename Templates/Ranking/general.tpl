@@ -1,9 +1,9 @@
 ﻿<?php
-   $tribe1 = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 1 and id>4");
-   $tribe2 = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 2 and id>4");
-   $tribe3 = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 3 and id>4");
-   $tribes = array(mysql_num_rows($tribe1), mysql_num_rows($tribe2), mysql_num_rows($tribe3));
-   $users = mysql_num_rows(mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE id>4")); ?>
+   $tribe1 = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 1 and id>4");
+   $tribe2 = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 2 and id>4");
+   $tribe3 = mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE tribe = 3 and id>4");
+   $tribes = array(mysqli_num_rows($tribe1), mysqli_num_rows($tribe2), mysqli_num_rows($tribe3));
+   $users = mysqli_num_rows(mysqli_query($con,"SELECT SQL_CACHE * FROM ".TB_PREFIX."users WHERE id>4")); ?>
 
 <h4 class="round">Stats</h4>
 <table cellpadding="1" cellspacing="1" id="world_player" class="transparent">
@@ -15,13 +15,13 @@
      <tr>
       <th>Active players</th>
       <td><?php
-                   $active = mysql_num_rows(mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE ".time()."-timestamp < (3600*24)"));
+                   $active = mysqli_num_rows(mysqli_query($con,"SELECT * FROM ".TB_PREFIX."users WHERE ".time()."-timestamp < (3600*24)"));
                    echo $active; ?></td>
      </tr>     <tr>
       <th>Players online</th>
       <td><?php
-				$result = mysql_query("SELECT * FROM ".TB_PREFIX."online");
-				$num_rows = mysql_num_rows($result);
+				$result = mysqli_query($con,"SELECT * FROM ".TB_PREFIX."online");
+				$num_rows = mysqli_num_rows($result);
 				echo $num_rows;
 				?></td>
      </tr>
@@ -81,7 +81,7 @@ echo "%"; ?></td>
 
                 <td><?php echo date("j. M"); ?></td>
             </tr>
-			
+
             <tr class="hover">
                 <td><?php echo $database->getAttackByDate(time()-(86400*1)); ?></td>
 

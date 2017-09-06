@@ -17,13 +17,13 @@
 #################################################################################
 
 include_once("../../Account.php");
-mysql_connect(SQL_SERVER, SQL_USER, SQL_PASS);
-mysql_select_db(SQL_DB);
+$con = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS);
+mysqli_select_db($con,SQL_DB);
 if ($session->access < ADMIN) die("Access Denied: You aren't Admin!");
 $id = $_POST['id'];
 $silver = $_POST['silver'];
 $q = "UPDATE ".TB_PREFIX."users SET silver = silver + ".$_POST['silver']." WHERE id != '0'";
-mysql_query($q);
-mysql_query("Insert into ".TB_PREFIX."admin_log values (0,$id,'Added <b>$silver</b> silver to all users',".time().")");
+mysqli_query($con,$q);
+mysqli_query($con,"Insert into ".TB_PREFIX."admin_log values (0,$id,'Added <b>$silver</b> silver to all users',".time().")");
 header("Location: ../../../Admin/index.php?p=give&s=$silver");
 ?>
