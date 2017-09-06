@@ -49,5 +49,5 @@ class mysqli_DB {
 };
 
 $database = new mysqli_DB;
-}
+
 ?>
