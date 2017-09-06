@@ -48,10 +48,6 @@ class mysqli_DB {
 	}
 };
 
-if(DB_TYPE) {
-	$database = new MYSQLi_DB;
-}
-else {
-	$database = new mysqli_DB;
+$database = new mysqli_DB;
 }
 ?>
