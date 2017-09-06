@@ -17,11 +17,11 @@ include("constant.php");
 
 // };
 
-class mysqli_DB {
+class mysql_DB {
 
 	var $connection;
 
-	function mysqli_DB() {
+	function mysql_DB() {
 		$this->connection = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS) or die(mysqli_error());
 		mysqli_select_db($this->connection,SQL_DB) or die(mysqli_error());
 	}
@@ -48,6 +48,6 @@ class mysqli_DB {
 	}
 };
 
-$database = new mysqli_DB;
+$database = new mysql_DB;
 
 ?>
