@@ -4,24 +4,12 @@ set_time_limit(0);
 include("connection.php");
 include("constant.php");
 
-// class MYSQLi_DB {
 
-// 	var $connection;
-
-// 	function MYSQLi_DB() {
-// 		$this->connection = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS, SQL_DB) or die(mysqli_error());
-// 	}
-// 		function query($query) {
-// 		return $this->connection->query($query);
-// 		}
-
-// };
-
-class mysql_DB {
+class mysqli_DB {
 
 	var $connection;
 
-	function mysql_DB() {
+	function mysqli_DB() {
 		$this->connection = mysqli_connect(SQL_SERVER, SQL_USER, SQL_PASS) or die(mysqli_error());
 		mysqli_select_db($this->connection,SQL_DB) or die(mysqli_error());
 	}
@@ -48,6 +36,7 @@ class mysql_DB {
 	}
 };
 
-$database = new mysql_DB;
+
+$database = new mysqli_DB;
 
 ?>
