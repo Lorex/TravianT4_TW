@@ -156,7 +156,7 @@ if($village and $user){
 
     <tr>
 
-        <td><img src="../img/admin/r/1.gif"> 木材</td>
+        <td><img src="img/admin/r/1.gif"> 木材</td>
 
         <td class="hab"><?php echo floor($village['wood']);?></td>
 
@@ -166,7 +166,7 @@ if($village and $user){
 
     <tr>
 
-        <td><img src="../img/admin/r/2.gif"> 磚塊</td>
+        <td><img src="img/admin/r/2.gif"> 磚塊</td>
 
         <td class="hab"><?php echo floor($village['clay']);?></td>
       
@@ -175,7 +175,7 @@ if($village and $user){
 
     <tr>
 
-        <td><img src="../img/admin/r/3.gif"> 鋼鐵</td>
+        <td><img src="img/admin/r/3.gif"> 鋼鐵</td>
 
         <td class="hab"><?php echo floor($village['iron']);?></td>    
 
@@ -183,7 +183,7 @@ if($village and $user){
 
     <tr>
 
-        <td><img src="../img/admin/r/4.gif"> 穀物</td>
+        <td><img src="img/admin/r/4.gif"> 穀物<td>
 
         <td class="hab"><?php echo floor($village['crop']);?></td>
 
